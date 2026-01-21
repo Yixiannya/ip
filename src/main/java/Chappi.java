@@ -6,6 +6,7 @@ import dukeExceptions.DukeException;
 import dukeExceptions.DukeInvalidEventException;
 import dukeExceptions.DukeInvalidDeadlineException;
 import dukeExceptions.DukeInvalidTodoException;
+import dukeExceptions.DukeUnrecognisedCommandException;
 
 public class Chappi {
     // Common use strings
@@ -37,14 +38,14 @@ public class Chappi {
                     markList(input);
                 } else if (input.startsWith("unmark ")) {
                     unmarkList(input);
-                } else if (input.startsWith("todo ")) {
+                } else if (input.startsWith("todo")) {
                     addToDo(input);
                 } else if (input.startsWith("deadline ")) {
                     addDeadline(input);
                 } else if (input.startsWith("event ")) {
                     addEvent(input);
                 } else {
-                    throw new DukeException("      I did not recognise that command.");
+                    throw new DukeUnrecognisedCommandException();
                 }
             } catch (DukeException e) {
                 System.out.println(seperator + e + seperator);
@@ -56,13 +57,19 @@ public class Chappi {
         return input.substring(prefix.length());
     }
 
-    private static void addToDo(String input) throws DukeInvalidTodoException {
-        String description = trimPrefix(input, "todo").strip();
-        if (description.isBlank()) {
+    private static void addToDo(String input) throws DukeException {
+        if (input.equals("todo")) {
             throw new DukeInvalidTodoException("Please enter a task description.");
+        } else if (input.startsWith("todo ")) {
+            String description = trimPrefix(input, "todo ").strip();
+            if (description.isBlank()) {
+                throw new DukeInvalidTodoException("Please enter a task description.");
+            }
+            ToDo todo = new ToDo(description);
+            addToTaskList(todo);
+        } else {
+            throw new DukeUnrecognisedCommandException();
         }
-        ToDo todo = new ToDo(description);
-        addToTaskList(todo);
     }
 
     private static void addDeadline(String input) {
