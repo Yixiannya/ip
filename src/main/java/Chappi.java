@@ -1,5 +1,11 @@
+// Imports
 import java.util.Scanner;
 import java.util.ArrayList;
+
+import dukeExceptions.DukeException;
+import dukeExceptions.DukeInvalidEventException;
+import dukeExceptions.DukeInvalidDeadlineException;
+import dukeExceptions.DukeInvalidTodoException;
 
 public class Chappi {
     // Common use strings
@@ -19,29 +25,31 @@ public class Chappi {
         scanner = new Scanner(System.in);
 
         while (true) {
-            String input = scanner.nextLine();
+            try {
+                String input = scanner.nextLine();
 
-            if (input.equals("list")) {
-                readList();
-            } else if (input.equals("blah")) {
-                sayBlah();
-            } else if (input.equals("bye")) {
-                sayBye();
-                System.exit(0);
-            } else if (input.startsWith("mark ")) {
-                int index = Integer.parseInt(trimPrefix(input, "mark "));
-                markList(index);
-            } else if (input.startsWith("unmark ")) {
-                int index = Integer.parseInt(trimPrefix(input, "unmark "));
-                unmarkList(index);
-            } else if (input.startsWith("todo ")) {
-                addToDo(input);
-            } else if (input.startsWith("deadline ")) {
-                addDeadline(input);
-            } else if (input.startsWith("event ")) {
-                addEvent(input);
-            } else {
-                addTask(input);
+                if (input.equals("list")) {
+                    readList();
+                } else if (input.equals("blah")) {
+                    sayBlah();
+                } else if (input.equals("bye")) {
+                    sayBye();
+                    System.exit(0);
+                } else if (input.startsWith("mark ")) {
+                    markList(input);
+                } else if (input.startsWith("unmark ")) {
+                    unmarkList(input);
+                } else if (input.startsWith("todo ")) {
+                    addToDo(input);
+                } else if (input.startsWith("deadline ")) {
+                    addDeadline(input);
+                } else if (input.startsWith("event ")) {
+                    addEvent(input);
+                } else {
+                    throw new DukeException("    I did not recognise that command.");
+                }
+            } catch (DukeException e) {
+                System.out.println(seperator + e + seperator);
             }
         }
     }
@@ -70,24 +78,24 @@ public class Chappi {
         }
     }
 
-    private static void addEvent(String input) {
+    private static void addEvent(String input) throws DukeInvalidEventException {
         String description = trimPrefix(input, "todo ");
-        if (description.contains("/from ") && description.contains("/to ")) {
-            String[] strings = description.split("/from ");
-            String[] dateArray = strings[1].split("/to ");
-            Event event = new Event(strings[0], dateArray[0], dateArray[1]);
-            addToTaskList(event);
-        } else {
+        if (!description.contains("/from ")) {
+            throw new DukeInvalidEventException("Please enter a valid string for a start date using the '/from' keyword.\n");
+        }
+        if (!description.contains("/to ")) {
+            throw new DukeInvalidEventException("Please enter a valid string for an end date using the '/to' keyword.\n");
+        }
+        else {
             System.out.println(seperator
                     + "     Invalid format.\n"
                     + "     Please enter a start date with the '/from' keyword and an end date with the '/to' keyword.\n"
                     + seperator);
         }
-    }
-
-    private static void addTask(String str) {
-        Task task = new Task(str);
-        addToTaskList(task);
+        String[] strings = description.split("/from ");
+        String[] dateArray = strings[1].split("/to ");
+        Event event = new Event(strings[0], dateArray[0], dateArray[1]);
+        addToTaskList(event);
     }
 
     private static void addToTaskList(Task task) {
@@ -100,20 +108,40 @@ public class Chappi {
                 + seperator);
     }
 
-    private static void markList(int index) {
+    private static Task getTask(String input) throws DukeException {
+        int index = Integer.parseInt(input);
         int i = index - 1;
-        Task task = taskList.get(i);
-        task.markDone();
-        String msg = "      Alright, marked this task as done:\n        %s\n";
-        System.out.println(seperator + String.format(msg, task) + seperator);
+        if (i < 0) {
+            throw new DukeException("    Please input a number greater than 0.");
+        }
+        if (i > taskList.size()) {
+            String e = String.format("    The given number is larger than the size of the list.\n"
+                    + "    Please give a number smaller than %d.", taskList.size());
+            throw new DukeException(e);
+        }
+        return taskList.get(i);
     }
 
-    private static void unmarkList(int index) {
-        int i = index - 1;
-        Task task = taskList.get(i);
-        task.markNotDone();
-        String msg = "      Alright, marked this task as not done yet:\n        %s\n";
-        System.out.println(seperator + String.format(msg, task) + seperator);
+    private static void markList(String input) throws DukeException {
+        try {
+            Task task = getTask(trimPrefix(input, "mark").strip());
+            task.markDone();
+            String msg = "      Alright, marked this task as done:\n        %s\n";
+            System.out.println(seperator + String.format(msg, task) + seperator);
+        } catch (NumberFormatException e) {
+            throw new DukeException("    That is not a valid number.");
+        }
+    }
+
+    private static void unmarkList(String input) throws DukeException {
+        try {
+            Task task = getTask(trimPrefix(input, "unmark").strip());
+            task.markNotDone();
+            String msg = "      Alright, marked this task as not done yet:\n        %s\n";
+            System.out.println(seperator + String.format(msg, task) + seperator);
+        } catch (NumberFormatException e) {
+            throw new DukeException("    That is not a valid number.");
+        }
     }
 
     private static void readList() {
