@@ -30,8 +30,6 @@ public class Chappi {
 
                 if (input.equals("list")) {
                     readList();
-                } else if (input.equals("blah")) {
-                    sayBlah();
                 } else if (input.equals("bye")) {
                     sayBye();
                     System.exit(0);
