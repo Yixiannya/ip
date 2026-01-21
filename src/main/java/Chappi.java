@@ -40,7 +40,7 @@ public class Chappi {
                     unmarkList(input);
                 } else if (input.startsWith("todo")) {
                     addToDo(input);
-                } else if (input.startsWith("deadline ")) {
+                } else if (input.startsWith("deadline")) {
                     addDeadline(input);
                 } else if (input.startsWith("event")) {
                     addEvent(input);
@@ -72,17 +72,28 @@ public class Chappi {
         }
     }
 
-    private static void addDeadline(String input) {
-        String description = trimPrefix(input, "deadline ");
-        if (description.contains("/by ")) {
+    private static void addDeadline(String input) throws DukeException{
+        if (input.equals("deadline")) {
+            throw new DukeInvalidDeadlineException("Please enter the event's description and start date.");
+        } else if (input.startsWith("deadline ")) {
+            String description = trimPrefix(input, "deadline ").strip();
+            if (!description.contains("/by ")) {
+                throw new DukeInvalidDeadlineException("Please enter a due date with the '/by' keyword.");
+            }
             String[] strings = description.split("/by ");
-            Deadline deadline = new Deadline(strings[0], strings[1]);
+            String desc = strings[0].strip();
+            String endDate = strings[1].strip();
+            if (desc.isBlank()) {
+                throw new DukeInvalidDeadlineException("Please enter a valid description.");
+            }
+            if (endDate.isBlank()) {
+                throw new DukeInvalidDeadlineException("Please enter a valid end date.");
+            }
+            Deadline deadline = new Deadline(desc, endDate);
             addToTaskList(deadline);
+
         } else {
-            System.out.println(seperator
-                    + "      Invalid format.\n"
-                    + "      Please enter a due date with the '/by' keyword.\n"
-                    + seperator);
+            throw new DukeUnrecognisedCommandException();
         }
     }
 
@@ -103,13 +114,13 @@ public class Chappi {
             String startDate = dateArray[0].strip();
             String endDate = dateArray[1].strip();
             if (desc.isBlank()) {
-                throw new DukeInvalidEventException("Please enter a valid description");
+                throw new DukeInvalidEventException("Please enter a valid description.");
             }
             if (startDate.isBlank()) {
-                throw new DukeInvalidEventException("Please enter a valid start date");
+                throw new DukeInvalidEventException("Please enter a valid start date.");
             }
             if (endDate.isBlank()) {
-                throw new DukeInvalidEventException("Please enter a valid end date");
+                throw new DukeInvalidEventException("Please enter a valid end date.");
             }
             Event event = new Event(desc, startDate, endDate);
             addToTaskList(event);
