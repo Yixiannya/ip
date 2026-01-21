@@ -8,6 +8,17 @@
      ____________________________________________________________
 
      ____________________________________________________________
+      There's been a problem.
+      Sorry, this is an invalid Todo task format.
+      Please enter a task description.
+     ____________________________________________________________
+
+     ____________________________________________________________
+      There's been a problem.
+      I did not recognise that command.
+     ____________________________________________________________
+
+     ____________________________________________________________
       Sure, added:
       [T][ ] Eat a bagel
       There's 1 tasks in your list now.
@@ -19,67 +30,232 @@
      ____________________________________________________________
 
      ____________________________________________________________
+      There's been a problem.
+      Sorry, this is an invalid Deadline task format.
+      Please enter the event's description and start date.
+     ____________________________________________________________
+
+     ____________________________________________________________
+      There's been a problem.
+      Sorry, this is an invalid Deadline task format.
+      Please enter a due date with the '/by' keyword.
+     ____________________________________________________________
+
+     ____________________________________________________________
+      There's been a problem.
+      I did not recognise that command.
+     ____________________________________________________________
+
+     ____________________________________________________________
+      There's been a problem.
+      Sorry, this is an invalid Deadline task format.
+      Please enter a due date with the '/by' keyword.
+     ____________________________________________________________
+
+     ____________________________________________________________
+      There's been a problem.
+      Sorry, this is an invalid Deadline task format.
+      Please enter a due date with the '/by' keyword.
+     ____________________________________________________________
+
+     ____________________________________________________________
+      There's been a problem.
+      Sorry, this is an invalid Deadline task format.
+      Please enter a due date with the '/by' keyword.
+     ____________________________________________________________
+
+     ____________________________________________________________
+      There's been a problem.
+      Sorry, this is an invalid Deadline task format.
+      Please enter a valid description.
+     ____________________________________________________________
+
+     ____________________________________________________________
+      There's been a problem.
+      Sorry, this is an invalid Deadline task format.
+      Please enter a due date with the '/by' keyword.
+     ____________________________________________________________
+
+     ____________________________________________________________
       Sure, added:
-      [D][ ] Finish Assignment 21  (by: 15 Feb)
+      [D][ ] Finish Assignment 21 (by: 15 Feb)
       There's 2 tasks in your list now.
      ____________________________________________________________
 
      ____________________________________________________________
-     Invalid format.
-     Please enter a due date with the '/by' keyword.
+      Here's your list:
+      1.[T][ ] Eat a bagel
+      2.[D][ ] Finish Assignment 21 (by: 15 Feb)
      ____________________________________________________________
 
      ____________________________________________________________
-      Here's your list:
-      1.[T][ ] Eat a bagel
-      2.[D][ ] Finish Assignment 21  (by: 15 Feb)
+      There's been a problem.
+      Sorry, this is an invalid Event task format.
+      Please enter the event's description, start date and end date.
+     ____________________________________________________________
+
+     ____________________________________________________________
+      There's been a problem.
+      I did not recognise that command.
+     ____________________________________________________________
+
+     ____________________________________________________________
+      There's been a problem.
+      Sorry, this is an invalid Event task format.
+      Please enter a valid string for a start date using the '/from' keyword.
+     ____________________________________________________________
+
+     ____________________________________________________________
+      There's been a problem.
+      Sorry, this is an invalid Event task format.
+      Please enter a valid string for an end date using the '/to' keyword.
+     ____________________________________________________________
+
+     ____________________________________________________________
+      There's been a problem.
+      Sorry, this is an invalid Event task format.
+      Please enter a valid string for a start date using the '/from' keyword.
+     ____________________________________________________________
+
+     ____________________________________________________________
+      There's been a problem.
+      Sorry, this is an invalid Event task format.
+      Please enter a valid string for a start date using the '/from' keyword.
+     ____________________________________________________________
+
+     ____________________________________________________________
+      There's been a problem.
+      Sorry, this is an invalid Event task format.
+      Please enter a valid string for a start date using the '/from' keyword.
+     ____________________________________________________________
+
+     ____________________________________________________________
+      There's been a problem.
+      Sorry, this is an invalid Event task format.
+      Please enter a valid string for an end date using the '/to' keyword.
+     ____________________________________________________________
+
+     ____________________________________________________________
+      There's been a problem.
+      Sorry, this is an invalid Event task format.
+      Please enter a valid string for an end date using the '/to' keyword.
+     ____________________________________________________________
+
+     ____________________________________________________________
+      There's been a problem.
+      Sorry, this is an invalid Event task format.
+      Please enter a valid string for a start date using the '/from' keyword.
+     ____________________________________________________________
+
+     ____________________________________________________________
+      There's been a problem.
+      Sorry, this is an invalid Event task format.
+      Please enter a valid string for a start date using the '/from' keyword.
+     ____________________________________________________________
+
+     ____________________________________________________________
+      There's been a problem.
+      Sorry, this is an invalid Event task format.
+      Please enter a valid string for a start date using the '/from' keyword.
+     ____________________________________________________________
+
+     ____________________________________________________________
+      There's been a problem.
+      Sorry, this is an invalid Event task format.
+      Please enter a valid string for an end date using the '/to' keyword.
+     ____________________________________________________________
+
+     ____________________________________________________________
+      There's been a problem.
+      Sorry, this is an invalid Event task format.
+      Please enter a valid description.
+     ____________________________________________________________
+
+     ____________________________________________________________
+      There's been a problem.
+      Sorry, this is an invalid Event task format.
+      Please enter a valid string for an end date using the '/to' keyword.
+     ____________________________________________________________
+
+     ____________________________________________________________
+      There's been a problem.
+      Sorry, this is an invalid Event task format.
+      Please enter a valid description.
+     ____________________________________________________________
+
+     ____________________________________________________________
+      There's been a problem.
+      Sorry, this is an invalid Event task format.
+      Please enter a valid string for a start date using the '/from' keyword.
+     ____________________________________________________________
+
+     ____________________________________________________________
+      There's been a problem.
+      Sorry, this is an invalid Event task format.
+      Please enter a valid string for an end date using the '/to' keyword.
+     ____________________________________________________________
+
+     ____________________________________________________________
+      There's been a problem.
+      Sorry, this is an invalid Event task format.
+      Please enter a valid string for a start date using the '/from' keyword.
      ____________________________________________________________
 
      ____________________________________________________________
       Sure, added:
-      [E][ ] Drink water  (from: today  to: another day)
+      [E][ ] Drink water (from: today to: another day)
       There's 3 tasks in your list now.
      ____________________________________________________________
 
      ____________________________________________________________
-     Invalid format.
-     Please enter a start date with the '/from' keyword and an end date with the '/to' keyword.
-     ____________________________________________________________
-
-     ____________________________________________________________
-     Invalid format.
-     Please enter a start date with the '/from' keyword and an end date with the '/to' keyword.
-     ____________________________________________________________
-
-     ____________________________________________________________
       Here's your list:
       1.[T][ ] Eat a bagel
-      2.[D][ ] Finish Assignment 21  (by: 15 Feb)
-      3.[E][ ] Drink water  (from: today  to: another day)
+      2.[D][ ] Finish Assignment 21 (by: 15 Feb)
+      3.[E][ ] Drink water (from: today to: another day)
+     ____________________________________________________________
+
+     ____________________________________________________________
+      There's been a problem.
+      Please enter a number.
+     ____________________________________________________________
+
+     ____________________________________________________________
+      There's been a problem.
+      I did not recognise that command.
      ____________________________________________________________
 
      ____________________________________________________________
       Alright, marked this task as done:
-        [D][X] Finish Assignment 21  (by: 15 Feb)
+        [D][X] Finish Assignment 21 (by: 15 Feb)
      ____________________________________________________________
 
      ____________________________________________________________
       Here's your list:
       1.[T][ ] Eat a bagel
-      2.[D][X] Finish Assignment 21  (by: 15 Feb)
-      3.[E][ ] Drink water  (from: today  to: another day)
+      2.[D][X] Finish Assignment 21 (by: 15 Feb)
+      3.[E][ ] Drink water (from: today to: another day)
+     ____________________________________________________________
+
+     ____________________________________________________________
+      There's been a problem.
+      Please enter a number.
+     ____________________________________________________________
+
+     ____________________________________________________________
+      There's been a problem.
+      I did not recognise that command.
      ____________________________________________________________
 
      ____________________________________________________________
       Alright, marked this task as not done yet:
-        [D][ ] Finish Assignment 21  (by: 15 Feb)
+        [D][ ] Finish Assignment 21 (by: 15 Feb)
      ____________________________________________________________
 
      ____________________________________________________________
       Here's your list:
       1.[T][ ] Eat a bagel
-      2.[D][ ] Finish Assignment 21  (by: 15 Feb)
-      3.[E][ ] Drink water  (from: today  to: another day)
+      2.[D][ ] Finish Assignment 21 (by: 15 Feb)
+      3.[E][ ] Drink water (from: today to: another day)
      ____________________________________________________________
 
      ____________________________________________________________
@@ -94,55 +270,73 @@
 
      ____________________________________________________________
       Alright, marked this task as not done yet:
-        [D][ ] Finish Assignment 21  (by: 15 Feb)
+        [D][ ] Finish Assignment 21 (by: 15 Feb)
      ____________________________________________________________
 
      ____________________________________________________________
       Alright, marked this task as not done yet:
-        [E][ ]  Drink water  (from: today  to: another day)
+        [E][ ] Drink water (from: today to: another day)
      ____________________________________________________________
 
      ____________________________________________________________
       Alright, marked this task as done:
-        [E][X]  Drink water  (from: today  to: another day)
+        [E][X] Drink water (from: today to: another day)
+     ____________________________________________________________
+
+     ____________________________________________________________
+      There's been a problem.
+      The given number is larger than the size of the list.
+      Please give a number smaller than 3.
+     ____________________________________________________________
+
+     ____________________________________________________________
+      There's been a problem.
+      Please input a number greater than 0.
+     ____________________________________________________________
+
+     ____________________________________________________________
+      There's been a problem.
+      The given number is larger than the size of the list.
+      Please give a number smaller than 3.
+     ____________________________________________________________
+
+     ____________________________________________________________
+      There's been a problem.
+      Please input a number greater than 0.
      ____________________________________________________________
 
      ____________________________________________________________
       Here's your list:
       1.[T][X] Eat a bagel
-      2.[D][ ] Finish Assignment 21  (by: 15 Feb)
-      3.[E][X]  Drink water  (from: today  to: another day)
+      2.[D][ ] Finish Assignment 21 (by: 15 Feb)
+      3.[E][X] Drink water (from: today to: another day)
      ____________________________________________________________
 
      ____________________________________________________________
-      blah
+      There's been a problem.
+      I did not recognise that command.
      ____________________________________________________________
 
      ____________________________________________________________
-      Sure, added:
-      [ ] dance
-      There's 4 tasks in your list now.
+      There's been a problem.
+      I did not recognise that command.
      ____________________________________________________________
 
      ____________________________________________________________
-      Sure, added:
-      [ ] sing
-      There's 5 tasks in your list now.
+      There's been a problem.
+      I did not recognise that command.
      ____________________________________________________________
 
      ____________________________________________________________
-      Sure, added:
-      [ ] write
-      There's 6 tasks in your list now.
+      There's been a problem.
+      I did not recognise that command.
      ____________________________________________________________
 
      ____________________________________________________________
-      Sure, added:
-      [ ] cry
-      There's 7 tasks in your list now.
+      There's been a problem.
+      I did not recognise that command.
      ____________________________________________________________
 
      ____________________________________________________________
       Bye. Hope to see you again soon! ☆*:.｡. o(≧▽≦)o .｡.:*☆
      ____________________________________________________________
-

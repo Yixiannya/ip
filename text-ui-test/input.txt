@@ -7,13 +7,31 @@ deadline
 deadline draw a circle
 deadlineeatpants/by30 Feb
 deadline Sleep /bytoday
+deadline Wake up /by 
+deadline /by 
+deadline /by Tomorrow
+deadline /bynoon
 deadline Finish Assignment 21 /by 15 Feb
 list
 event
 eventeat burger
 event Drink lemonade
 event Drink grape juice /from 12 Jan
+event Drink grape juice /from12Jan
 event Drink milk /to tomorrow
+event Drink milk /totomorrow
+event snacks yum /from /to 
+event /from Thursday
+event /fromThursday
+event /to Sunday
+event /toSunday
+event /from /to 
+event /from /to Wednesday
+event /from /toWednesday
+event /from Monday /to Tuesday
+event /fromMonday /to Tuesday
+event /from Monday /toTuesday
+event /fromMonday /toTuesday
 event Drink water /from today /to another day
 list
 mark
