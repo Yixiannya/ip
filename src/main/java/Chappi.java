@@ -38,6 +38,8 @@ public class Chappi {
                     markList(input);
                 } else if (input.startsWith("unmark")) {
                     unmarkList(input);
+                } else if (input.startsWith("delete")) {
+                    deleteTask(input);
                 } else if (input.startsWith("todo")) {
                     addToDo(input);
                 } else if (input.startsWith("deadline")) {
@@ -181,6 +183,23 @@ public class Chappi {
                 Task task = getTask(trimPrefix(input, "unmark").strip());
                 task.markNotDone();
                 String msg = "      Alright, marked this task as not done yet:\n        %s\n";
+                System.out.println(seperator + String.format(msg, task) + seperator);
+            } catch (NumberFormatException e) {
+                throw new DukeException("      That is not a valid number.");
+            }
+        } else {
+            throw new DukeUnrecognisedCommandException();
+        }
+    }
+
+    private static void deleteTask(String input) throws DukeException {
+        if (input.equals("delete")) {
+            throw new DukeException("      Please enter a number.");
+        } else if (input.startsWith("delete ")) {
+            try {
+                Task task = getTask(trimPrefix(input, "delete").strip());
+                taskList.remove(task);
+                String msg = "      OK, I removed this task as you wanted:\n        %s\n";
                 System.out.println(seperator + String.format(msg, task) + seperator);
             } catch (NumberFormatException e) {
                 throw new DukeException("      That is not a valid number.");
