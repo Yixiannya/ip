@@ -59,7 +59,7 @@ public class Chappi {
     }
 
     private static void addToDo(String input) {
-        String description = trimPrefix(input, "todo ");
+        String description = trimPrefix(input, "todo").strip();
         ToDo todo = new ToDo(description);
         addToTaskList(todo);
     }
@@ -158,11 +158,6 @@ public class Chappi {
             }
         }
         System.out.println(seperator + result + seperator);
-    }
-
-    private static void sayBlah() {
-        String msg = "      blah\n";
-        System.out.println(seperator + msg + seperator);
     }
 
     private static void sayBye() {
