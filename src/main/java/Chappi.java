@@ -42,7 +42,7 @@ public class Chappi {
                     addToDo(input);
                 } else if (input.startsWith("deadline ")) {
                     addDeadline(input);
-                } else if (input.startsWith("event ")) {
+                } else if (input.startsWith("event")) {
                     addEvent(input);
                 } else {
                     throw new DukeUnrecognisedCommandException();
@@ -86,24 +86,36 @@ public class Chappi {
         }
     }
 
-    private static void addEvent(String input) throws DukeInvalidEventException {
-        String description = trimPrefix(input, "todo ");
-        if (!description.contains("/from ")) {
-            throw new DukeInvalidEventException("Please enter a valid string for a start date using the '/from' keyword.\n");
+    private static void addEvent(String input) throws DukeException {
+        if (input.equals("event")) {
+            throw new DukeInvalidEventException("Please enter the event's description, start date and end date.");
+        } else if (input.startsWith("event ")) {
+            String description = trimPrefix(input, "todo ").strip();
+            if (!description.contains("/from ")) {
+                throw new DukeInvalidEventException("Please enter a valid string for a start date using the '/from' keyword.");
+            }
+            if (!description.contains("/to ")) {
+                throw new DukeInvalidEventException("Please enter a valid string for an end date using the '/to' keyword.");
+            }
+            String[] strings = description.split("/from ");
+            String[] dateArray = strings[1].split("/to ");
+            String desc = strings[0].strip();
+            String startDate = dateArray[0].strip();
+            String endDate = dateArray[1].strip();
+            if (desc.isBlank()) {
+                throw new DukeInvalidEventException("Please enter a valid description");
+            }
+            if (startDate.isBlank()) {
+                throw new DukeInvalidEventException("Please enter a valid start date");
+            }
+            if (endDate.isBlank()) {
+                throw new DukeInvalidEventException("Please enter a valid end date");
+            }
+            Event event = new Event(desc, startDate, endDate);
+            addToTaskList(event);
+        } else {
+            throw new DukeUnrecognisedCommandException();
         }
-        if (!description.contains("/to ")) {
-            throw new DukeInvalidEventException("Please enter a valid string for an end date using the '/to' keyword.\n");
-        }
-        else {
-            System.out.println(seperator
-                    + "      Invalid format.\n"
-                    + "      Please enter a start date with the '/from' keyword and an end date with the '/to' keyword.\n"
-                    + seperator);
-        }
-        String[] strings = description.split("/from ");
-        String[] dateArray = strings[1].split("/to ");
-        Event event = new Event(strings[0].strip(), dateArray[0].strip(), dateArray[1].strip());
-        addToTaskList(event);
     }
 
     private static void addToTaskList(Task task) {
