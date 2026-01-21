@@ -44,7 +44,7 @@ public class Chappi {
                 } else if (input.startsWith("event ")) {
                     addEvent(input);
                 } else {
-                    throw new DukeException("    I did not recognise that command.");
+                    throw new DukeException("      I did not recognise that command.");
                 }
             } catch (DukeException e) {
                 System.out.println(seperator + e + seperator);
@@ -56,8 +56,11 @@ public class Chappi {
         return input.substring(prefix.length());
     }
 
-    private static void addToDo(String input) {
+    private static void addToDo(String input) throws DukeInvalidTodoException {
         String description = trimPrefix(input, "todo").strip();
+        if (description.isBlank()) {
+            throw new DukeInvalidTodoException("Please enter a task description.");
+        }
         ToDo todo = new ToDo(description);
         addToTaskList(todo);
     }
@@ -70,8 +73,8 @@ public class Chappi {
             addToTaskList(deadline);
         } else {
             System.out.println(seperator
-                    + "     Invalid format.\n"
-                    + "     Please enter a due date with the '/by' keyword.\n"
+                    + "      Invalid format.\n"
+                    + "      Please enter a due date with the '/by' keyword.\n"
                     + seperator);
         }
     }
@@ -86,8 +89,8 @@ public class Chappi {
         }
         else {
             System.out.println(seperator
-                    + "     Invalid format.\n"
-                    + "     Please enter a start date with the '/from' keyword and an end date with the '/to' keyword.\n"
+                    + "      Invalid format.\n"
+                    + "      Please enter a start date with the '/from' keyword and an end date with the '/to' keyword.\n"
                     + seperator);
         }
         String[] strings = description.split("/from ");
@@ -109,12 +112,15 @@ public class Chappi {
     private static Task getTask(String input) throws DukeException {
         int index = Integer.parseInt(input);
         int i = index - 1;
-        if (i < 0) {
-            throw new DukeException("    Please input a number greater than 0.");
+        if (taskList.isEmpty()) {
+            throw new DukeException("      The list is empty!");
         }
-        if (i > taskList.size()) {
-            String e = String.format("    The given number is larger than the size of the list.\n"
-                    + "    Please give a number smaller than %d.", taskList.size());
+        if (i < 0) {
+            throw new DukeException("      Please input a number greater than 0.");
+        }
+        if (i >= taskList.size()) {
+            String e = String.format("      The given number is larger than the size of the list.\n"
+                    + "      Please give a number smaller than %d.", taskList.size());
             throw new DukeException(e);
         }
         return taskList.get(i);
