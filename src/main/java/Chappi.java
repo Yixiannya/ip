@@ -102,7 +102,7 @@ public class Chappi {
         }
         String[] strings = description.split("/from ");
         String[] dateArray = strings[1].split("/to ");
-        Event event = new Event(strings[0], dateArray[0], dateArray[1]);
+        Event event = new Event(strings[0].strip(), dateArray[0].strip(), dateArray[1].strip());
         addToTaskList(event);
     }
 
