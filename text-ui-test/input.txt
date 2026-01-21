@@ -1,15 +1,27 @@
 list
+todo
+todobagel
 todo Eat a bagel
 list
-deadline Finish Assignment 21 /by 15 Feb
+deadline
 deadline draw a circle
+deadlineeatpants/by30 Feb
+deadline Sleep /bytoday
+deadline Finish Assignment 21 /by 15 Feb
 list
-event Drink water /from today /to another day
+event
+eventeat burger
 event Drink lemonade
 event Drink grape juice /from 12 Jan
+event Drink milk /to tomorrow
+event Drink water /from today /to another day
 list
+mark
+markus
 mark 2
 list
+unmark
+unmarky
 unmark 2
 list
 mark 1
@@ -17,6 +29,10 @@ mark 1
 unmark 2
 unmark 3
 mark 3
+mark 999
+mark -1
+unmark 999
+unmark -1
 list
 blah
 dance
