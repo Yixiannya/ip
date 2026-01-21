@@ -34,9 +34,9 @@ public class Chappi {
                 } else if (input.equals("bye")) {
                     sayBye();
                     System.exit(0);
-                } else if (input.startsWith("mark ")) {
+                } else if (input.startsWith("mark")) {
                     markList(input);
-                } else if (input.startsWith("unmark ")) {
+                } else if (input.startsWith("unmark")) {
                     unmarkList(input);
                 } else if (input.startsWith("todo")) {
                     addToDo(input);
@@ -134,24 +134,36 @@ public class Chappi {
     }
 
     private static void markList(String input) throws DukeException {
-        try {
-            Task task = getTask(trimPrefix(input, "mark").strip());
-            task.markDone();
-            String msg = "      Alright, marked this task as done:\n        %s\n";
-            System.out.println(seperator + String.format(msg, task) + seperator);
-        } catch (NumberFormatException e) {
-            throw new DukeException("    That is not a valid number.");
+        if (input.equals("mark")) {
+            throw new DukeException("      Please enter a number.");
+        } else if (input.startsWith("mark ")) {
+            try {
+                Task task = getTask(trimPrefix(input, "mark").strip());
+                task.markDone();
+                String msg = "      Alright, marked this task as done:\n        %s\n";
+                System.out.println(seperator + String.format(msg, task) + seperator);
+            } catch (NumberFormatException e) {
+                throw new DukeException("      That is not a valid number.");
+            }
+        } else {
+            throw new DukeUnrecognisedCommandException();
         }
     }
 
     private static void unmarkList(String input) throws DukeException {
-        try {
-            Task task = getTask(trimPrefix(input, "unmark").strip());
-            task.markNotDone();
-            String msg = "      Alright, marked this task as not done yet:\n        %s\n";
-            System.out.println(seperator + String.format(msg, task) + seperator);
-        } catch (NumberFormatException e) {
-            throw new DukeException("    That is not a valid number.");
+        if (input.equals("unmark")) {
+            throw new DukeException("      Please enter a number.");
+        } else if (input.startsWith("unmark ")) {
+            try {
+                Task task = getTask(trimPrefix(input, "unmark").strip());
+                task.markNotDone();
+                String msg = "      Alright, marked this task as not done yet:\n        %s\n";
+                System.out.println(seperator + String.format(msg, task) + seperator);
+            } catch (NumberFormatException e) {
+                throw new DukeException("      That is not a valid number.");
+            }
+        } else {
+            throw new DukeUnrecognisedCommandException();
         }
     }
 
