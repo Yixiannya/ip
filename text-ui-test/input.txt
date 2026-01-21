@@ -1,0 +1,26 @@
+list
+todo Eat a bagel
+list
+deadline Finish Assignment 21 /by 15 Feb
+deadline draw a circle
+list
+event Drink water /from today /to another day
+event Drink lemonade
+event Drink grape juice /from 12 Jan
+list
+mark 2
+list
+unmark 2
+list
+mark 1
+mark 1
+unmark 2
+unmark 3
+mark 3
+list
+blah
+dance
+sing
+write
+cry
+bye
