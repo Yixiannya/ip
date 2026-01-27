@@ -45,21 +45,29 @@ public class Chappi {
                     System.exit(0);
                 } else if (input.startsWith("mark")) {
                     markList(input);
+                    save();
                 } else if (input.startsWith("unmark")) {
                     unmarkList(input);
+                    save();
                 } else if (input.startsWith("delete")) {
                     deleteTask(input);
+                    save();
                 } else if (input.startsWith("todo")) {
                     addToDo(input);
+                    save();
                 } else if (input.startsWith("deadline")) {
                     addDeadline(input);
+                    save();
                 } else if (input.startsWith("event")) {
                     addEvent(input);
+                    save();
                 } else {
                     throw new DukeUnrecognisedCommandException();
                 }
             } catch (DukeException e) {
                 System.out.println(seperator + e + seperator);
+            } catch (FileNotFoundException e) {
+                throw new RuntimeException(e);
             }
         }
     }
