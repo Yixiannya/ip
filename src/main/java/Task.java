@@ -23,6 +23,10 @@ public class Task {
         this.isDone = false;
     }
 
+    public int doneToInt() {
+        return isDone ? 1 : 0;
+    }
+
     public String toFileString() {
         return description;
     }
