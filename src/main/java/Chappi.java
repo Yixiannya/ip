@@ -1,4 +1,5 @@
 // Imports
+import java.io.FileNotFoundException;
 import java.util.Scanner;
 import java.util.ArrayList;
 
@@ -17,7 +18,8 @@ import dukeExceptions.DukeUnrecognisedCommandException;
 
 public class Chappi {
     // Common use strings
-    private static String seperator = "     ____________________________________________________________\n";
+    private static final String seperator = "     ____________________________________________________________\n";
+    private static final String filePath = "./data/duke.txt";
     private static Scanner scanner;
     private static ArrayList<Task> taskList;
 
@@ -235,5 +237,16 @@ public class Chappi {
     private static void sayBye() {
         String msg = "      Bye. Hope to see you again soon! ☆*:.｡. o(≧▽≦)o .｡.:*☆\n";
         System.out.println(seperator + msg + seperator);
+    }
+
+    private static void save() throws FileNotFoundException {
+        File saveFile = new File(filePath);
+        saveFile.getParentFile().mkdirs();
+
+        try (PrintWriter printWriter = new PrintWriter(saveFile)) {
+            for (Task t : taskList) {
+                printWriter.write(t.toFileString() + "\n");
+            }
+        }
     }
 }
