@@ -8,6 +8,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 
 // Exception imports
 import dukeExceptions.DukeException;
@@ -256,5 +257,24 @@ public class Chappi {
                 printWriter.write(t.toFileString() + "\n");
             }
         }
+    }
+
+    private static ArrayList<Task> load() throws IOException {
+        ArrayList<Task> savedList = new ArrayList<>();
+        File saveFile = new File(filePath);
+
+        if (!saveFile.exists()) {
+            return savedList;
+        }
+
+        try (BufferedReader br = new BufferedReader(new FileReader(saveFile))) {
+            String line = br.readLine();
+            while (line != null) {
+                savedList.add(parseTask(line));
+                line = br.readLine();
+            }
+        }
+
+        return savedList;
     }
 }
