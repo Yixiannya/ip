@@ -7,6 +7,17 @@ public class Deadline extends Task {
     }
 
     @Override
+    public String toFileString() {
+        return "D | "
+                + super.doneToInt()
+                + " | "
+                + super.description
+                + " | "
+                + "End: "
+                + endDate;
+    }
+
+    @Override
     public String toString() {
         String endDateStr = String.format(" (by: %s)", this.endDate);
         return "[D]" + super.toString() + endDateStr;
