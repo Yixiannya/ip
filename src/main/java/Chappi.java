@@ -2,6 +2,15 @@
 import java.util.Scanner;
 import java.util.ArrayList;
 
+// IO Imports
+import java.io.PrintWriter;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+
+// Exception imports
 import dukeExceptions.DukeException;
 import dukeExceptions.DukeInvalidEventException;
 import dukeExceptions.DukeInvalidDeadlineException;
@@ -10,17 +19,18 @@ import dukeExceptions.DukeUnrecognisedCommandException;
 
 public class Chappi {
     // Common use strings
-    private static String seperator = "     ____________________________________________________________\n";
+    private static final String seperator = "     ____________________________________________________________\n";
+    private static final String filePath = "./data/chappiSave.txt";
     private static Scanner scanner;
     private static ArrayList<Task> taskList;
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         // Messages
         String greeting = "      Hello! I'm Chappi!\n" +
                 "      What can I do for you?\n";
 
         // Initialisation
-        taskList = new ArrayList<>();
+        taskList = load();
         System.out.println(seperator + greeting + seperator);
 
         scanner = new Scanner(System.in);
@@ -36,21 +46,29 @@ public class Chappi {
                     System.exit(0);
                 } else if (input.startsWith("mark")) {
                     markList(input);
+                    save();
                 } else if (input.startsWith("unmark")) {
                     unmarkList(input);
+                    save();
                 } else if (input.startsWith("delete")) {
                     deleteTask(input);
+                    save();
                 } else if (input.startsWith("todo")) {
                     addToDo(input);
+                    save();
                 } else if (input.startsWith("deadline")) {
                     addDeadline(input);
+                    save();
                 } else if (input.startsWith("event")) {
                     addEvent(input);
+                    save();
                 } else {
                     throw new DukeUnrecognisedCommandException();
                 }
             } catch (DukeException e) {
                 System.out.println(seperator + e + seperator);
+            } catch (FileNotFoundException e) {
+                throw new RuntimeException(e);
             }
         }
     }
@@ -228,5 +246,53 @@ public class Chappi {
     private static void sayBye() {
         String msg = "      Bye. Hope to see you again soon! ☆*:.｡. o(≧▽≦)o .｡.:*☆\n";
         System.out.println(seperator + msg + seperator);
+    }
+
+    private static void save() throws FileNotFoundException {
+        File saveFile = new File(filePath);
+        saveFile.getParentFile().mkdirs();
+
+        try (PrintWriter printWriter = new PrintWriter(saveFile)) {
+            for (Task t : taskList) {
+                printWriter.write(t.toFileString() + "\n");
+            }
+        }
+    }
+
+    private static ArrayList<Task> load() throws IOException {
+        ArrayList<Task> savedList = new ArrayList<>();
+        File saveFile = new File(filePath);
+
+        if (!saveFile.exists()) {
+            return savedList;
+        }
+
+        try (BufferedReader br = new BufferedReader(new FileReader(saveFile))) {
+            String line = br.readLine();
+            while (line != null) {
+                savedList.add(parseTask(line));
+                line = br.readLine();
+            }
+        }
+
+        return savedList;
+    }
+
+    private static Task parseTask(String line) {
+        String[] splitLine = line.split(" \\| ");
+        String taskType = splitLine[0];
+        boolean isDone = splitLine[1].equals("1");
+        String description = splitLine[2];
+
+        switch (taskType) {
+        case "T":
+            return new ToDo(description, isDone);
+        case "D":
+            return new Deadline(description, isDone, trimPrefix(splitLine[3], "End: "));
+        case "E":
+            return new Event(description, isDone, trimPrefix(splitLine[3], "Start: "), trimPrefix(splitLine[4], "End: "));
+        default:
+            throw new IllegalArgumentException("Unknown task type");
+        }
     }
 }
