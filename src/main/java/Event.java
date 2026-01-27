@@ -9,6 +9,11 @@ public class Event extends Task {
     }
 
     @Override
+    public String toFileString() {
+        return "E | " + super.doneToInt() + " | " + super.description;
+    }
+
+    @Override
     public String toString() {
         String dateStr = String.format(" (from: %s to: %s)", this.startDate, this.endDate);
         return "[E]" + super.toString() + dateStr;
