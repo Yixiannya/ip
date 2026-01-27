@@ -2,6 +2,13 @@
 import java.util.Scanner;
 import java.util.ArrayList;
 
+// IO Imports
+import java.io.File;
+import java.io.PrintWriter;
+import java.io.IOException;
+
+
+// Exception imports
 import dukeExceptions.DukeException;
 import dukeExceptions.DukeInvalidEventException;
 import dukeExceptions.DukeInvalidDeadlineException;
