@@ -24,13 +24,13 @@ public class Chappi {
     private static Scanner scanner;
     private static ArrayList<Task> taskList;
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         // Messages
         String greeting = "      Hello! I'm Chappi!\n" +
                 "      What can I do for you?\n";
 
         // Initialisation
-        taskList = new ArrayList<>();
+        taskList = load();
         System.out.println(seperator + greeting + seperator);
 
         scanner = new Scanner(System.in);
@@ -288,9 +288,9 @@ public class Chappi {
         case "T":
             return new ToDo(description, isDone);
         case "D":
-            return new Deadline(description, isDone, splitLine[3]);
+            return new Deadline(description, isDone, trimPrefix(splitLine[3], "End: "));
         case "E":
-            return new Event(description, isDone, splitLine[3], splitLine[4]);
+            return new Event(description, isDone, trimPrefix(splitLine[3], "Start: "), trimPrefix(splitLine[4], "End: "));
         default:
             throw new IllegalArgumentException("Unknown task type");
         }
