@@ -277,4 +277,22 @@ public class Chappi {
 
         return savedList;
     }
+
+    private static Task parseTask(String line) {
+        String[] splitLine = line.split(" \\| ");
+        String taskType = splitLine[0];
+        boolean isDone = splitLine[1].equals("1");
+        String description = splitLine[2];
+
+        switch (taskType) {
+        case "T":
+            return new ToDo(description, isDone);
+        case "D":
+            return new Deadline(description, isDone, splitLine[3]);
+        case "E":
+            return new Event(description, isDone, splitLine[3], splitLine[4]);
+        default:
+            throw new IllegalArgumentException("Unknown task type");
+        }
+    }
 }
