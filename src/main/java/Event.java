@@ -10,7 +10,16 @@ public class Event extends Task {
 
     @Override
     public String toFileString() {
-        return "E | " + super.doneToInt() + " | " + super.description;
+        return "E | "
+                + super.doneToInt()
+                + " | "
+                + super.description
+                + " | "
+                + "Start: "
+                + startDate
+                + " | "
+                + "End: "
+                + endDate;
     }
 
     @Override
