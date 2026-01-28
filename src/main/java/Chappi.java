@@ -216,8 +216,7 @@ public class Chappi {
             try {
                 Task task = getTask(trimPrefix(input, "unmark").strip());
                 task.markNotDone();
-                String msg = "      Alright, marked this task as not done yet:\n        %s\n";
-                System.out.println(seperator + String.format(msg, task) + seperator);
+                ui.readUnmarkedTask(task);
             } catch (NumberFormatException e) {
                 throw new DukeException("      That is not a valid number.");
             }

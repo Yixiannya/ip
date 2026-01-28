@@ -36,6 +36,12 @@ public class Ui {
                 + SEPERATOR);
     }
 
+    public void readUnmarkedTask(Task task) {
+        System.out.println(SEPERATOR
+                + String.format("      Alright, marked this task as not done yet:\n        %s\n", task)
+                + SEPERATOR);
+    }
+
     public void showDukeException(DukeException e) {
         System.out.println(SEPERATOR
                         + e
