@@ -2,7 +2,6 @@ import dukeExceptions.*;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
-import java.util.ArrayList;
 
 public class Parser {
     public Parser() {}
@@ -139,7 +138,7 @@ public class Parser {
         }
     }
 
-    public static Task parseTaskIndex(String input, ArrayList<Task> taskList) throws DukeException {
+    public static Task parseTaskIndex(String input, TaskList taskList) throws DukeException {
         try {
             int index = Integer.parseInt(input);
             int i = index - 1;
@@ -152,7 +151,7 @@ public class Parser {
             if (i >= taskList.size()) {
                 throw new DukeException("The given index is too large!");
             }
-            return taskList.get(i);
+            return taskList.getTask(i);
         } catch (NumberFormatException e) {
             throw new DukeException("That is not a valid number.");
         }

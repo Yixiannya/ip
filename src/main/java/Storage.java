@@ -9,19 +9,20 @@ public class Storage {
         this.filePath = filePath;
     }
 
-    public void save(ArrayList<Task> taskList) throws FileNotFoundException {
+    public void save(TaskList taskList) throws FileNotFoundException {
         File saveFile = new File(this.filePath);
         saveFile.getParentFile().mkdirs();
 
         try (PrintWriter printWriter = new PrintWriter(saveFile)) {
-            for (Task t : taskList) {
+            for (int i = 0; i < taskList.size(); i++) {
+                Task t = taskList.getTask(i);
                 printWriter.write(t.toFileString() + "\n");
             }
         }
     }
 
-    public ArrayList<Task> load() throws IOException {
-        ArrayList<Task> savedList = new ArrayList<>();
+    public TaskList load() throws IOException {
+        TaskList savedList = new TaskList();
         File saveFile = new File(this.filePath);
 
         if (!saveFile.exists()) {
@@ -31,7 +32,7 @@ public class Storage {
         try (BufferedReader br = new BufferedReader(new FileReader(saveFile))) {
             String line = br.readLine();
             while (line != null) {
-                savedList.add(Parser.parseSavedTask(line));
+                savedList.addTask(Parser.parseSavedTask(line));
                 line = br.readLine();
             }
         }
