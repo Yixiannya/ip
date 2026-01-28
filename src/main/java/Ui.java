@@ -42,6 +42,12 @@ public class Ui {
                 + SEPERATOR);
     }
 
+    public void showDeletedTask(Task task) {
+        System.out.println(SEPERATOR
+                + String.format("      OK, I removed this task as you wanted:\n        %s\n", task)
+                + SEPERATOR);
+    }
+
     public void showDukeException(DukeException e) {
         System.out.println(SEPERATOR
                         + e

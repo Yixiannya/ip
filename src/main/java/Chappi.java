@@ -232,8 +232,7 @@ public class Chappi {
             try {
                 Task task = getTask(trimPrefix(input, "delete").strip());
                 taskList.remove(task);
-                String msg = "      OK, I removed this task as you wanted:\n        %s\n";
-                System.out.println(seperator + String.format(msg, task) + seperator);
+                ui.showDeletedTask(task);
             } catch (NumberFormatException e) {
                 throw new DukeException("      That is not a valid number.");
             }
