@@ -16,7 +16,7 @@ public class Deadline extends Task {
 
     @Override
     public String toFileString() {
-        String endDateStr = this.endDate.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
+        String endDateStr = this.endDate.toString();
         return "D | "
                 + super.doneToInt()
                 + " | "
