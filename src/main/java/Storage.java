@@ -31,7 +31,7 @@ public class Storage {
         try (BufferedReader br = new BufferedReader(new FileReader(saveFile))) {
             String line = br.readLine();
             while (line != null) {
-                savedList.add(Parser.parseTask(line));
+                savedList.add(Parser.parseSavedTask(line));
                 line = br.readLine();
             }
         }

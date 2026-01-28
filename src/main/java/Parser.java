@@ -28,7 +28,7 @@ public class Parser {
         }
     }
 
-    public static Task parseTask(String line) {
+    public static Task parseSavedTask(String line) {
         String[] splitLine = line.split(" \\| ");
         String taskType = splitLine[0];
         boolean isDone = splitLine[1].equals("1");
