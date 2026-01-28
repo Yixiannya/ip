@@ -1,3 +1,5 @@
+import dukeExceptions.DukeException;
+
 import java.io.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -21,7 +23,7 @@ public class Storage {
         }
     }
 
-    public TaskList load() throws IOException {
+    public TaskList load() throws DukeException {
         TaskList savedList = new TaskList();
         File saveFile = new File(this.filePath);
 
@@ -35,6 +37,8 @@ public class Storage {
                 savedList.addTask(Parser.parseSavedTask(line));
                 line = br.readLine();
             }
+        } catch (IOException e) {
+            throw new DukeException(e.toString());
         }
 
         return savedList;
