@@ -72,6 +72,13 @@ public class Ui {
                 + SEPERATOR);
     }
 
+    public void showInputTooBig(int limit) {
+        System.out.println(SEPERATOR
+                + "      The given number is larger than the size of the list.\n"
+                + String.format("      Please give a number smaller than %d.\n", limit)
+                + SEPERATOR);
+    }
+
     public void showDukeException(DukeException e) {
         System.out.println(SEPERATOR
                         + e

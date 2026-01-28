@@ -176,7 +176,7 @@ public class Chappi {
         ui.readNewTask(task, taskList);
     }
 
-    private static Task getTask(String input) throws DukeException {
+    private static Task getTask(String input) {
         int index = Integer.parseInt(input);
         int i = index - 1;
         if (taskList.isEmpty()) {
@@ -186,9 +186,7 @@ public class Chappi {
             ui.showInputTooSmall();
         }
         if (i >= taskList.size()) {
-            String e = String.format("      The given number is larger than the size of the list.\n"
-                    + "      Please give a number smaller than %d.", taskList.size());
-            throw new DukeException(e);
+            ui.showInputTooBig(taskList.size());
         }
         return taskList.get(i);
     }
