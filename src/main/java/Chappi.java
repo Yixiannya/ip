@@ -6,16 +6,25 @@ import dukeExceptions.DukeException;
 import dukeExceptions.DukeUnrecognisedCommandException;
 
 public class Chappi {
-    private static final String filePath = "./data/chappiSave.txt";
 
-    private static TaskList taskList;
-    private static Ui ui;
+    private Storage storage;
+    private TaskList taskList;
+    private Ui ui;
 
-    public static void main(String[] args) throws IOException {
+    public Chappi(String filePath) {
         // Initialisation
         ui = new Ui();
-        Storage storage = new Storage(filePath);
-        taskList = storage.load();
+        storage = new Storage(filePath);
+        try {
+            taskList = storage.load();
+        } catch (DukeException e) {
+            ui.showDukeException(e);
+            taskList = new TaskList();
+        }
+    }
+
+    public static void main(String[] args) throws IOException {
+
 
         ui.showGreeting();
 
