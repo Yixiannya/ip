@@ -1,4 +1,5 @@
 import dukeExceptions.DukeException;
+import dukeExceptions.DukeInvalidTodoException;
 import dukeExceptions.DukeUnrecognisedCommandException;
 
 import java.time.LocalDate;
@@ -25,6 +26,20 @@ public class Parser {
             return 7;
         } else {
             return -1;
+        }
+    }
+
+    public static String parseTodo(String input) throws DukeException{
+        if (input.equals("todo")) {
+            throw new DukeInvalidTodoException("Please enter a task description.");
+        } else if (input.startsWith("todo ")) {
+            String description = Util.trimPrefix(input, "todo ").strip();
+            if (description.isBlank()) {
+                throw new DukeInvalidTodoException("Please enter a task description.");
+            }
+            return description;
+        } else {
+            throw new DukeUnrecognisedCommandException();
         }
     }
 

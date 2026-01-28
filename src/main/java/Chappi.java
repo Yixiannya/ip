@@ -86,18 +86,9 @@ public class Chappi {
     }
 
     private static void addToDo(String input) throws DukeException {
-        if (input.equals("todo")) {
-            throw new DukeInvalidTodoException("Please enter a task description.");
-        } else if (input.startsWith("todo ")) {
-            String description = Util.trimPrefix(input, "todo ").strip();
-            if (description.isBlank()) {
-                throw new DukeInvalidTodoException("Please enter a task description.");
-            }
-            ToDo todo = new ToDo(description);
-            addToTaskList(todo);
-        } else {
-            throw new DukeUnrecognisedCommandException();
-        }
+        String description = Parser.parseTodo(input);
+        ToDo todo = new ToDo(description);
+        addToTaskList(todo);
     }
 
     private static void addDeadline(String input) throws DukeException{
