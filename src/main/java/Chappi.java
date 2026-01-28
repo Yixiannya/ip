@@ -85,15 +85,11 @@ public class Chappi {
         }
     }
 
-    private static String trimPrefix(String input, String prefix) {
-        return input.substring(prefix.length());
-    }
-
     private static void addToDo(String input) throws DukeException {
         if (input.equals("todo")) {
             throw new DukeInvalidTodoException("Please enter a task description.");
         } else if (input.startsWith("todo ")) {
-            String description = trimPrefix(input, "todo ").strip();
+            String description = Util.trimPrefix(input, "todo ").strip();
             if (description.isBlank()) {
                 throw new DukeInvalidTodoException("Please enter a task description.");
             }
@@ -108,7 +104,7 @@ public class Chappi {
         if (input.equals("deadline")) {
             throw new DukeInvalidDeadlineException("Please enter the event's description and start date.");
         } else if (input.startsWith("deadline ")) {
-            String description = trimPrefix(input, "deadline ").strip();
+            String description = Util.trimPrefix(input, "deadline ").strip();
             if (!description.contains("/by ")) {
                 throw new DukeInvalidDeadlineException("Please enter a due date with the '/by' keyword.");
             }
@@ -141,7 +137,7 @@ public class Chappi {
         if (input.equals("event")) {
             throw new DukeInvalidEventException("Please enter the event's description, start date and end date.");
         } else if (input.startsWith("event ")) {
-            String description = trimPrefix(input, "todo ").strip();
+            String description = Util.trimPrefix(input, "todo ").strip();
             if (!description.contains("/from ")) {
                 throw new DukeInvalidEventException("Please enter a valid string for a start date using the '/from' keyword.");
             }
@@ -206,7 +202,7 @@ public class Chappi {
             throw new DukeException("      Please enter a number.");
         } else if (input.startsWith("mark ")) {
             try {
-                Task task = getTask(trimPrefix(input, "mark").strip());
+                Task task = getTask(Util.trimPrefix(input, "mark").strip());
                 task.markDone();
                 ui.showMarkedTask(task);
             } catch (NumberFormatException e) {
@@ -222,7 +218,7 @@ public class Chappi {
             throw new DukeException("      Please enter a number.");
         } else if (input.startsWith("unmark ")) {
             try {
-                Task task = getTask(trimPrefix(input, "unmark").strip());
+                Task task = getTask(Util.trimPrefix(input, "unmark").strip());
                 task.markNotDone();
                 ui.showUnmarkedTask(task);
             } catch (NumberFormatException e) {
@@ -238,7 +234,7 @@ public class Chappi {
             throw new DukeException("      Please enter a number.");
         } else if (input.startsWith("delete ")) {
             try {
-                Task task = getTask(trimPrefix(input, "delete").strip());
+                Task task = getTask(Util.trimPrefix(input, "delete").strip());
                 taskList.remove(task);
                 ui.showDeletedTask(task);
             } catch (NumberFormatException e) {
