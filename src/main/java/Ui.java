@@ -93,7 +93,7 @@ public class Ui {
 
     public void showIOException(IOException e) {
         System.out.println(SEPERATOR
-                + "Sorry, there's been a problem:\n"
+                + "      Sorry, there's been a problem:\n"
                 + e
                 + SEPERATOR);
     }

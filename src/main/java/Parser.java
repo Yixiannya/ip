@@ -154,13 +154,13 @@ public class Parser {
             }
             return taskList.get(i);
         } catch (NumberFormatException e) {
-            throw new DukeException("      That is not a valid number.");
+            throw new DukeException("That is not a valid number.");
         }
     }
 
     public static String parseMarkTask(String input) throws DukeException {
         if (input.equals("mark")) {
-            throw new DukeException("      Please enter a number.");
+            throw new DukeException("Please enter a number.");
         } else if (input.startsWith("mark ")) {
             return Util.trimPrefix(input, "mark").strip();
         } else {
@@ -170,7 +170,7 @@ public class Parser {
 
     public static String parseUnmarkTask(String input) throws DukeException {
         if (input.equals("unmark")) {
-            throw new DukeException("      Please enter a number.");
+            throw new DukeException("Please enter a number.");
         } else if (input.startsWith("unmark ")) {
             return Util.trimPrefix(input, "unmark").strip();
         } else {
@@ -180,7 +180,7 @@ public class Parser {
 
     public static String parseDeleteTask(String input) throws DukeException {
         if (input.equals("delete")) {
-            throw new DukeException("      Please enter a number.");
+            throw new DukeException("Please enter a number.");
         } else if (input.startsWith("delete ")) {
             return Util.trimPrefix(input, "delete").strip();
         } else {
