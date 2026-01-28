@@ -19,6 +19,10 @@ public class TaskList {
         return arrayList.size();
     }
 
+    public boolean isEmpty() {
+        return arrayList.isEmpty();
+    }
+
     @Override
     public String toString() {
         String result = "";
