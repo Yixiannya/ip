@@ -140,17 +140,31 @@ public class Parser {
     }
 
     public static Task parseTaskIndex(String input, ArrayList<Task> taskList) throws DukeException {
-        int index = Integer.parseInt(input);
-        int i = index - 1;
-        if (taskList.isEmpty()) {
-            throw new DukeException("The list is empty!");
+        try {
+            int index = Integer.parseInt(input);
+            int i = index - 1;
+            if (taskList.isEmpty()) {
+                throw new DukeException("The list is empty!");
+            }
+            if (i < 0) {
+                throw new DukeException("The given index is too small!");
+            }
+            if (i >= taskList.size()) {
+                throw new DukeException("The given index is too large!");
+            }
+            return taskList.get(i);
+        } catch (NumberFormatException e) {
+            throw new DukeException("      That is not a valid number.");
         }
-        if (i < 0) {
-            throw new DukeException("The given index is too small!");
+    }
+
+    public static String parseMarkTask(String input) throws DukeException {
+        if (input.equals("mark")) {
+            throw new DukeException("      Please enter a number.");
+        } else if (input.startsWith("mark ")) {
+            return Util.trimPrefix(input, "mark").strip();
+        } else {
+            throw new DukeUnrecognisedCommandException();
         }
-        if (i >= taskList.size()) {
-            throw new DukeException("The given index is too large!");
-        }
-        return taskList.get(i);
     }
 }
