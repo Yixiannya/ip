@@ -39,6 +39,10 @@ public class Storage {
         return savedList;
     }
 
+    private String trimPrefix(String input, String prefix) {
+        return input.substring(prefix.length());
+    }
+
     private Task parseTask(String line) {
         String[] splitLine = line.split(" \\| ");
         String taskType = splitLine[0];
