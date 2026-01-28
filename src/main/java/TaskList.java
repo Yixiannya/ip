@@ -10,4 +10,14 @@ public class TaskList {
     public void addTask(Task task) {
         arrayList.add(task);
     }
+
+    @Override
+    public String toString() {
+        String result = "";
+        for (int i = 0; i < arrayList.size(); i++) {
+            int index = i + 1;
+            String msg = "      %d.%s\n";
+            result = result.concat(String.format(msg, index, arrayList.get(i)));
+        }
+    }
 }

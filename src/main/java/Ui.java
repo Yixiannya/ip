@@ -54,15 +54,10 @@ public class Ui {
                 + SEPERATOR);
     }
 
-    public void showTaskList(ArrayList<Task> taskList) {
-        String result = "      Here's your list:\n";
-        for (int i = 0; i < taskList.size(); i++) {
-            int index = i + 1;
-            String msg = "      %d.%s\n";
-            result = result.concat(String.format(msg, index, taskList.get(i)));
-        }
+    public void showTaskList(TaskList taskList) {
         System.out.println(SEPERATOR
-                + result
+                + "      Here's your list:\n"
+                + taskList
                 + SEPERATOR);
     }
 
