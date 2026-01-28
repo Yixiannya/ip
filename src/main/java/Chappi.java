@@ -67,9 +67,9 @@ public class Chappi {
                     throw new DukeUnrecognisedCommandException();
                 }
             } catch (DukeException e) {
-                ui.showException(e);
-            } catch (FileNotFoundException e) {
-                throw new RuntimeException(e);
+                ui.showDukeException(e);
+            } catch (IOException e) {
+                ui.showIOException(e);
             }
         }
     }

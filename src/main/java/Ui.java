@@ -1,5 +1,7 @@
 import dukeExceptions.DukeException;
 
+import java.io.IOException;
+
 public class Ui {
     private static final String SEPERATOR = "     ____________________________________________________________\n";
 
@@ -20,9 +22,16 @@ public class Ui {
                 + SEPERATOR);
     }
 
-    public void showException(DukeException e) {
+    public void showDukeException(DukeException e) {
         System.out.println(SEPERATOR
                         + e
                         + SEPERATOR);
+    }
+
+    public void showIOException(IOException e) {
+        System.out.println(SEPERATOR
+                + "Sorry, there's been a problem:\n"
+                + e
+                + SEPERATOR);
     }
 }
