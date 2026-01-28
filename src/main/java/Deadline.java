@@ -1,30 +1,35 @@
-public class Deadline extends Task {
-    protected String endDate;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
-    public Deadline(String description, String endDate) {
+public class Deadline extends Task {
+    protected LocalDate endDate;
+
+    public Deadline(String description, LocalDate endDate) {
         super(description);
         this.endDate = endDate;
     }
 
-    public Deadline(String description, boolean isDone, String endDate) {
+    public Deadline(String description, boolean isDone, LocalDate endDate) {
         super(description, isDone);
         this.endDate = endDate;
     }
 
     @Override
     public String toFileString() {
+        String endDateStr = this.endDate.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
         return "D | "
                 + super.doneToInt()
                 + " | "
                 + super.description
                 + " | "
                 + "End: "
-                + endDate;
+                + endDateStr;
     }
 
     @Override
     public String toString() {
-        String endDateStr = String.format(" (by: %s)", this.endDate);
-        return "[D]" + super.toString() + endDateStr;
+        String endDateStr = this.endDate.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
+        String dateStr = String.format(" (by: %s)", endDateStr);
+        return "[D]" + super.toString() + dateStr;
     }
 }
