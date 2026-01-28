@@ -15,6 +15,10 @@ public class TaskList {
         arrayList.remove(task);
     }
 
+    public Task getTask(int i) {
+        return arrayList.get(i);
+    }
+
     public int size() {
         return arrayList.size();
     }
