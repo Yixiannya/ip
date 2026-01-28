@@ -17,6 +17,10 @@ import dukeExceptions.DukeInvalidDeadlineException;
 import dukeExceptions.DukeInvalidTodoException;
 import dukeExceptions.DukeUnrecognisedCommandException;
 
+// Date imports
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
+
 public class Chappi {
     // Common use strings
     private static final String seperator = "     ____________________________________________________________\n";
@@ -102,15 +106,24 @@ public class Chappi {
             }
             String[] strings = description.split("/by ");
             String desc = strings[0].strip();
-            String endDate = strings[1].strip();
+            String endDateStr = strings[1].strip();
+            System.out.println(endDateStr);
             if (desc.isBlank()) {
                 throw new DukeInvalidDeadlineException("Please enter a valid description.");
             }
-            if (endDate.isBlank()) {
+            if (endDateStr.isBlank()) {
                 throw new DukeInvalidDeadlineException("Please enter a valid end date.");
             }
-            Deadline deadline = new Deadline(desc, endDate);
-            addToTaskList(deadline);
+            if (!endDateStr.matches("\\d{4}-\\d{2}-\\d{2}")) {
+                throw new DukeInvalidDeadlineException("Please enter a valid end date in the YYYY-MM-DD format.");
+            }
+            try {
+                LocalDate endDate = LocalDate.parse(endDateStr);
+                Deadline deadline = new Deadline(desc, endDate);
+                addToTaskList(deadline);
+            } catch (DateTimeParseException e) {
+                throw new DukeInvalidDeadlineException(e.toString());
+            }
 
         } else {
             throw new DukeUnrecognisedCommandException();
@@ -131,19 +144,32 @@ public class Chappi {
             String[] strings = description.split("/from ");
             String[] dateArray = strings[1].split("/to ");
             String desc = strings[0].strip();
-            String startDate = dateArray[0].strip();
-            String endDate = dateArray[1].strip();
+            String startDateStr = dateArray[0].strip();
+            String endDateStr = dateArray[1].strip();
             if (desc.isBlank()) {
                 throw new DukeInvalidEventException("Please enter a valid description.");
             }
-            if (startDate.isBlank()) {
+            if (startDateStr.isBlank()) {
                 throw new DukeInvalidEventException("Please enter a valid start date.");
             }
-            if (endDate.isBlank()) {
+            if (endDateStr.isBlank()) {
                 throw new DukeInvalidEventException("Please enter a valid end date.");
             }
-            Event event = new Event(desc, startDate, endDate);
-            addToTaskList(event);
+            if (!startDateStr.matches("\\d{4}-\\d{2}-\\d{2}")) {
+                throw new DukeInvalidDeadlineException("Please enter a valid end date in the YYYY-MM-DD format.");
+            }
+            if (!endDateStr.matches("\\d{4}-\\d{2}-\\d{2}")) {
+                throw new DukeInvalidDeadlineException("Please enter a valid end date in the YYYY-MM-DD format.");
+            }
+            try {
+                LocalDate startDate = LocalDate.parse(startDateStr);
+                LocalDate endDate = LocalDate.parse(endDateStr);
+                Event event = new Event(desc, startDate, endDate);
+                addToTaskList(event);
+            } catch (DateTimeParseException e){
+                throw new DukeInvalidEventException(e.toString());
+            }
+
         } else {
             throw new DukeUnrecognisedCommandException();
         }
@@ -288,9 +314,12 @@ public class Chappi {
         case "T":
             return new ToDo(description, isDone);
         case "D":
-            return new Deadline(description, isDone, trimPrefix(splitLine[3], "End: "));
+            LocalDate deadlineEndDate = LocalDate.parse(trimPrefix(splitLine[3], "End: "));
+            return new Deadline(description, isDone, deadlineEndDate);
         case "E":
-            return new Event(description, isDone, trimPrefix(splitLine[3], "Start: "), trimPrefix(splitLine[4], "End: "));
+            LocalDate eventStartDate = LocalDate.parse(trimPrefix(splitLine[3], "Start: "));
+            LocalDate eventEndDate = LocalDate.parse(trimPrefix(splitLine[4], "End: "));
+            return new Event(description, isDone, eventStartDate, eventEndDate);
         default:
             throw new IllegalArgumentException("Unknown task type");
         }
