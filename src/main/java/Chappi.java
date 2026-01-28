@@ -200,8 +200,7 @@ public class Chappi {
             try {
                 Task task = getTask(trimPrefix(input, "mark").strip());
                 task.markDone();
-                String msg = "      Alright, marked this task as done:\n        %s\n";
-                System.out.println(seperator + String.format(msg, task) + seperator);
+                ui.readMarkedTask(task);
             } catch (NumberFormatException e) {
                 throw new DukeException("      That is not a valid number.");
             }
