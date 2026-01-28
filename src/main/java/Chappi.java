@@ -41,30 +41,40 @@ public class Chappi {
         while (true) {
             try {
                 String input = ui.readInput();
-                if (input.equals("list")) {
+                int commandType = Parser.parse(input);
+                switch (commandType) {
+                case 0:
                     readList();
-                } else if (input.equals("bye")) {
+                    break;
+                case 1:
                     ui.showGoodbye();
                     System.exit(0);
-                } else if (input.startsWith("mark")) {
+                    break;
+                case 2:
                     markList(input);
                     storage.save(taskList);
-                } else if (input.startsWith("unmark")) {
+                    break;
+                case 3:
                     unmarkList(input);
                     storage.save(taskList);
-                } else if (input.startsWith("delete")) {
+                    break;
+                case 4:
                     deleteTask(input);
                     storage.save(taskList);
-                } else if (input.startsWith("todo")) {
+                    break;
+                case 5:
                     addToDo(input);
                     storage.save(taskList);
-                } else if (input.startsWith("deadline")) {
+                    break;
+                case 6:
                     addDeadline(input);
                     storage.save(taskList);
-                } else if (input.startsWith("event")) {
+                    break;
+                case 7:
                     addEvent(input);
                     storage.save(taskList);
-                } else {
+                    break;
+                default:
                     throw new DukeUnrecognisedCommandException();
                 }
             } catch (DukeException e) {
