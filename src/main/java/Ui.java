@@ -66,6 +66,12 @@ public class Ui {
                 + SEPERATOR);
     }
 
+    public void showInputTooSmall() {
+        System.out.println(SEPERATOR
+                + "      Please input a number greater than 0."
+                + SEPERATOR);
+    }
+
     public void showDukeException(DukeException e) {
         System.out.println(SEPERATOR
                         + e

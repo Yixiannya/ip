@@ -180,10 +180,10 @@ public class Chappi {
         int index = Integer.parseInt(input);
         int i = index - 1;
         if (taskList.isEmpty()) {
-            throw new DukeException("      The list is empty!");
+            ui.showEmptyTaskList();
         }
         if (i < 0) {
-            throw new DukeException("      Please input a number greater than 0.");
+            ui.showInputTooSmall();
         }
         if (i >= taskList.size()) {
             String e = String.format("      The given number is larger than the size of the list.\n"
