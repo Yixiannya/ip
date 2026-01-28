@@ -40,7 +40,6 @@ public class Chappi {
         while (true) {
             try {
                 String input = scanner.nextLine();
-
                 if (input.equals("list")) {
                     readList();
                 } else if (input.equals("bye")) {
@@ -68,7 +67,7 @@ public class Chappi {
                     throw new DukeUnrecognisedCommandException();
                 }
             } catch (DukeException e) {
-                System.out.println(seperator + e + seperator);
+                ui.showException(e);
             } catch (FileNotFoundException e) {
                 throw new RuntimeException(e);
             }
@@ -105,7 +104,6 @@ public class Chappi {
             String[] strings = description.split("/by ");
             String desc = strings[0].strip();
             String endDateStr = strings[1].strip();
-            System.out.println(endDateStr);
             if (desc.isBlank()) {
                 throw new DukeInvalidDeadlineException("Please enter a valid description.");
             }

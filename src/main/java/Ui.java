@@ -1,3 +1,5 @@
+import dukeExceptions.DukeException;
+
 public class Ui {
     private static final String SEPERATOR = "     ____________________________________________________________\n";
 
@@ -16,5 +18,11 @@ public class Ui {
         System.out.println(SEPERATOR
                 + "      Bye. Hope to see you again soon! ☆*:.｡. o(≧▽≦)o .｡.:*☆\n"
                 + SEPERATOR);
+    }
+
+    public void showException(DukeException e) {
+        System.out.println(SEPERATOR
+                        + e
+                        + SEPERATOR);
     }
 }
