@@ -11,4 +11,10 @@ public class Ui {
                 + "      What can I do for you?\n"
                 + SEPERATOR);
     }
+
+    public void sayBye() {
+        System.out.println(SEPERATOR
+                + "      Bye. Hope to see you again soon! ☆*:.｡. o(≧▽≦)o .｡.:*☆\n"
+                + SEPERATOR);
+    }
 }

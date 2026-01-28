@@ -44,7 +44,7 @@ public class Chappi {
                 if (input.equals("list")) {
                     readList();
                 } else if (input.equals("bye")) {
-                    sayBye();
+                    ui.sayBye();
                     System.exit(0);
                 } else if (input.startsWith("mark")) {
                     markList(input);
@@ -265,10 +265,5 @@ public class Chappi {
             }
         }
         System.out.println(seperator + result + seperator);
-    }
-
-    private static void sayBye() {
-        String msg = "      Bye. Hope to see you again soon! ☆*:.｡. o(≧▽≦)o .｡.:*☆\n";
-        System.out.println(seperator + msg + seperator);
     }
 }
