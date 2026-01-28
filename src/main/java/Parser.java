@@ -1,7 +1,4 @@
-import dukeExceptions.DukeException;
-import dukeExceptions.DukeInvalidDeadlineException;
-import dukeExceptions.DukeInvalidTodoException;
-import dukeExceptions.DukeUnrecognisedCommandException;
+import dukeExceptions.*;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
@@ -71,6 +68,49 @@ public class Parser {
                 return new Deadline(desc, endDate);
             } catch (DateTimeParseException e) {
                 throw new DukeInvalidDeadlineException(e.toString());
+            }
+        } else {
+            throw new DukeUnrecognisedCommandException();
+        }
+    }
+
+    public static Event parseEvent(String input) throws DukeException {
+        if (input.equals("event")) {
+            throw new DukeInvalidEventException("Please enter the event's description, start date and end date.");
+        } else if (input.startsWith("event ")) {
+            String description = Util.trimPrefix(input, "todo ").strip();
+            if (!description.contains("/from ")) {
+                throw new DukeInvalidEventException("Please enter a valid string for a start date using the '/from' keyword.");
+            }
+            if (!description.contains("/to ")) {
+                throw new DukeInvalidEventException("Please enter a valid string for an end date using the '/to' keyword.");
+            }
+            String[] strings = description.split("/from ");
+            String[] dateArray = strings[1].split("/to ");
+            String desc = strings[0].strip();
+            String startDateStr = dateArray[0].strip();
+            String endDateStr = dateArray[1].strip();
+            if (desc.isBlank()) {
+                throw new DukeInvalidEventException("Please enter a valid description.");
+            }
+            if (startDateStr.isBlank()) {
+                throw new DukeInvalidEventException("Please enter a valid start date.");
+            }
+            if (endDateStr.isBlank()) {
+                throw new DukeInvalidEventException("Please enter a valid end date.");
+            }
+            if (!startDateStr.matches("\\d{4}-\\d{2}-\\d{2}")) {
+                throw new DukeInvalidDeadlineException("Please enter a valid end date in the YYYY-MM-DD format.");
+            }
+            if (!endDateStr.matches("\\d{4}-\\d{2}-\\d{2}")) {
+                throw new DukeInvalidDeadlineException("Please enter a valid end date in the YYYY-MM-DD format.");
+            }
+            try {
+                LocalDate startDate = LocalDate.parse(startDateStr);
+                LocalDate endDate = LocalDate.parse(endDateStr);
+                return new Event(desc, startDate, endDate);
+            } catch (DateTimeParseException e){
+                throw new DukeInvalidEventException(e.toString());
             }
         } else {
             throw new DukeUnrecognisedCommandException();
