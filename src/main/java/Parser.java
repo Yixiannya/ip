@@ -167,4 +167,24 @@ public class Parser {
             throw new DukeUnrecognisedCommandException();
         }
     }
+
+    public static String parseUnmarkTask(String input) throws DukeException {
+        if (input.equals("unmark")) {
+            throw new DukeException("      Please enter a number.");
+        } else if (input.startsWith("unmark ")) {
+            return Util.trimPrefix(input, "unmark").strip();
+        } else {
+            throw new DukeUnrecognisedCommandException();
+        }
+    }
+
+    public static String parseDeleteTask(String input) throws DukeException {
+        if (input.equals("delete")) {
+            throw new DukeException("      Please enter a number.");
+        } else if (input.startsWith("delete ")) {
+            return Util.trimPrefix(input, "delete").strip();
+        } else {
+            throw new DukeUnrecognisedCommandException();
+        }
+    }
 }

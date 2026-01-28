@@ -109,19 +109,9 @@ public class Chappi {
     }
 
     private static void unmarkList(String input) throws DukeException {
-        if (input.equals("unmark")) {
-            throw new DukeException("      Please enter a number.");
-        } else if (input.startsWith("unmark ")) {
-            try {
-                Task task = Parser.parseTaskIndex(Util.trimPrefix(input, "unmark").strip(), taskList);
-                task.markNotDone();
-                ui.showUnmarkedTask(task);
-            } catch (NumberFormatException e) {
-                throw new DukeException("      That is not a valid number.");
-            }
-        } else {
-            throw new DukeUnrecognisedCommandException();
-        }
+        Task task = Parser.parseTaskIndex(Parser.parseUnmarkTask(input), taskList);
+        task.markNotDone();
+        ui.showUnmarkedTask(task);
     }
 
     private static void deleteTask(String input) throws DukeException {
