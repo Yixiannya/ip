@@ -243,9 +243,8 @@ public class Chappi {
 
     private static void readList() {
         String result = "";
-
         if (taskList.size() <= 0) {
-            result = result.concat("      The list is empty!\n");
+            ui.showEmptyTaskList();
         } else {
             result = result.concat("      Here's your list:\n");
             for (int i = 0; i < taskList.size(); i++) {
@@ -253,7 +252,7 @@ public class Chappi {
                 String msg = "      %d.%s\n";
                 result = result.concat(String.format(msg, index, taskList.get(i)));
             }
+            System.out.println(seperator + result + seperator);
         }
-        System.out.println(seperator + result + seperator);
     }
 }

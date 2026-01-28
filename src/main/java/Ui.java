@@ -48,6 +48,12 @@ public class Ui {
                 + SEPERATOR);
     }
 
+    public void showEmptyTaskList() {
+        System.out.println(SEPERATOR
+                + "      The list is empty!\n"
+                + SEPERATOR);
+    }
+
     public void showDukeException(DukeException e) {
         System.out.println(SEPERATOR
                         + e
