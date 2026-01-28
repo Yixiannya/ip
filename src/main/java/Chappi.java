@@ -26,7 +26,7 @@ public class Chappi {
     private static final String seperator = "     ____________________________________________________________\n";
     private static final String filePath = "./data/chappiSave.txt";
 
-    private static ArrayList<Task> taskList;
+    private static TaskList taskList;
     private static Ui ui;
 
     public static void main(String[] args) throws IOException {
@@ -86,19 +86,20 @@ public class Chappi {
     }
 
     private static void addToDo(String input) throws DukeException {
-        addToTaskList(Parser.parseTodo(input));
+        Task task = Parser.parseTodo(input)
+        taskList.addTask(task);
+        ui.showNewTask(task, taskList);
     }
 
     private static void addDeadline(String input) throws DukeException{
-        addToTaskList(Parser.parseDeadline(input));
+        Task task = Parser.parseDeadline(input);
+        taskList.addTask(task);
+        ui.showNewTask(task, taskList);
     }
 
     private static void addEvent(String input) throws DukeException {
-        addToTaskList(Parser.parseEvent(input));
-    }
-
-    private static void addToTaskList(Task task) {
-        taskList.add(task);
+        Task task = Parser.parseEvent(input);
+        taskList.addTask(task);
         ui.showNewTask(task, taskList);
     }
 
