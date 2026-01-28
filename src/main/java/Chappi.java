@@ -242,17 +242,10 @@ public class Chappi {
     }
 
     private static void readList() {
-        String result = "";
         if (taskList.size() <= 0) {
             ui.showEmptyTaskList();
         } else {
-            result = result.concat("      Here's your list:\n");
-            for (int i = 0; i < taskList.size(); i++) {
-                int index = i + 1;
-                String msg = "      %d.%s\n";
-                result = result.concat(String.format(msg, index, taskList.get(i)));
-            }
-            System.out.println(seperator + result + seperator);
+            ui.showTaskList(taskList);
         }
     }
 }

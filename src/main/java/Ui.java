@@ -48,6 +48,18 @@ public class Ui {
                 + SEPERATOR);
     }
 
+    public void showTaskList(ArrayList<Task> taskList) {
+        String result = "      Here's your list:\n";
+        for (int i = 0; i < taskList.size(); i++) {
+            int index = i + 1;
+            String msg = "      %d.%s\n";
+            result = result.concat(String.format(msg, index, taskList.get(i)));
+        }
+        System.out.println(SEPERATOR
+                + result
+                + SEPERATOR);
+    }
+
     public void showEmptyTaskList() {
         System.out.println(SEPERATOR
                 + "      The list is empty!\n"
