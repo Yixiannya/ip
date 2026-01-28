@@ -1,6 +1,7 @@
 import dukeExceptions.DukeException;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class Ui {
     private static final String SEPERATOR = "     ____________________________________________________________\n";
@@ -19,6 +20,13 @@ public class Ui {
     public void sayBye() {
         System.out.println(SEPERATOR
                 + "      Bye. Hope to see you again soon! ☆*:.｡. o(≧▽≦)o .｡.:*☆\n"
+                + SEPERATOR);
+    }
+
+    public void readNewTask(Task task, ArrayList<Task> taskList) {
+        System.out.println(SEPERATOR
+                + String.format("      Sure, added:\n      %s\n", task)
+                + String.format("      There's %d tasks in your list now.\n", taskList.size())
                 + SEPERATOR);
     }
 

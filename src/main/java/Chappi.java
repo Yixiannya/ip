@@ -27,10 +27,11 @@ public class Chappi {
     private static final String filePath = "./data/chappiSave.txt";
     private static Scanner scanner;
     private static ArrayList<Task> taskList;
+    private static Ui ui;
 
     public static void main(String[] args) throws IOException {
         // Initialisation
-        Ui ui = new Ui();
+        ui = new Ui();
         Storage storage = new Storage(filePath);
         taskList = storage.load();
 
@@ -165,7 +166,6 @@ public class Chappi {
             } catch (DateTimeParseException e){
                 throw new DukeInvalidEventException(e.toString());
             }
-
         } else {
             throw new DukeUnrecognisedCommandException();
         }
@@ -173,12 +173,7 @@ public class Chappi {
 
     private static void addToTaskList(Task task) {
         taskList.add(task);
-        String msg = "      Sure, added:\n      %s\n";
-        String listLenMsg = String.format("      There's %d tasks in your list now.\n", taskList.size());
-        System.out.println(seperator
-                + String.format(msg, task)
-                + listLenMsg
-                + seperator);
+        ui.readNewTask(task, taskList);
     }
 
     private static Task getTask(String input) throws DukeException {
