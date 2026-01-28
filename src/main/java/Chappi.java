@@ -1,29 +1,11 @@
-// Imports
-import java.util.Scanner;
-import java.util.ArrayList;
-
-// IO Imports
-import java.io.PrintWriter;
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.FileNotFoundException;
+// IO imports
 import java.io.IOException;
 
 // Exception imports
 import dukeExceptions.DukeException;
-import dukeExceptions.DukeInvalidEventException;
-import dukeExceptions.DukeInvalidDeadlineException;
-import dukeExceptions.DukeInvalidTodoException;
 import dukeExceptions.DukeUnrecognisedCommandException;
 
-// Date imports
-import java.time.LocalDate;
-import java.time.format.DateTimeParseException;
-
 public class Chappi {
-    // Common use strings
-    private static final String seperator = "     ____________________________________________________________\n";
     private static final String filePath = "./data/chappiSave.txt";
 
     private static TaskList taskList;
@@ -36,7 +18,6 @@ public class Chappi {
         taskList = storage.load();
 
         ui.showGreeting();
-
 
         while (true) {
             try {
