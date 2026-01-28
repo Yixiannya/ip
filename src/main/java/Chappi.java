@@ -35,7 +35,7 @@ public class Chappi {
         Storage storage = new Storage(filePath);
         taskList = storage.load();
 
-        ui.greetUser();
+        ui.showGreeting();
         scanner = new Scanner(System.in);
 
         while (true) {
@@ -44,7 +44,7 @@ public class Chappi {
                 if (input.equals("list")) {
                     readList();
                 } else if (input.equals("bye")) {
-                    ui.sayBye();
+                    ui.showGoodbye();
                     System.exit(0);
                 } else if (input.startsWith("mark")) {
                     markList(input);
@@ -173,7 +173,7 @@ public class Chappi {
 
     private static void addToTaskList(Task task) {
         taskList.add(task);
-        ui.readNewTask(task, taskList);
+        ui.showNewTask(task, taskList);
     }
 
     private static Task getTask(String input) {
