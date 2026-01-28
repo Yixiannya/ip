@@ -318,7 +318,7 @@ public class Chappi {
             return new Deadline(description, isDone, deadlineEndDate);
         case "E":
             LocalDate eventStartDate = LocalDate.parse(trimPrefix(splitLine[3], "Start: "));
-            LocalDate eventEndDate = LocalDate.parse(trimPrefix(splitLine[3], "End: "));
+            LocalDate eventEndDate = LocalDate.parse(trimPrefix(splitLine[4], "End: "));
             return new Event(description, isDone, eventStartDate, eventEndDate);
         default:
             throw new IllegalArgumentException("Unknown task type");
