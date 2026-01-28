@@ -15,6 +15,10 @@ public class TaskList {
         arrayList.remove(task);
     }
 
+    public int size() {
+        return arrayList.size();
+    }
+
     @Override
     public String toString() {
         String result = "";
