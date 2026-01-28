@@ -29,16 +29,12 @@ public class Chappi {
     private static ArrayList<Task> taskList;
 
     public static void main(String[] args) throws IOException {
-        // Messages
-        String greeting = "      Hello! I'm Chappi!\n" +
-                "      What can I do for you?\n";
-
         // Initialisation
+        Ui ui = new Ui();
         Storage storage = new Storage(filePath);
         taskList = storage.load();
-        
-        System.out.println(seperator + greeting + seperator);
 
+        ui.greetUser();
         scanner = new Scanner(System.in);
 
         while (true) {
