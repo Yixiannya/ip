@@ -23,11 +23,8 @@ public class Chappi {
         }
     }
 
-    public static void main(String[] args) throws IOException {
-
-
+    public void run() {
         ui.showGreeting();
-
         while (true) {
             try {
                 String input = ui.readInput();
@@ -89,5 +86,9 @@ public class Chappi {
                 ui.showIOException(e);
             }
         }
+    }
+
+    public static void main(String[] args) throws IOException {
+        new Chappi("./data/chappiSave.txt").run();
     }
 }
