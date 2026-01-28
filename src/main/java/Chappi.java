@@ -200,7 +200,7 @@ public class Chappi {
             try {
                 Task task = getTask(trimPrefix(input, "mark").strip());
                 task.markDone();
-                ui.readMarkedTask(task);
+                ui.showMarkedTask(task);
             } catch (NumberFormatException e) {
                 throw new DukeException("      That is not a valid number.");
             }
@@ -216,7 +216,7 @@ public class Chappi {
             try {
                 Task task = getTask(trimPrefix(input, "unmark").strip());
                 task.markNotDone();
-                ui.readUnmarkedTask(task);
+                ui.showUnmarkedTask(task);
             } catch (NumberFormatException e) {
                 throw new DukeException("      That is not a valid number.");
             }

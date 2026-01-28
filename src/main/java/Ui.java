@@ -30,13 +30,13 @@ public class Ui {
                 + SEPERATOR);
     }
 
-    public void readMarkedTask(Task task) {
+    public void showMarkedTask(Task task) {
         System.out.println(SEPERATOR
                 + String.format("      Alright, marked this task as done:\n        %s\n", task)
                 + SEPERATOR);
     }
 
-    public void readUnmarkedTask(Task task) {
+    public void showUnmarkedTask(Task task) {
         System.out.println(SEPERATOR
                 + String.format("      Alright, marked this task as not done yet:\n        %s\n", task)
                 + SEPERATOR);
