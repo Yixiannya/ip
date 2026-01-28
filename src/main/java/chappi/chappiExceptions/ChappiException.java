@@ -1,9 +1,9 @@
-package dukeExceptions;
+package chappi.chappiExceptions;
 
-public class DukeException extends Exception {
+public class ChappiException extends Exception {
     protected String msg;
 
-    public DukeException(String message) {
+    public ChappiException(String message) {
         msg = "      There's been a problem.\n"
                 + "      "
                 + message
