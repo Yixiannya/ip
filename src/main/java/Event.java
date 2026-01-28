@@ -19,8 +19,8 @@ public class Event extends Task {
 
     @Override
     public String toFileString() {
-        String startDateStr = this.startDate.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
-        String endDateStr = this.endDate.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
+        String startDateStr = this.startDate.toString();
+        String endDateStr = this.endDate.toString();
         return "E | "
                 + super.doneToInt()
                 + " | "
