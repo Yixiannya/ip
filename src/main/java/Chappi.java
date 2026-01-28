@@ -102,27 +102,12 @@ public class Chappi {
         ui.showNewTask(task, taskList);
     }
 
-    private static Task getTask(String input) {
-        int index = Integer.parseInt(input);
-        int i = index - 1;
-        if (taskList.isEmpty()) {
-            ui.showEmptyTaskList();
-        }
-        if (i < 0) {
-            ui.showInputTooSmall();
-        }
-        if (i >= taskList.size()) {
-            ui.showInputTooBig(taskList.size());
-        }
-        return taskList.get(i);
-    }
-
     private static void markList(String input) throws DukeException {
         if (input.equals("mark")) {
             throw new DukeException("      Please enter a number.");
         } else if (input.startsWith("mark ")) {
             try {
-                Task task = getTask(Util.trimPrefix(input, "mark").strip());
+                Task task = Parser.parseTaskIndex(Util.trimPrefix(input, "mark").strip(), taskList);
                 task.markDone();
                 ui.showMarkedTask(task);
             } catch (NumberFormatException e) {
@@ -138,7 +123,7 @@ public class Chappi {
             throw new DukeException("      Please enter a number.");
         } else if (input.startsWith("unmark ")) {
             try {
-                Task task = getTask(Util.trimPrefix(input, "unmark").strip());
+                Task task = Parser.parseTaskIndex(Util.trimPrefix(input, "unmark").strip(), taskList);
                 task.markNotDone();
                 ui.showUnmarkedTask(task);
             } catch (NumberFormatException e) {
@@ -154,7 +139,7 @@ public class Chappi {
             throw new DukeException("      Please enter a number.");
         } else if (input.startsWith("delete ")) {
             try {
-                Task task = getTask(Util.trimPrefix(input, "delete").strip());
+                Task task = Parser.parseTaskIndex(Util.trimPrefix(input, "delete").strip(), taskList);
                 taskList.remove(task);
                 ui.showDeletedTask(task);
             } catch (NumberFormatException e) {

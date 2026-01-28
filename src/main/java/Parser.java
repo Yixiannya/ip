@@ -2,6 +2,7 @@ import dukeExceptions.*;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
+import java.util.ArrayList;
 
 public class Parser {
     public Parser() {}
@@ -136,5 +137,20 @@ public class Parser {
         default:
             throw new IllegalArgumentException("Unknown task type");
         }
+    }
+
+    public static Task parseTaskIndex(String input, ArrayList<Task> taskList) throws DukeException {
+        int index = Integer.parseInt(input);
+        int i = index - 1;
+        if (taskList.isEmpty()) {
+            throw new DukeException("The list is empty!");
+        }
+        if (i < 0) {
+            throw new DukeException("The given index is too small!");
+        }
+        if (i >= taskList.size()) {
+            throw new DukeException("The given index is too large!");
+        }
+        return taskList.get(i);
     }
 }
