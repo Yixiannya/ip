@@ -35,5 +35,6 @@ public class TaskList {
             String msg = "      %d.%s\n";
             result = result.concat(String.format(msg, index, arrayList.get(i)));
         }
+        return result;
     }
 }
