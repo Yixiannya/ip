@@ -115,19 +115,9 @@ public class Chappi {
     }
 
     private static void deleteTask(String input) throws DukeException {
-        if (input.equals("delete")) {
-            throw new DukeException("      Please enter a number.");
-        } else if (input.startsWith("delete ")) {
-            try {
-                Task task = Parser.parseTaskIndex(Util.trimPrefix(input, "delete").strip(), taskList);
-                taskList.remove(task);
-                ui.showDeletedTask(task);
-            } catch (NumberFormatException e) {
-                throw new DukeException("      That is not a valid number.");
-            }
-        } else {
-            throw new DukeUnrecognisedCommandException();
-        }
+        Task task = Parser.parseTaskIndex(Parser.parseDeleteTask(input), taskList);
+        taskList.remove(task);
+        ui.showDeletedTask(task);
     }
 
     private static void readList() {
