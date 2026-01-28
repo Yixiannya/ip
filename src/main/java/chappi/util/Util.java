@@ -1,3 +1,5 @@
+package chappi.util;
+
 public class Util {
     public Util() {}
 

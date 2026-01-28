@@ -1,7 +1,10 @@
-import dukeExceptions.DukeException;
+package chappi.ui;
+
+import chappi.chappiExceptions.ChappiException;
+import chappi.task.Task;
+import chappi.tasklist.TaskList;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Ui {
@@ -80,7 +83,7 @@ public class Ui {
                 + SEPERATOR);
     }
 
-    public void showDukeException(DukeException e) {
+    public void showDukeException(ChappiException e) {
         System.out.println(SEPERATOR
                         + e
                         + SEPERATOR);

@@ -1,9 +1,17 @@
+package chappi.ui;
+
 // IO imports
 import java.io.IOException;
 
+
+
 // Exception imports
-import dukeExceptions.DukeException;
-import dukeExceptions.DukeUnrecognisedCommandException;
+import chappi.chappiExceptions.ChappiException;
+import chappi.chappiExceptions.ChappiUnrecognisedCommandException;
+import chappi.parser.Parser;
+import chappi.storage.Storage;
+import chappi.task.Task;
+import chappi.tasklist.TaskList;
 
 public class Chappi {
 
@@ -17,7 +25,7 @@ public class Chappi {
         storage = new Storage(filePath);
         try {
             taskList = storage.load();
-        } catch (DukeException e) {
+        } catch (ChappiException e) {
             ui.showDukeException(e);
             taskList = new TaskList();
         }
@@ -78,9 +86,9 @@ public class Chappi {
                     storage.save(taskList);
                     break;
                 default:
-                    throw new DukeUnrecognisedCommandException();
+                    throw new ChappiUnrecognisedCommandException();
                 }
-            } catch (DukeException e) {
+            } catch (ChappiException e) {
                 ui.showDukeException(e);
             } catch (IOException e) {
                 ui.showIOException(e);

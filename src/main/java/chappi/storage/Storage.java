@@ -1,8 +1,11 @@
-import dukeExceptions.DukeException;
+package chappi.storage;
+
+import chappi.parser.Parser;
+import chappi.task.Task;
+import chappi.chappiExceptions.ChappiException;
+import chappi.tasklist.TaskList;
 
 import java.io.*;
-import java.time.LocalDate;
-import java.util.ArrayList;
 
 public class Storage {
     private String filePath;
@@ -23,7 +26,7 @@ public class Storage {
         }
     }
 
-    public TaskList load() throws DukeException {
+    public TaskList load() throws ChappiException {
         TaskList savedList = new TaskList();
         File saveFile = new File(this.filePath);
 
@@ -38,7 +41,7 @@ public class Storage {
                 line = br.readLine();
             }
         } catch (IOException e) {
-            throw new DukeException(e.toString());
+            throw new ChappiException(e.toString());
         }
 
         return savedList;
