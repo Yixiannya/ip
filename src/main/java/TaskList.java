@@ -11,6 +11,10 @@ public class TaskList {
         arrayList.add(task);
     }
 
+    public void removeTask(Task task) {
+        arrayList.remove(task);
+    }
+
     @Override
     public String toString() {
         String result = "";

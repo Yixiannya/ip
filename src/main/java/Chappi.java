@@ -117,7 +117,7 @@ public class Chappi {
 
     private static void deleteTask(String input) throws DukeException {
         Task task = Parser.parseTaskIndex(Parser.parseDeleteTask(input), taskList);
-        taskList.remove(task);
+        taskList.removeTask(task);
         ui.showDeletedTask(task);
     }
 
