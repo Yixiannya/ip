@@ -2,12 +2,18 @@ import dukeExceptions.DukeException;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Ui {
+    private static Scanner scanner;
     private static final String SEPERATOR = "     ____________________________________________________________\n";
 
     public Ui() {
+        scanner = new Scanner(System.in);
+    }
 
+    public String readInput() {
+        return scanner.nextLine();
     }
 
     public void showGreeting() {

@@ -25,7 +25,7 @@ public class Chappi {
     // Common use strings
     private static final String seperator = "     ____________________________________________________________\n";
     private static final String filePath = "./data/chappiSave.txt";
-    private static Scanner scanner;
+
     private static ArrayList<Task> taskList;
     private static Ui ui;
 
@@ -36,11 +36,11 @@ public class Chappi {
         taskList = storage.load();
 
         ui.showGreeting();
-        scanner = new Scanner(System.in);
+
 
         while (true) {
             try {
-                String input = scanner.nextLine();
+                String input = ui.readInput();
                 if (input.equals("list")) {
                     readList();
                 } else if (input.equals("bye")) {
