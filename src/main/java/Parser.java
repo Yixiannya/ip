@@ -38,18 +38,14 @@ public class Parser {
         case "T":
             return new ToDo(description, isDone);
         case "D":
-            LocalDate deadlineEndDate = LocalDate.parse(trimPrefix(splitLine[3], "End: "));
+            LocalDate deadlineEndDate = LocalDate.parse(Util.trimPrefix(splitLine[3], "End: "));
             return new Deadline(description, isDone, deadlineEndDate);
         case "E":
-            LocalDate eventStartDate = LocalDate.parse(trimPrefix(splitLine[3], "Start: "));
-            LocalDate eventEndDate = LocalDate.parse(trimPrefix(splitLine[4], "End: "));
+            LocalDate eventStartDate = LocalDate.parse(Util.trimPrefix(splitLine[3], "Start: "));
+            LocalDate eventEndDate = LocalDate.parse(Util.trimPrefix(splitLine[4], "End: "));
             return new Event(description, isDone, eventStartDate, eventEndDate);
         default:
             throw new IllegalArgumentException("Unknown task type");
         }
-    }
-
-    private String trimPrefix(String input, String prefix) {
-        return input.substring(prefix.length());
     }
 }
