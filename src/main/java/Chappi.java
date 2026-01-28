@@ -44,34 +44,50 @@ public class Chappi {
                 int commandType = Parser.parse(input);
                 switch (commandType) {
                 case 0:
-                    readList();
+                    if (taskList.isEmpty()) {
+                        ui.showEmptyTaskList();
+                    } else {
+                        ui.showTaskList(taskList);
+                    }
                     break;
                 case 1:
                     ui.showGoodbye();
                     System.exit(0);
                     break;
                 case 2:
-                    markList(input);
+                    Task markedTask = Parser.parseTaskIndex(Parser.parseMarkTask(input), taskList);
+                    markedTask.markDone();
+                    ui.showMarkedTask(markedTask);
                     storage.save(taskList);
                     break;
                 case 3:
-                    unmarkList(input);
+                    Task unmarkedTask = Parser.parseTaskIndex(Parser.parseUnmarkTask(input), taskList);
+                    unmarkedTask.markNotDone();
+                    ui.showUnmarkedTask(unmarkedTask);
                     storage.save(taskList);
                     break;
                 case 4:
-                    deleteTask(input);
+                    Task deletedTask = Parser.parseTaskIndex(Parser.parseDeleteTask(input), taskList);
+                    taskList.removeTask(deletedTask);
+                    ui.showDeletedTask(deletedTask);
                     storage.save(taskList);
                     break;
                 case 5:
-                    addToDo(input);
+                    Task todoTask = Parser.parseTodo(input);
+                    taskList.addTask(todoTask);
+                    ui.showNewTask(todoTask, taskList);
                     storage.save(taskList);
                     break;
                 case 6:
-                    addDeadline(input);
+                    Task deadlineTask = Parser.parseDeadline(input);
+                    taskList.addTask(deadlineTask);
+                    ui.showNewTask(deadlineTask, taskList);
                     storage.save(taskList);
                     break;
                 case 7:
-                    addEvent(input);
+                    Task eventTask = Parser.parseEvent(input);
+                    taskList.addTask(eventTask);
+                    ui.showNewTask(eventTask, taskList);
                     storage.save(taskList);
                     break;
                 default:
@@ -82,50 +98,6 @@ public class Chappi {
             } catch (IOException e) {
                 ui.showIOException(e);
             }
-        }
-    }
-
-    private static void addToDo(String input) throws DukeException {
-        Task task = Parser.parseTodo(input);
-        taskList.addTask(task);
-        ui.showNewTask(task, taskList);
-    }
-
-    private static void addDeadline(String input) throws DukeException{
-        Task task = Parser.parseDeadline(input);
-        taskList.addTask(task);
-        ui.showNewTask(task, taskList);
-    }
-
-    private static void addEvent(String input) throws DukeException {
-        Task task = Parser.parseEvent(input);
-        taskList.addTask(task);
-        ui.showNewTask(task, taskList);
-    }
-
-    private static void markList(String input) throws DukeException {
-        Task task = Parser.parseTaskIndex(Parser.parseMarkTask(input), taskList);
-        task.markDone();
-        ui.showMarkedTask(task);
-    }
-
-    private static void unmarkList(String input) throws DukeException {
-        Task task = Parser.parseTaskIndex(Parser.parseUnmarkTask(input), taskList);
-        task.markNotDone();
-        ui.showUnmarkedTask(task);
-    }
-
-    private static void deleteTask(String input) throws DukeException {
-        Task task = Parser.parseTaskIndex(Parser.parseDeleteTask(input), taskList);
-        taskList.removeTask(task);
-        ui.showDeletedTask(task);
-    }
-
-    private static void readList() {
-        if (taskList.size() <= 0) {
-            ui.showEmptyTaskList();
-        } else {
-            ui.showTaskList(taskList);
         }
     }
 }
