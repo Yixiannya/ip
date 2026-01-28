@@ -92,36 +92,7 @@ public class Chappi {
     }
 
     private static void addDeadline(String input) throws DukeException{
-        if (input.equals("deadline")) {
-            throw new DukeInvalidDeadlineException("Please enter the event's description and start date.");
-        } else if (input.startsWith("deadline ")) {
-            String description = Util.trimPrefix(input, "deadline ").strip();
-            if (!description.contains("/by ")) {
-                throw new DukeInvalidDeadlineException("Please enter a due date with the '/by' keyword.");
-            }
-            String[] strings = description.split("/by ");
-            String desc = strings[0].strip();
-            String endDateStr = strings[1].strip();
-            if (desc.isBlank()) {
-                throw new DukeInvalidDeadlineException("Please enter a valid description.");
-            }
-            if (endDateStr.isBlank()) {
-                throw new DukeInvalidDeadlineException("Please enter a valid end date.");
-            }
-            if (!endDateStr.matches("\\d{4}-\\d{2}-\\d{2}")) {
-                throw new DukeInvalidDeadlineException("Please enter a valid end date in the YYYY-MM-DD format.");
-            }
-            try {
-                LocalDate endDate = LocalDate.parse(endDateStr);
-                Deadline deadline = new Deadline(desc, endDate);
-                addToTaskList(deadline);
-            } catch (DateTimeParseException e) {
-                throw new DukeInvalidDeadlineException(e.toString());
-            }
-
-        } else {
-            throw new DukeUnrecognisedCommandException();
-        }
+        addToTaskList(Parser.parseDeadline(input));
     }
 
     private static void addEvent(String input) throws DukeException {
