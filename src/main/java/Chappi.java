@@ -86,9 +86,7 @@ public class Chappi {
     }
 
     private static void addToDo(String input) throws DukeException {
-        String description = Parser.parseTodo(input);
-        ToDo todo = new ToDo(description);
-        addToTaskList(todo);
+        addToTaskList(Parser.parseTodo(input));
     }
 
     private static void addDeadline(String input) throws DukeException{

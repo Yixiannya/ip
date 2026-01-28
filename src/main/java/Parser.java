@@ -31,7 +31,7 @@ public class Parser {
         }
     }
 
-    public static String parseTodo(String input) throws DukeException{
+    public static ToDo parseTodo(String input) throws DukeException{
         if (input.equals("todo")) {
             throw new DukeInvalidTodoException("Please enter a task description.");
         } else if (input.startsWith("todo ")) {
@@ -39,7 +39,7 @@ public class Parser {
             if (description.isBlank()) {
                 throw new DukeInvalidTodoException("Please enter a task description.");
             }
-            return description;
+            return new ToDo(description);
         } else {
             throw new DukeUnrecognisedCommandException();
         }
