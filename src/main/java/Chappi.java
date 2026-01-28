@@ -34,6 +34,7 @@ public class Chappi {
                 "      What can I do for you?\n";
 
         // Initialisation
+        Storage storage = new Storage(filePath);
         taskList = load();
         System.out.println(seperator + greeting + seperator);
 
@@ -50,22 +51,22 @@ public class Chappi {
                     System.exit(0);
                 } else if (input.startsWith("mark")) {
                     markList(input);
-                    save();
+                    storage.save(taskList);
                 } else if (input.startsWith("unmark")) {
                     unmarkList(input);
-                    save();
+                    storage.save(taskList);
                 } else if (input.startsWith("delete")) {
                     deleteTask(input);
-                    save();
+                    storage.save(taskList);
                 } else if (input.startsWith("todo")) {
                     addToDo(input);
-                    save();
+                    storage.save(taskList);
                 } else if (input.startsWith("deadline")) {
                     addDeadline(input);
-                    save();
+                    storage.save(taskList);
                 } else if (input.startsWith("event")) {
                     addEvent(input);
-                    save();
+                    storage.save(taskList);
                 } else {
                     throw new DukeUnrecognisedCommandException();
                 }
@@ -272,17 +273,6 @@ public class Chappi {
     private static void sayBye() {
         String msg = "      Bye. Hope to see you again soon! ☆*:.｡. o(≧▽≦)o .｡.:*☆\n";
         System.out.println(seperator + msg + seperator);
-    }
-
-    private static void save() throws FileNotFoundException {
-        File saveFile = new File(filePath);
-        saveFile.getParentFile().mkdirs();
-
-        try (PrintWriter printWriter = new PrintWriter(saveFile)) {
-            for (Task t : taskList) {
-                printWriter.write(t.toFileString() + "\n");
-            }
-        }
     }
 
     private static ArrayList<Task> load() throws IOException {
