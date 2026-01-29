@@ -50,4 +50,26 @@ public class ParserTest {
             assertEquals(testException.toString(), e.toString());
         }
     }
+
+    @Test
+    public void parseToDo_missingDescription() throws Exception {
+        try {
+            ToDo testResult = Parser.parseTodo("todo");
+            fail();
+        } catch (ChappiException e) {
+            ChappiException testException = new ChappiInvalidTodoException("Please enter a task description.");
+            assertEquals(testException.toString(), e.toString());
+        }
+    }
+
+    @Test
+    public void parseToDo_missingDescription_withWhiteSpace() throws Exception {
+        try {
+            ToDo testResult = Parser.parseTodo("todo    ");
+            fail();
+        } catch (ChappiException e) {
+            ChappiException testException = new ChappiInvalidTodoException("Please enter a task description.");
+            assertEquals(testException.toString(), e.toString());
+        }
+    }
 }
