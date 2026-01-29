@@ -83,6 +83,18 @@ public abstract class Task {
         return description;
     }
 
+    /**
+     * Compares keyword with task description and returns
+     * a boolean.
+     * True if the keyword contains it.
+     * False otherwise.
+     * @param keyword String representation of a keyword to compare.
+     * @return Boolean indicating if the task has that keyword.
+     */
+    public boolean containsKeyword(String keyword) {
+        return this.description.contains(keyword);
+    }
+
     @Override
     public String toString() {
         String statusIcon = this.getStatusIcon();
