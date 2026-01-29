@@ -31,13 +31,13 @@
 
      ____________________________________________________________
       There's been a problem.
-      Sorry, this is an invalid Deadline task format.
+      Sorry, this is an invalid chappi.task.Deadline task format.
       Please enter the event's description and start date.
      ____________________________________________________________
 
      ____________________________________________________________
       There's been a problem.
-      Sorry, this is an invalid Deadline task format.
+      Sorry, this is an invalid chappi.task.Deadline task format.
       Please enter a due date with the '/by' keyword.
      ____________________________________________________________
 
@@ -48,31 +48,31 @@
 
      ____________________________________________________________
       There's been a problem.
-      Sorry, this is an invalid Deadline task format.
+      Sorry, this is an invalid chappi.task.Deadline task format.
       Please enter a due date with the '/by' keyword.
      ____________________________________________________________
 
      ____________________________________________________________
       There's been a problem.
-      Sorry, this is an invalid Deadline task format.
+      Sorry, this is an invalid chappi.task.Deadline task format.
       Please enter a due date with the '/by' keyword.
      ____________________________________________________________
 
      ____________________________________________________________
       There's been a problem.
-      Sorry, this is an invalid Deadline task format.
+      Sorry, this is an invalid chappi.task.Deadline task format.
       Please enter a due date with the '/by' keyword.
      ____________________________________________________________
 
      ____________________________________________________________
       There's been a problem.
-      Sorry, this is an invalid Deadline task format.
+      Sorry, this is an invalid chappi.task.Deadline task format.
       Please enter a valid description.
      ____________________________________________________________
 
      ____________________________________________________________
       There's been a problem.
-      Sorry, this is an invalid Deadline task format.
+      Sorry, this is an invalid chappi.task.Deadline task format.
       Please enter a due date with the '/by' keyword.
      ____________________________________________________________
 
@@ -90,7 +90,7 @@
 
      ____________________________________________________________
       There's been a problem.
-      Sorry, this is an invalid Event task format.
+      Sorry, this is an invalid chappi.task.Event task format.
       Please enter the event's description, start date and end date.
      ____________________________________________________________
 
@@ -101,103 +101,103 @@
 
      ____________________________________________________________
       There's been a problem.
-      Sorry, this is an invalid Event task format.
+      Sorry, this is an invalid chappi.task.Event task format.
       Please enter a valid string for a start date using the '/from' keyword.
      ____________________________________________________________
 
      ____________________________________________________________
       There's been a problem.
-      Sorry, this is an invalid Event task format.
+      Sorry, this is an invalid chappi.task.Event task format.
       Please enter a valid string for an end date using the '/to' keyword.
      ____________________________________________________________
 
      ____________________________________________________________
       There's been a problem.
-      Sorry, this is an invalid Event task format.
+      Sorry, this is an invalid chappi.task.Event task format.
       Please enter a valid string for a start date using the '/from' keyword.
      ____________________________________________________________
 
      ____________________________________________________________
       There's been a problem.
-      Sorry, this is an invalid Event task format.
+      Sorry, this is an invalid chappi.task.Event task format.
       Please enter a valid string for a start date using the '/from' keyword.
      ____________________________________________________________
 
      ____________________________________________________________
       There's been a problem.
-      Sorry, this is an invalid Event task format.
+      Sorry, this is an invalid chappi.task.Event task format.
       Please enter a valid string for a start date using the '/from' keyword.
      ____________________________________________________________
 
      ____________________________________________________________
       There's been a problem.
-      Sorry, this is an invalid Event task format.
+      Sorry, this is an invalid chappi.task.Event task format.
       Please enter a valid string for an end date using the '/to' keyword.
      ____________________________________________________________
 
      ____________________________________________________________
       There's been a problem.
-      Sorry, this is an invalid Event task format.
+      Sorry, this is an invalid chappi.task.Event task format.
       Please enter a valid string for an end date using the '/to' keyword.
      ____________________________________________________________
 
      ____________________________________________________________
       There's been a problem.
-      Sorry, this is an invalid Event task format.
+      Sorry, this is an invalid chappi.task.Event task format.
       Please enter a valid string for a start date using the '/from' keyword.
      ____________________________________________________________
 
      ____________________________________________________________
       There's been a problem.
-      Sorry, this is an invalid Event task format.
+      Sorry, this is an invalid chappi.task.Event task format.
       Please enter a valid string for a start date using the '/from' keyword.
      ____________________________________________________________
 
      ____________________________________________________________
       There's been a problem.
-      Sorry, this is an invalid Event task format.
+      Sorry, this is an invalid chappi.task.Event task format.
       Please enter a valid string for a start date using the '/from' keyword.
      ____________________________________________________________
 
      ____________________________________________________________
       There's been a problem.
-      Sorry, this is an invalid Event task format.
+      Sorry, this is an invalid chappi.task.Event task format.
       Please enter a valid string for an end date using the '/to' keyword.
      ____________________________________________________________
 
      ____________________________________________________________
       There's been a problem.
-      Sorry, this is an invalid Event task format.
+      Sorry, this is an invalid chappi.task.Event task format.
       Please enter a valid description.
      ____________________________________________________________
 
      ____________________________________________________________
       There's been a problem.
-      Sorry, this is an invalid Event task format.
+      Sorry, this is an invalid chappi.task.Event task format.
       Please enter a valid string for an end date using the '/to' keyword.
      ____________________________________________________________
 
      ____________________________________________________________
       There's been a problem.
-      Sorry, this is an invalid Event task format.
+      Sorry, this is an invalid chappi.task.Event task format.
       Please enter a valid description.
      ____________________________________________________________
 
      ____________________________________________________________
       There's been a problem.
-      Sorry, this is an invalid Event task format.
+      Sorry, this is an invalid chappi.task.Event task format.
       Please enter a valid string for a start date using the '/from' keyword.
      ____________________________________________________________
 
      ____________________________________________________________
       There's been a problem.
-      Sorry, this is an invalid Event task format.
+      Sorry, this is an invalid chappi.task.Event task format.
       Please enter a valid string for an end date using the '/to' keyword.
      ____________________________________________________________
 
      ____________________________________________________________
       There's been a problem.
-      Sorry, this is an invalid Event task format.
+      Sorry, this is an invalid chappi.task.Event task format.
       Please enter a valid string for a start date using the '/from' keyword.
      ____________________________________________________________
 
