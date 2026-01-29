@@ -70,6 +70,25 @@ public class Ui {
                 + SEPERATOR);
     }
 
+    /**
+     * Sends a message to the user regarding the given list of found tasks.
+     * If there are no found tasks, tell the user that none were found.
+     * If there were, show the tasks to the user.
+     * @param foundTasks Task list of all tasks that match the user's keyword. Can be empty.
+     */
+    public void showFoundTasks(TaskList foundTasks) {
+        if (foundTasks.isEmpty()) {
+            System.out.println(SEPERATOR
+                    + "      Sorry, no tasks with this keyword was found!\n"
+                    + SEPERATOR);
+        } else {
+            System.out.println(SEPERATOR
+                    + "      Here are the tasks that may match!\n"
+                    + foundTasks
+                    + SEPERATOR);
+        }
+    }
+
     public void showInputTooSmall() {
         System.out.println(SEPERATOR
                 + "      Please input a number greater than 0."
