@@ -40,8 +40,8 @@ public class Storage {
                 savedList.addTask(Parser.parseSavedTask(line));
                 line = br.readLine();
             }
-        } catch (IOException e) {
-            throw new ChappiException(e.toString());
+        } catch (IllegalArgumentException | IOException e) {
+            throw new ChappiException(e.getMessage());
         }
 
         return savedList;
