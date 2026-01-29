@@ -7,18 +7,34 @@ import chappi.tasklist.TaskList;
 import java.io.IOException;
 import java.util.Scanner;
 
+/**
+ * Performs all user interfaced related methods.
+ * Accepts user commands and displays any messages and information.
+ * Displayed messages are decorated appropriately.
+ */
 public class Ui {
     private static Scanner scanner;
     private static final String SEPERATOR = "     ____________________________________________________________\n";
 
+    /**
+     * Creates a new ui object.
+     * Will create a scanner to read user input.
+     */
     public Ui() {
         scanner = new Scanner(System.in);
     }
 
+    /**
+     * Reads user given input.
+     * @return User input as a String.
+     */
     public String readInput() {
         return scanner.nextLine();
     }
 
+    /**
+     * Displays greeting message.
+     */
     public void showGreeting() {
         System.out.println(SEPERATOR
                 + "      Hello! I'm Chappi!\n"
@@ -26,12 +42,20 @@ public class Ui {
                 + SEPERATOR);
     }
 
+    /**
+     * Displays goodbye message.
+     */
     public void showGoodbye() {
         System.out.println(SEPERATOR
                 + "      Bye. Hope to see you again soon! ☆*:.｡. o(≧▽≦)o .｡.:*☆\n"
                 + SEPERATOR);
     }
 
+    /**
+     * Displays the given task to the user.
+     * @param task Task to be shown to user.
+     * @param taskList List of tasks to have its size shown to user.
+     */
     public void showNewTask(Task task, TaskList taskList) {
         System.out.println(SEPERATOR
                 + String.format("      Sure, added:\n      %s\n", task)
@@ -39,24 +63,40 @@ public class Ui {
                 + SEPERATOR);
     }
 
+    /**
+     * Displays the given task that is marked to the user.
+     * @param task Task to be shown that has been marked.
+     */
     public void showMarkedTask(Task task) {
         System.out.println(SEPERATOR
                 + String.format("      Alright, marked this task as done:\n        %s\n", task)
                 + SEPERATOR);
     }
 
+    /**
+     * Displays the given task that is unmarked to the user.
+     * @param task Task to be shown that has been unmarked.
+     */
     public void showUnmarkedTask(Task task) {
         System.out.println(SEPERATOR
                 + String.format("      Alright, marked this task as not done yet:\n        %s\n", task)
                 + SEPERATOR);
     }
 
+    /**
+     * Displays the given task that was deleted to the user.
+     * @param task Task to be shown that had been deleted.
+     */
     public void showDeletedTask(Task task) {
         System.out.println(SEPERATOR
                 + String.format("      OK, I removed this task as you wanted:\n        %s\n", task)
                 + SEPERATOR);
     }
 
+    /**
+     * Displays the given task list as a string to the user.
+     * @param taskList List of tasks to be shown to the user.
+     */
     public void showTaskList(TaskList taskList) {
         System.out.println(SEPERATOR
                 + "      Here's your list:\n"
@@ -64,18 +104,28 @@ public class Ui {
                 + SEPERATOR);
     }
 
+    /**
+     * Tells user that the task list is empty.
+     */
     public void showEmptyTaskList() {
         System.out.println(SEPERATOR
                 + "      The list is empty!\n"
                 + SEPERATOR);
     }
 
+    /**
+     * Tells user that given input is smaller than required.
+     */
     public void showInputTooSmall() {
         System.out.println(SEPERATOR
                 + "      Please input a number greater than 0."
                 + SEPERATOR);
     }
 
+    /**
+     * Tells user that given input is larger than the specified limit.
+     * @param limit Integer which user's input has exceeded.
+     */
     public void showInputTooBig(int limit) {
         System.out.println(SEPERATOR
                 + "      The given number is larger than the size of the list.\n"
@@ -83,12 +133,22 @@ public class Ui {
                 + SEPERATOR);
     }
 
+    /**
+     * Displays encountered exception as a message to the user.
+     * Used to tell user that a given command has encountered some problems.
+     * @param e Exception to be shown to user.
+     */
     public void showDukeException(ChappiException e) {
         System.out.println(SEPERATOR
                         + e
                         + SEPERATOR);
     }
 
+    /**
+     * Displays encountered exception as a message to the user.
+     * Used to tell user that a storage command has encountered some problems.
+     * @param e Exception to be shown to user.
+     */
     public void showIOException(IOException e) {
         System.out.println(SEPERATOR
                 + "      Sorry, there's been a problem:\n"

@@ -11,10 +11,29 @@ import chappi.util.Util;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
+/**
+ * Represents the logic in extracting the required
+ * information from the given String input commands.
+ * Performs various tasks depending on what is parsed.
+ */
 public class Parser {
+    /**
+     * Basic constructor.
+     * Parser has no variables needed.
+     */
     public Parser() {}
 
-    public static int parse(String input) throws ChappiException {
+    /**
+     * Main parsing logic for commands.
+     * Checks the given command to see if it starts with
+     * any of the given keywords and gives and returns an integer
+     * from 1 to 7.
+     * Each integer represents their respective command.
+     * Returns -1 if the command is not recognised.
+     * @param input String representation of the command to be deciphered.
+     * @return Integer that represents the command to be performed.
+     */
+    public static int parse(String input) {
         if (input.equals("list")) {
             return 0;
         } else if (input.equals("bye")) {
@@ -36,6 +55,14 @@ public class Parser {
         }
     }
 
+    /**
+     * Takes a String representation of a command
+     * to create and return a ToDo task
+     * with the given description.
+     * @param input String representation of todo task command.
+     * @return ToDo task with the given description.
+     * @throws ChappiException if input is in the incorrect format.
+     */
     public static ToDo parseTodo(String input) throws ChappiException {
         if (input.equals("todo")) {
             throw new ChappiInvalidTodoException("Please enter a task description.");
@@ -50,6 +77,14 @@ public class Parser {
         }
     }
 
+    /**
+     * Takes a String representation of a command
+     * to create and return a Deadline task
+     * with the given description and end date.
+     * @param input String representation of deadline task command.
+     * @return Deadline task with the given description and end date.
+     * @throws ChappiException if input is in the incorrect format.
+     */
     public static Deadline parseDeadline(String input) throws ChappiException {
         if (input.equals("deadline")) {
             throw new ChappiInvalidDeadlineException("Please enter the event's description and start date.");
@@ -82,6 +117,14 @@ public class Parser {
         }
     }
 
+    /**
+     * Takes a String representation of a command
+     * to create and return a Event task
+     * with the given description and start and end date.
+     * @param input String representation of Event task command.
+     * @return Deadline task with the given description and start and end date.
+     * @throws ChappiException if input is in the incorrect format.
+     */
     public static Event parseEvent(String input) throws ChappiException {
         if (input.equals("event")) {
             throw new ChappiInvalidEventException("Please enter the event's description, start date and end date.");
@@ -125,6 +168,13 @@ public class Parser {
         }
     }
 
+    /**
+     * Takes given String representation of task.
+     * This input String must be formatted in the
+     * format of the saved text file.
+     * @param line String representing a single line in the save file.
+     * @return Task that the line represents.
+     */
     public static Task parseSavedTask(String line) {
         String[] splitLine = line.split(" \\| ");
         String taskType = splitLine[0];
@@ -146,6 +196,14 @@ public class Parser {
         }
     }
 
+    /**
+     * Extracts the task located in the task list
+     * that has the specified integer index indicated in the command.
+     * @param input String command that has an integer indicating index of task.
+     * @param taskList Task list that contains the tasks of Chappi.
+     * @return Task that is specified by the index.
+     * @throws ChappiException if index in the input does not match what is available in the task list.
+     */
     public static Task parseTaskIndex(String input, TaskList taskList) throws ChappiException {
         try {
             int index = Integer.parseInt(input);
@@ -165,6 +223,14 @@ public class Parser {
         }
     }
 
+    /**
+     * Takes a String command telling Chappi to mark a task.
+     * Then extracts the index of the task Chappi should mark.
+     * This index is represented as a string.
+     * @param input String command that commands Chappi to mark a task.
+     * @return String representing the index of the task to mark.
+     * @throws ChappiException if command is not formatted correctly.
+     */
     public static String parseMarkTask(String input) throws ChappiException {
         if (input.equals("mark")) {
             throw new ChappiException("Please enter a number.");
@@ -175,6 +241,14 @@ public class Parser {
         }
     }
 
+    /**
+     * Takes a String command telling Chappi to unmark a task.
+     * Then extracts the index of the task Chappi should unmark.
+     * This index is represented as a string.
+     * @param input String command that commands Chappi to unmark a task.
+     * @return String representing the index of the task to unmark.
+     * @throws ChappiException if command is not formatted correctly.
+     */
     public static String parseUnmarkTask(String input) throws ChappiException {
         if (input.equals("unmark")) {
             throw new ChappiException("Please enter a number.");
@@ -185,6 +259,14 @@ public class Parser {
         }
     }
 
+    /**
+     * Takes a String command telling Chappi to delete a task.
+     * Then extracts the index of the task Chappi should delete.
+     * This index is represented as a string.
+     * @param input String command that commands Chappi to delete a task.
+     * @return String representing the index of the task to delete.
+     * @throws ChappiException if command is not formatted correctly.
+     */
     public static String parseDeleteTask(String input) throws ChappiException {
         if (input.equals("delete")) {
             throw new ChappiException("Please enter a number.");
