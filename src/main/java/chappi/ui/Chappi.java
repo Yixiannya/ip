@@ -1,11 +1,7 @@
 package chappi.ui;
 
-// IO imports
 import java.io.IOException;
 
-
-
-// Exception imports
 import chappi.chappiExceptions.ChappiException;
 import chappi.chappiExceptions.ChappiUnrecognisedCommandException;
 import chappi.parser.Parser;
@@ -13,12 +9,19 @@ import chappi.storage.Storage;
 import chappi.task.Task;
 import chappi.tasklist.TaskList;
 
+/**
+ * Main class in which the Chappi chatbot is run on.
+ */
 public class Chappi {
 
     private Storage storage;
     private TaskList taskList;
     private Ui ui;
 
+    /**
+     * Creates a Chappi object that uses the specified file path for storage.
+     * @param filePath File path to be used for storage.
+     */
     public Chappi(String filePath) {
         // Initialisation
         ui = new Ui();
@@ -31,6 +34,10 @@ public class Chappi {
         }
     }
 
+    /**
+     * Performs the main logic and behaviour of Chappi chatbot.
+     * Executes various tasks based on the commands received.
+     */
     public void run() {
         ui.showGreeting();
         while (true) {
@@ -96,7 +103,11 @@ public class Chappi {
         }
     }
 
-    public static void main(String[] args) throws IOException {
+    /**
+     * The main logic for running Chappi chatbot.
+     * @param args Command line arguments.
+     */
+    public static void main(String[] args) {
         new Chappi("./data/chappiSave.txt").run();
     }
 }
