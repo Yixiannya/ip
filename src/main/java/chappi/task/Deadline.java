@@ -7,6 +7,7 @@ import java.time.format.DateTimeFormatter;
  * Represents a task with an end date.
  * Otherwise, has the same properties
  * as that of the parent Task class.
+ * Displays end date in MMM DD YYYY format.
  */
 public class Deadline extends Task {
     protected LocalDate endDate;
@@ -15,6 +16,7 @@ public class Deadline extends Task {
      * Creates a task with the given description.
      * Also contains end date which is represented
      * as a LocalDate object.
+     * Only accepts dates in the YYYY-MM-DD format.
      * Automatically marked as not done.
      * @param description String describing deadline task.
      * @param endDate LocalDate representation of the task's deadline.
@@ -28,6 +30,7 @@ public class Deadline extends Task {
      * Creates a task with the given description.
      * Also contains end date which is represented
      * as a LocalDate object.
+     * Only accepts dates in the YYYY-MM-DD format.
      * Marked as done or not done depending on input.
      * @param description String describing deadline task.
      * @param isDone Boolean indicating if task is marked as done.
