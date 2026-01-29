@@ -1,8 +1,8 @@
 package chappi.tasklist;
 
-import chappi.task.Task;
-
 import java.util.ArrayList;
+
+import chappi.task.Task;
 
 public class TaskList {
     private ArrayList<Task> arrayList;

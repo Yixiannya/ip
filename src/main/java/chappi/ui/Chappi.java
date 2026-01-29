@@ -1,16 +1,16 @@
 package chappi.ui;
 
-// IO imports
 import java.io.IOException;
 
-
-
-// Exception imports
 import chappi.chappiExceptions.ChappiException;
 import chappi.chappiExceptions.ChappiUnrecognisedCommandException;
+
 import chappi.parser.Parser;
+
 import chappi.storage.Storage;
+
 import chappi.task.Task;
+
 import chappi.tasklist.TaskList;
 
 public class Chappi {
@@ -20,7 +20,6 @@ public class Chappi {
     private Ui ui;
 
     public Chappi(String filePath) {
-        // Initialisation
         ui = new Ui();
         storage = new Storage(filePath);
         try {

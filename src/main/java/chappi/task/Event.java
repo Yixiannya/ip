@@ -40,6 +40,8 @@ public class Event extends Task {
         String startDateStr = this.startDate.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
         String endDateStr = this.endDate.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
         String dateStr = String.format(" (from: %s to: %s)", startDateStr, endDateStr);
-        return "[E]" + super.toString() + dateStr;
+        return "[E]"
+                + super.toString()
+                + dateStr;
     }
 }
