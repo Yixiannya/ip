@@ -85,6 +85,11 @@ public class Chappi {
                     ui.showNewTask(eventTask, taskList);
                     storage.save(taskList);
                     break;
+                case 8:
+                    String keyword = Parser.parseFindTask(input);
+                    TaskList foundTasks = taskList.findMatchingTasks(keyword);
+                    ui.showFoundTasks(foundTasks);
+                    break;
                 default:
                     throw new ChappiUnrecognisedCommandException();
                 }
