@@ -13,6 +13,8 @@ public class ChappiInvalidEventException extends ChappiException {
      * @param message Input message given from method that throws this exception.
      */
     public ChappiInvalidEventException(String message) {
-        super("Sorry, this is an invalid Event task format.\n" + "      " + message);
+        super("Sorry, this is an invalid Event task format.\n"
+                + "      "
+                + message);
     }
 }

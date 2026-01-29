@@ -13,6 +13,8 @@ public class ChappiInvalidDeadlineException extends ChappiException {
      * @param message Input message given from method that throws this exception.
      */
     public ChappiInvalidDeadlineException(String message) {
-        super("Sorry, this is an invalid Deadline task format.\n" + "      " + message);
+        super("Sorry, this is an invalid Deadline task format.\n"
+                + "      "
+                + message);
     }
 }

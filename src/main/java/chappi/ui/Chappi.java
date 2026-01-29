@@ -4,9 +4,13 @@ import java.io.IOException;
 
 import chappi.chappiExceptions.ChappiException;
 import chappi.chappiExceptions.ChappiUnrecognisedCommandException;
+
 import chappi.parser.Parser;
+
 import chappi.storage.Storage;
+
 import chappi.task.Task;
+
 import chappi.tasklist.TaskList;
 
 /**
@@ -23,7 +27,6 @@ public class Chappi {
      * @param filePath File path to be used for storage.
      */
     public Chappi(String filePath) {
-        // Initialisation
         ui = new Ui();
         storage = new Storage(filePath);
         try {

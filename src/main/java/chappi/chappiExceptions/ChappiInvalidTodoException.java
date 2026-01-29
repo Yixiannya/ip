@@ -13,6 +13,8 @@ public class ChappiInvalidTodoException extends ChappiException {
      * @param message
      */
     public ChappiInvalidTodoException(String message) {
-        super("Sorry, this is an invalid Todo task format.\n" + "      " + message);
+        super("Sorry, this is an invalid Todo task format.\n"
+                + "      "
+                + message);
     }
 }
