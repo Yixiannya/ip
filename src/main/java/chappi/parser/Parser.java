@@ -207,7 +207,11 @@ public class Parser {
         if (input.equals("find")) {
             throw new ChappiException("Please enter a keyword.");
         } else if (input.startsWith("find ")) {
-            return Util.trimPrefix(input, "find").strip();
+            String keyword = Util.trimPrefix(input, "find").strip();
+            if (keyword.isBlank()) {
+                throw new ChappiException("Please enter a keyword.");
+            }
+            return keyword;
         } else {
             throw new ChappiUnrecognisedCommandException();
         }
