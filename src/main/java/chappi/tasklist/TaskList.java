@@ -31,6 +31,24 @@ public class TaskList {
         return arrayList.isEmpty();
     }
 
+    /**
+     * Finds all tasks that have a description that
+     * is matching the given String keyword and
+     * places them in a new task list to be returned.
+     * @param keyword String representation of a keyword to match with the tasks.
+     * @return Task list containing all the tasks that the user wants.
+     */
+    public TaskList findMatchingTasks(String keyword) {
+        TaskList foundTasks = new TaskList();
+        for (int i = 0; i < arrayList.size(); i++) {
+            Task t = this.getTask(i);
+            if (t.containsKeyword(keyword)) {
+                foundTasks.addTask(t);
+            }
+        }
+        return foundTasks;
+    }
+
     @Override
     public String toString() {
         String result = "";
