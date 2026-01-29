@@ -31,6 +31,8 @@ public class Parser {
             return 6;
         } else if (input.startsWith("event")) {
             return 7;
+        } else if (input.startsWith("find")) {
+            return 8;
         } else {
             return -1;
         }
@@ -190,6 +192,22 @@ public class Parser {
             throw new ChappiException("Please enter a number.");
         } else if (input.startsWith("delete ")) {
             return Util.trimPrefix(input, "delete").strip();
+        } else {
+            throw new ChappiUnrecognisedCommandException();
+        }
+    }
+
+    /**
+     * Parses find command represented as a String input
+     * to obtain a keyword that is returned as a String.
+     * @param input String representation of a find command.
+     * @return Keyword to be searched for as a String.
+     */
+    public static String parseFindTask(String input) throws ChappiException {
+        if (input.equals("find")) {
+            throw new ChappiException("Please enter a keyword.");
+        } else if (input.startsWith("find ")) {
+            return Util.trimPrefix(input, "find").strip();
         } else {
             throw new ChappiUnrecognisedCommandException();
         }
