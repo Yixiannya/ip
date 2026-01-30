@@ -62,9 +62,8 @@ public class TaskList {
     }
 
     /**
-     * Finds all tasks that have a description that
-     * is matching the given String keyword and
-     * places them in a new task list to be returned.
+     * Returns a task list of all tasks that match keyword.
+     * Returns an empty task list if no tasks match.
      * @param keyword String representation of a keyword to match with the tasks.
      * @return Task list containing all the tasks that the user wants.
      */
