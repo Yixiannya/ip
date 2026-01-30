@@ -8,6 +8,7 @@ package chappi.chappiExceptions;
  * that an issue in the chatbot has occurred.
  */
 public class ChappiException extends Exception {
+    protected String msg;
 
     /**
      * Creates an exception specific to the Chappi chatbot
@@ -15,9 +16,14 @@ public class ChappiException extends Exception {
      * @param message Input message given from method that throws this exception.
      */
     public ChappiException(String message) {
-        super("      There's been a problem.\n"
+        msg = "      There's been a problem.\n"
                 + "      "
                 + message
-                + "\n");
+                + "\n";
+    }
+
+    @Override
+    public String toString() {
+        return msg;
     }
 }

@@ -112,7 +112,7 @@ public class Ui {
                 + "      The list is empty!\n"
                 + SEPERATOR);
     }
-
+    
     /**
      * Sends a message to the user regarding the given list of found tasks.
      * If there are no found tasks, tell the user that none were found.
@@ -159,7 +159,7 @@ public class Ui {
      */
     public void showDukeException(ChappiException e) {
         System.out.println(SEPERATOR
-                        + e.getMessage()
+                        + e
                         + SEPERATOR);
     }
 
