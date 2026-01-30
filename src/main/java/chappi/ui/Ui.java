@@ -159,7 +159,7 @@ public class Ui {
      */
     public void showDukeException(ChappiException e) {
         System.out.println(SEPERATOR
-                        + e
+                        + e.getMessage()
                         + SEPERATOR);
     }
 
