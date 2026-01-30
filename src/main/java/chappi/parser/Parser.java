@@ -207,7 +207,7 @@ public class Parser {
 
     /**
      * Extracts the task located in the task list
-     * that has the specified integer index indicated in the command.
+     * that has the specified integer index.
      * @param input String command that has an integer indicating index of task.
      * @param taskList Task list that contains the tasks of Chappi.
      * @return Task that is specified by the index.
