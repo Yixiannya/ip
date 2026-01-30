@@ -133,26 +133,6 @@ public class Ui {
     }
 
     /**
-     * Tells user that given input is smaller than required.
-     */
-    public void showInputTooSmall() {
-        System.out.println(SEPERATOR
-                + "      Please input a number greater than 0."
-                + SEPERATOR);
-    }
-
-    /**
-     * Tells user that given input is larger than the specified limit.
-     * @param limit Integer which user's input has exceeded.
-     */
-    public void showInputTooBig(int limit) {
-        System.out.println(SEPERATOR
-                + "      The given number is larger than the size of the list.\n"
-                + String.format("      Please give a number smaller than %d.\n", limit)
-                + SEPERATOR);
-    }
-
-    /**
      * Displays encountered exception as a message to the user.
      * Used to tell user that a given command has encountered some problems.
      * @param e Exception to be shown to user.
