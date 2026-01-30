@@ -47,7 +47,7 @@ public class ParserTest {
             fail();
         } catch (ChappiException e) {
             ChappiException testException = new ChappiUnrecognisedCommandException();
-            assertEquals(testException.toString(), e.toString());
+            assertEquals(testException.getMessage(), e.getMessage());
         }
     }
 
@@ -58,7 +58,7 @@ public class ParserTest {
             fail();
         } catch (ChappiException e) {
             ChappiException testException = new ChappiInvalidTodoException("Please enter a task description.");
-            assertEquals(testException.toString(), e.toString());
+            assertEquals(testException.getMessage(), e.getMessage());
         }
     }
 
@@ -69,7 +69,7 @@ public class ParserTest {
             fail();
         } catch (ChappiException e) {
             ChappiException testException = new ChappiInvalidTodoException("Please enter a task description.");
-            assertEquals(testException.toString(), e.toString());
+            assertEquals(testException.getMessage(), e.getMessage());
         }
     }
 }
