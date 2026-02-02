@@ -33,6 +33,13 @@ public class MainWindow extends AnchorPane {
     /** Injects the Chappi instance */
     public void setChappi(Chappi c) {
         chappi = c;
+        showGreeting();
+    }
+
+    private void showGreeting() {
+        dialogContainer.getChildren().addAll(
+                DialogBox.getChappiDialog(chappi.showGreeting(), chappiImage)
+        );
     }
 
     /**
