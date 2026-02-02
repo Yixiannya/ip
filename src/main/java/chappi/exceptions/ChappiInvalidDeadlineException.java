@@ -1,4 +1,4 @@
-package chappi.chappiExceptions;
+package chappi.exceptions;
 
 /**
  * Exception that decorates the given message

@@ -1,19 +1,17 @@
 package chappi.storage;
 
-import java.io.PrintWriter;
-import java.io.File;
-import java.io.FileReader;
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.IOException;
+import java.io.PrintWriter;
 
+import chappi.exceptions.ChappiException;
 import chappi.parser.Parser;
-
 import chappi.task.Task;
-
 import chappi.tasklist.TaskList;
 
-import chappi.chappiExceptions.ChappiException;
 
 /**
  * Represents the memory related interactions of Chappi.

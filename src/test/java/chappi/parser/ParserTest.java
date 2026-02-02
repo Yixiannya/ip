@@ -1,14 +1,14 @@
 package chappi.parser;
 
-import chappi.chappiExceptions.ChappiException;
-import chappi.chappiExceptions.ChappiInvalidTodoException;
-import chappi.chappiExceptions.ChappiUnrecognisedCommandException;
-import chappi.task.ToDo;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.fail;
 
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.fail;
+import chappi.exceptions.ChappiException;
+import chappi.exceptions.ChappiInvalidTodoException;
+import chappi.exceptions.ChappiUnrecognisedCommandException;
+import chappi.task.ToDo;
 
 public class ParserTest {
     @Test

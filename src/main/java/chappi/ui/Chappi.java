@@ -2,15 +2,11 @@ package chappi.ui;
 
 import java.io.IOException;
 
-import chappi.chappiExceptions.ChappiException;
-import chappi.chappiExceptions.ChappiUnrecognisedCommandException;
-
+import chappi.exceptions.ChappiException;
+import chappi.exceptions.ChappiUnrecognisedCommandException;
 import chappi.parser.Parser;
-
 import chappi.storage.Storage;
-
 import chappi.task.Task;
-
 import chappi.tasklist.TaskList;
 
 /**

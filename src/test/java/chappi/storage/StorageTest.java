@@ -1,12 +1,12 @@
 package chappi.storage;
 
-import chappi.chappiExceptions.ChappiException;
-import chappi.tasklist.TaskList;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.fail;
 
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.fail;
+import chappi.exceptions.ChappiException;
+import chappi.tasklist.TaskList;
 
 public class StorageTest {
     class TaskListStub extends TaskList {

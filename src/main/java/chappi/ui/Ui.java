@@ -1,11 +1,11 @@
 package chappi.ui;
 
-import chappi.chappiExceptions.ChappiException;
-import chappi.task.Task;
-import chappi.tasklist.TaskList;
-
 import java.io.IOException;
 import java.util.Scanner;
+
+import chappi.exceptions.ChappiException;
+import chappi.task.Task;
+import chappi.tasklist.TaskList;
 
 /**
  * Performs all user interfaced related methods.
@@ -112,7 +112,6 @@ public class Ui {
                 + "      The list is empty!\n"
                 + SEPERATOR);
     }
-    
     /**
      * Sends a message to the user regarding the given list of found tasks.
      * If there are no found tasks, tell the user that none were found.
@@ -148,7 +147,7 @@ public class Ui {
      * Used to tell user that a storage command has encountered some problems.
      * @param e Exception to be shown to user.
      */
-    public void showIOException(IOException e) {
+    public void showIoException(IOException e) {
         System.out.println(SEPERATOR
                 + "      Sorry, there's been a problem:\n"
                 + e
