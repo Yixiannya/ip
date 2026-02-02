@@ -34,6 +34,9 @@ public class Chappi {
     }
     /**
      * Generates a response for the user's chat message.
+     * Message is dependent on what command the user includes in their input.
+     * @param input String representation of user's command to Chappi.
+     * @return String representation of Chappi's response to the user.
      */
     public String getResponse(String input) {
         try {
@@ -91,6 +94,10 @@ public class Chappi {
         }
     }
 
+    /**
+     * Gives a String representation of the greeting Chappi says.
+     * @return String representation of greeting.
+     */
     public String showGreeting() {
         return ui.showGreeting();
     }

@@ -48,10 +48,23 @@ public class DialogBox extends HBox {
         setAlignment(Pos.TOP_LEFT);
     }
 
+    /**
+     * Contains user input text in a dialog box next to an image representing user.
+     * @param text String representation of user's input.
+     * @param img 150x150 image to indicate this is the user's input.
+     * @return DialogBox containing the user's input and image.
+     */
     public static DialogBox getUserDialog(String text, Image img) {
         return new DialogBox(text, img);
     }
 
+    /**
+     * Contains Chappi's response in a dialog box next to an image representing Chappi.
+     * Chappi's dialog box is flipped to differentiate it from user input.
+     * @param text String representation of Chappi's response.
+     * @param img 150x150 image to indicate this is Chappi's response.
+     * @return DialogBox containing Chappi's response and image.
+     */
     public static DialogBox getChappiDialog(String text, Image img) {
         var db = new DialogBox(text, img);
         db.flip();

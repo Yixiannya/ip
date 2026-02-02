@@ -31,12 +31,18 @@ public class MainWindow extends AnchorPane {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
     }
 
-    /** Injects the Chappi instance */
+    /**
+     * Injects the Chappi instance
+     * and displays the greeting message on initialisation of Chappi.
+     */
     public void setChappi(Chappi c) {
         chappi = c;
         showGreeting();
     }
 
+    /**
+     * Displays Chappi's greeting in the proper dialog container.
+     */
     private void showGreeting() {
         dialogContainer.getChildren().addAll(
                 DialogBox.getChappiDialog(chappi.showGreeting(), chappiImage)
@@ -44,7 +50,7 @@ public class MainWindow extends AnchorPane {
     }
 
     /**
-     * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
+     * Creates two dialog boxes, one echoing user input and the other containing Chappi's reply and then appends them to
      * the dialog container. Clears the user input after processing.
      */
     @FXML
