@@ -14,8 +14,7 @@ public class ChappiException extends Exception {
      * @param message Input message given from method that throws this exception.
      */
     public ChappiException(String message) {
-        super("      There's been a problem.\n"
-                + "      "
+        super("There's been a problem.\n"
                 + message
                 + "\n");
     }
