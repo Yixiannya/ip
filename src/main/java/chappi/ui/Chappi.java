@@ -32,84 +32,66 @@ public class Chappi {
             taskList = new TaskList();
         }
     }
-
-    /**
-     * Performs the main logic and behaviour of Chappi chatbot.
-     * Executes various tasks based on the commands received.
-     */
-    public void run() {
-        ui.showGreeting();
-        while (true) {
-            try {
-                String input = ui.readInput();
-                int commandType = Parser.parse(input);
-                switch (commandType) {
-                case 0:
-                    if (taskList.isEmpty()) {
-                        ui.showEmptyTaskList();
-                    } else {
-                        ui.showTaskList(taskList);
-                    }
-                    break;
-                case 1:
-                    ui.showGoodbye();
-                    System.exit(0);
-                    break;
-                case 2:
-                    Task markedTask = Parser.parseTaskIndex(Parser.parseMarkTask(input), taskList);
-                    markedTask.markDone();
-                    ui.showMarkedTask(markedTask);
-                    storage.save(taskList);
-                    break;
-                case 3:
-                    Task unmarkedTask = Parser.parseTaskIndex(Parser.parseUnmarkTask(input), taskList);
-                    unmarkedTask.markNotDone();
-                    ui.showUnmarkedTask(unmarkedTask);
-                    storage.save(taskList);
-                    break;
-                case 4:
-                    Task deletedTask = Parser.parseTaskIndex(Parser.parseDeleteTask(input), taskList);
-                    taskList.removeTask(deletedTask);
-                    ui.showDeletedTask(deletedTask);
-                    storage.save(taskList);
-                    break;
-                case 5:
-                    Task todoTask = Parser.parseTodo(input);
-                    taskList.addTask(todoTask);
-                    ui.showNewTask(todoTask, taskList);
-                    storage.save(taskList);
-                    break;
-                case 6:
-                    Task deadlineTask = Parser.parseDeadline(input);
-                    taskList.addTask(deadlineTask);
-                    ui.showNewTask(deadlineTask, taskList);
-                    storage.save(taskList);
-                    break;
-                case 7:
-                    Task eventTask = Parser.parseEvent(input);
-                    taskList.addTask(eventTask);
-                    ui.showNewTask(eventTask, taskList);
-                    storage.save(taskList);
-                    break;
-                case 8:
-                    String keyword = Parser.parseFindTask(input);
-                    TaskList foundTasks = taskList.findMatchingTasks(keyword);
-                    ui.showFoundTasks(foundTasks);
-                    break;
-                default:
-                    throw new ChappiUnrecognisedCommandException();
-                }
-            } catch (ChappiException e) {
-                ui.showDukeException(e);
-            } catch (IOException e) {
-                ui.showIoException(e);
-            }
-        }
-    }
     /**
      * Generates a response for the user's chat message.
      */
     public String getResponse(String input) {
-        return "Chappi heard: " + input;
+        try {
+            int commandType = Parser.parse(input);
+            switch (commandType) {
+            case 0:
+                if (taskList.isEmpty()) {
+                    return ui.showEmptyTaskList();
+                } else {
+                    return ui.showTaskList(taskList);
+                }
+            case 1:
+                return "bye";
+            case 2:
+                Task markedTask = Parser.parseTaskIndex(Parser.parseMarkTask(input), taskList);
+                markedTask.markDone();
+                storage.save(taskList);
+                return ui.showMarkedTask(markedTask);
+            case 3:
+                Task unmarkedTask = Parser.parseTaskIndex(Parser.parseUnmarkTask(input), taskList);
+                unmarkedTask.markNotDone();
+                storage.save(taskList);
+                return ui.showUnmarkedTask(unmarkedTask);
+            case 4:
+                Task deletedTask = Parser.parseTaskIndex(Parser.parseDeleteTask(input), taskList);
+                taskList.removeTask(deletedTask);
+                storage.save(taskList);
+                return ui.showDeletedTask(deletedTask);
+            case 5:
+                Task todoTask = Parser.parseTodo(input);
+                taskList.addTask(todoTask);
+                storage.save(taskList);
+                return ui.showNewTask(todoTask, taskList);
+            case 6:
+                Task deadlineTask = Parser.parseDeadline(input);
+                taskList.addTask(deadlineTask);
+                storage.save(taskList);
+                return ui.showNewTask(deadlineTask, taskList);
+            case 7:
+                Task eventTask = Parser.parseEvent(input);
+                taskList.addTask(eventTask);
+                storage.save(taskList);
+                return ui.showNewTask(eventTask, taskList);
+            case 8:
+                String keyword = Parser.parseFindTask(input);
+                TaskList foundTasks = taskList.findMatchingTasks(keyword);
+                return ui.showFoundTasks(foundTasks);
+            default:
+                throw new ChappiUnrecognisedCommandException();
+            }
+        } catch (ChappiException e) {
+            return ui.showDukeException(e);
+        } catch (IOException e) {
+            return ui.showIoException(e);
+        }
+    }
+
+    public String showGreeting() {
+        return ui.showGreeting();
     }
 }
