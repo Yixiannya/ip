@@ -13,42 +13,20 @@ import chappi.tasklist.TaskList;
  * Displayed messages are decorated appropriately.
  */
 public class Ui {
-    private static Scanner scanner;
-    private static final String SEPERATOR = "     ____________________________________________________________\n";
-
-    /**
-     * Creates a new ui object.
-     * Will create a scanner to read user input.
-     */
-    public Ui() {
-        scanner = new Scanner(System.in);
-    }
-
-    /**
-     * Reads user given input.
-     * @return User input as a String.
-     */
-    public String readInput() {
-        return scanner.nextLine();
-    }
-
     /**
      * Displays greeting message.
      */
-    public void showGreeting() {
-        System.out.println(SEPERATOR
-                + "      Hello! I'm Chappi!\n"
-                + "      What can I do for you?\n"
-                + SEPERATOR);
+    public String showGreeting() {
+        return "Hello! I'm Chappi!\n"
+                + "What can I do for you?\n"
+                + "☆*:.｡. o(≧▽≦)o .｡.:*☆";
     }
 
     /**
      * Displays goodbye message.
      */
-    public void showGoodbye() {
-        System.out.println(SEPERATOR
-                + "      Bye. Hope to see you again soon! ☆*:.｡. o(≧▽≦)o .｡.:*☆\n"
-                + SEPERATOR);
+    public String showGoodbye() {
+        return "Bye. Hope to see you again soon! ☆*:.｡. o(≧▽≦)o .｡.:*☆\n";
     }
 
     /**
@@ -56,61 +34,49 @@ public class Ui {
      * @param task Task to be shown to user.
      * @param taskList List of tasks to have its size shown to user.
      */
-    public void showNewTask(Task task, TaskList taskList) {
-        System.out.println(SEPERATOR
-                + String.format("      Sure, added:\n      %s\n", task)
-                + String.format("      There's %d tasks in your list now.\n", taskList.size())
-                + SEPERATOR);
+    public String showNewTask(Task task, TaskList taskList) {
+        return String.format("Sure, added:\n      %s\n", task)
+                + String.format("There's %d tasks in your list now.\n", taskList.size());
     }
 
     /**
      * Displays the given task that is marked to the user.
      * @param task Task to be shown that has been marked.
      */
-    public void showMarkedTask(Task task) {
-        System.out.println(SEPERATOR
-                + String.format("      Alright, marked this task as done:\n        %s\n", task)
-                + SEPERATOR);
+    public String showMarkedTask(Task task) {
+        return String.format("Alright, marked this task as done:\n        %s\n", task);
     }
 
     /**
      * Displays the given task that is unmarked to the user.
      * @param task Task to be shown that has been unmarked.
      */
-    public void showUnmarkedTask(Task task) {
-        System.out.println(SEPERATOR
-                + String.format("      Alright, marked this task as not done yet:\n        %s\n", task)
-                + SEPERATOR);
+    public String showUnmarkedTask(Task task) {
+        return String.format("Alright, marked this task as not done yet:\n        %s\n", task);
     }
 
     /**
      * Displays the given task that was deleted to the user.
      * @param task Task to be shown that had been deleted.
      */
-    public void showDeletedTask(Task task) {
-        System.out.println(SEPERATOR
-                + String.format("      OK, I removed this task as you wanted:\n        %s\n", task)
-                + SEPERATOR);
+    public String showDeletedTask(Task task) {
+        return String.format("OK, I removed this task as you wanted:\n        %s\n", task);
     }
 
     /**
      * Displays the given task list as a string to the user.
      * @param taskList List of tasks to be shown to the user.
      */
-    public void showTaskList(TaskList taskList) {
-        System.out.println(SEPERATOR
-                + "      Here's your list:\n"
-                + taskList
-                + SEPERATOR);
+    public String showTaskList(TaskList taskList) {
+        return "Here's your list:\n"
+                + taskList;
     }
 
     /**
      * Tells user that the task list is empty.
      */
-    public void showEmptyTaskList() {
-        System.out.println(SEPERATOR
-                + "      The list is empty!\n"
-                + SEPERATOR);
+    public String showEmptyTaskList() {
+        return "The list is empty!\n";
     }
     /**
      * Sends a message to the user regarding the given list of found tasks.
@@ -118,16 +84,12 @@ public class Ui {
      * If there were, show the tasks to the user.
      * @param foundTasks Task list of all tasks that match the user's keyword. Can be empty.
      */
-    public void showFoundTasks(TaskList foundTasks) {
+    public String showFoundTasks(TaskList foundTasks) {
         if (foundTasks.isEmpty()) {
-            System.out.println(SEPERATOR
-                    + "      Sorry, no tasks with this keyword was found!\n"
-                    + SEPERATOR);
+            return "Sorry, no tasks with this keyword was found!\n";
         } else {
-            System.out.println(SEPERATOR
-                    + "      Here are the tasks that may match!\n"
-                    + foundTasks
-                    + SEPERATOR);
+            return "Here are the tasks that may match!\n"
+                    + foundTasks;
         }
     }
 
@@ -136,10 +98,8 @@ public class Ui {
      * Used to tell user that a given command has encountered some problems.
      * @param e Exception to be shown to user.
      */
-    public void showDukeException(ChappiException e) {
-        System.out.println(SEPERATOR
-                        + e.getMessage()
-                        + SEPERATOR);
+    public String showDukeException(ChappiException e) {
+        return e.getMessage();
     }
 
     /**
@@ -147,10 +107,8 @@ public class Ui {
      * Used to tell user that a storage command has encountered some problems.
      * @param e Exception to be shown to user.
      */
-    public void showIoException(IOException e) {
-        System.out.println(SEPERATOR
-                + "      Sorry, there's been a problem:\n"
-                + e
-                + SEPERATOR);
+    public String showIoException(IOException e) {
+        return "Sorry, there's been a problem:\n"
+                + e;
     }
 }
