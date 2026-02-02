@@ -1,4 +1,4 @@
-package chappi.chappiExceptions;
+package chappi.exceptions;
 
 /**
  * Exception that decorates the given message
@@ -10,7 +10,7 @@ public class ChappiInvalidTodoException extends ChappiException {
     /**
      * Creates an exception specific to the todo task
      * that contains the message to tell the user what went wrong.
-     * @param message
+     * @param message Input message given from method that throws this exception.
      */
     public ChappiInvalidTodoException(String message) {
         super("Sorry, this is an invalid Todo task format.\n"

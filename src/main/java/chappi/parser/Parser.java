@@ -3,20 +3,19 @@ package chappi.parser;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
+import chappi.exceptions.ChappiException;
+import chappi.exceptions.ChappiInvalidDeadlineException;
+import chappi.exceptions.ChappiInvalidEventException;
+import chappi.exceptions.ChappiInvalidTodoException;
+import chappi.exceptions.ChappiUnrecognisedCommandException;
 import chappi.task.Deadline;
 import chappi.task.Event;
 import chappi.task.Task;
 import chappi.task.ToDo;
-
 import chappi.tasklist.TaskList;
-
 import chappi.util.Util;
 
-import chappi.chappiExceptions.ChappiException;
-import chappi.chappiExceptions.ChappiInvalidTodoException;
-import chappi.chappiExceptions.ChappiInvalidDeadlineException;
-import chappi.chappiExceptions.ChappiInvalidEventException;
-import chappi.chappiExceptions.ChappiUnrecognisedCommandException;
+
 
 /**
  * Represents the logic in extracting the required
@@ -128,7 +127,7 @@ public class Parser {
 
     /**
      * Takes a String representation of a command
-     * to create and return a Event task
+     * to create and return an Event task
      * with the given description and start and end date.
      * @param input String representation of Event task command.
      * @return Deadline task with the given description and start and end date.
@@ -140,10 +139,12 @@ public class Parser {
         } else if (input.startsWith("event ")) {
             String description = Util.trimPrefix(input, "todo ").strip();
             if (!description.contains("/from ")) {
-                throw new ChappiInvalidEventException("Please enter a valid string for a start date using the '/from' keyword.");
+                throw new ChappiInvalidEventException(
+                        "Please enter a valid string for a start date using the '/from' keyword.");
             }
             if (!description.contains("/to ")) {
-                throw new ChappiInvalidEventException("Please enter a valid string for an end date using the '/to' keyword.");
+                throw new ChappiInvalidEventException(
+                        "Please enter a valid string for an end date using the '/to' keyword.");
             }
             String[] strings = description.split("/from ");
             String[] dateArray = strings[1].split("/to ");
@@ -169,7 +170,7 @@ public class Parser {
                 LocalDate startDate = LocalDate.parse(startDateStr);
                 LocalDate endDate = LocalDate.parse(endDateStr);
                 return new Event(desc, startDate, endDate);
-            } catch (DateTimeParseException e){
+            } catch (DateTimeParseException e) {
                 throw new ChappiInvalidEventException(e.toString());
             }
         } else {

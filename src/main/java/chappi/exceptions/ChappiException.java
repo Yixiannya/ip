@@ -1,4 +1,4 @@
-package chappi.chappiExceptions;
+package chappi.exceptions;
 
 /**
  * Represents the various exceptions that can occur
