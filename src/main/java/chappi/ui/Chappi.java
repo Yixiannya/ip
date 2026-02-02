@@ -102,16 +102,14 @@ public class Chappi {
             } catch (ChappiException e) {
                 ui.showDukeException(e);
             } catch (IOException e) {
-                ui.showIOException(e);
+                ui.showIoException(e);
             }
         }
     }
-
     /**
-     * The main logic for running Chappi chatbot.
-     * @param args Command line arguments.
+     * Generates a response for the user's chat message.
      */
-    public static void main(String[] args) {
-        new Chappi("./data/chappiSave.txt").run();
+    public String getResponse(String input) {
+        return "Chappi heard: " + input;
     }
 }
