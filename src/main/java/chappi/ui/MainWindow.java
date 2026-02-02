@@ -1,5 +1,6 @@
 package chappi.ui;
 
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -51,6 +52,10 @@ public class MainWindow extends AnchorPane {
         String input = userInput.getText();
         String response = chappi.getResponse(input);
 
+        if (response.equals("bye")) {
+            Platform.exit();
+            return;
+        }
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),
                 DialogBox.getChappiDialog(response, chappiImage)
