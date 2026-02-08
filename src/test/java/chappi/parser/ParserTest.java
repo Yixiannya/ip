@@ -9,29 +9,30 @@ import chappi.exceptions.ChappiException;
 import chappi.exceptions.ChappiInvalidTodoException;
 import chappi.exceptions.ChappiUnrecognisedCommandException;
 import chappi.task.ToDo;
+import chappi.ui.Chappi;
 
 public class ParserTest {
     @Test
     public void parse() throws Exception {
-        assertEquals(0, Parser.parse("list"));
+        assertEquals(Chappi.CommandType.LIST, Parser.parse("list"));
 
-        assertEquals(1, Parser.parse("bye"));
+        assertEquals(Chappi.CommandType.BYE, Parser.parse("bye"));
 
-        assertEquals(2, Parser.parse("mark"));
+        assertEquals(Chappi.CommandType.MARK, Parser.parse("mark"));
 
-        assertEquals(3, Parser.parse("unmark"));
+        assertEquals(Chappi.CommandType.UNMARK, Parser.parse("unmark"));
 
-        assertEquals(4, Parser.parse("delete"));
+        assertEquals(Chappi.CommandType.DELETE, Parser.parse("delete"));
 
-        assertEquals(5, Parser.parse("todo"));
+        assertEquals(Chappi.CommandType.TODO, Parser.parse("todo"));
 
-        assertEquals(6, Parser.parse("deadline"));
+        assertEquals(Chappi.CommandType.DEADLINE, Parser.parse("deadline"));
 
-        assertEquals(7, Parser.parse("event"));
+        assertEquals(Chappi.CommandType.EVENT, Parser.parse("event"));
 
-        assertEquals(-1, Parser.parse("listy"));
+        assertEquals(Chappi.CommandType.UNRECOGNISED, Parser.parse("listy"));
 
-        assertEquals(-1, Parser.parse("sleep"));
+        assertEquals(Chappi.CommandType.UNRECOGNISED, Parser.parse("sleep"));
     }
 
     @Test

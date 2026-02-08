@@ -19,6 +19,23 @@ public class Chappi {
     private Ui ui;
 
     /**
+     * Represents the different command types
+     * a user can input.
+     */
+    public enum CommandType {
+        LIST,
+        BYE,
+        MARK,
+        UNMARK,
+        DELETE,
+        TODO,
+        DEADLINE,
+        EVENT,
+        FIND,
+        UNRECOGNISED
+    }
+
+    /**
      * Creates a Chappi object that uses the specified file path for storage.
      * @param filePath File path to be used for storage.
      */
@@ -41,48 +58,48 @@ public class Chappi {
      */
     public String getResponse(String input) {
         try {
-            int commandType = Parser.parse(input);
+            CommandType commandType = Parser.parse(input);
             assert commandType != null;
             switch (commandType) {
-            case 0:
+            case LIST:
                 if (taskList.isEmpty()) {
                     return ui.showEmptyTaskList();
                 } else {
                     return ui.showTaskList(taskList);
                 }
-            case 1:
+            case BYE:
                 return "bye";
-            case 2:
+            case MARK:
                 Task markedTask = Parser.parseTaskIndex(Parser.parseMarkTask(input), taskList);
                 markedTask.markDone();
                 storage.save(taskList);
                 return ui.showMarkedTask(markedTask);
-            case 3:
+            case UNMARK:
                 Task unmarkedTask = Parser.parseTaskIndex(Parser.parseUnmarkTask(input), taskList);
                 unmarkedTask.markNotDone();
                 storage.save(taskList);
                 return ui.showUnmarkedTask(unmarkedTask);
-            case 4:
+            case DELETE:
                 Task deletedTask = Parser.parseTaskIndex(Parser.parseDeleteTask(input), taskList);
                 taskList.removeTask(deletedTask);
                 storage.save(taskList);
                 return ui.showDeletedTask(deletedTask);
-            case 5:
+            case TODO:
                 Task todoTask = Parser.parseTodo(input);
                 taskList.addTask(todoTask);
                 storage.save(taskList);
                 return ui.showNewTask(todoTask, taskList);
-            case 6:
+            case DEADLINE:
                 Task deadlineTask = Parser.parseDeadline(input);
                 taskList.addTask(deadlineTask);
                 storage.save(taskList);
                 return ui.showNewTask(deadlineTask, taskList);
-            case 7:
+            case EVENT:
                 Task eventTask = Parser.parseEvent(input);
                 taskList.addTask(eventTask);
                 storage.save(taskList);
                 return ui.showNewTask(eventTask, taskList);
-            case 8:
+            case FIND:
                 String keyword = Parser.parseFindTask(input);
                 TaskList foundTasks = taskList.findMatchingTasks(keyword);
                 return ui.showFoundTasks(foundTasks);

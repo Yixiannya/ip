@@ -13,6 +13,7 @@ import chappi.task.Event;
 import chappi.task.Task;
 import chappi.task.ToDo;
 import chappi.tasklist.TaskList;
+import chappi.ui.Chappi;
 import chappi.util.Util;
 
 
@@ -32,34 +33,31 @@ public class Parser {
     /**
      * Main parsing logic for commands.
      * Checks the given command to see if it starts with
-     * any of the given keywords and gives and returns an integer
-     * from 1 to 7.
-     * Each integer represents their respective command.
-     * Returns -1 if the command is not recognised.
+     * any of the given keywords and returns the appropriate command type.
      * @param input String representation of the command to be deciphered.
-     * @return Integer that represents the command to be performed.
+     * @return Enum that represents the command to be performed.
      */
-    public static int parse(String input) {
+    public static Chappi.CommandType parse(String input) {
         if (input.equals("list")) {
-            return 0;
+            return Chappi.CommandType.LIST;
         } else if (input.equals("bye")) {
-            return 1;
+            return Chappi.CommandType.BYE;
         } else if (input.startsWith("mark")) {
-            return 2;
+            return Chappi.CommandType.MARK;
         } else if (input.startsWith("unmark")) {
-            return 3;
+            return Chappi.CommandType.UNMARK;
         } else if (input.startsWith("delete")) {
-            return 4;
+            return Chappi.CommandType.DELETE;
         } else if (input.startsWith("todo")) {
-            return 5;
+            return Chappi.CommandType.TODO;
         } else if (input.startsWith("deadline")) {
-            return 6;
+            return Chappi.CommandType.DEADLINE;
         } else if (input.startsWith("event")) {
-            return 7;
+            return Chappi.CommandType.EVENT;
         } else if (input.startsWith("find")) {
-            return 8;
+            return Chappi.CommandType.FIND;
         } else {
-            return -1;
+            return Chappi.CommandType.UNRECOGNISED;
         }
     }
 
@@ -74,15 +72,16 @@ public class Parser {
     public static ToDo parseTodo(String input) throws ChappiException {
         if (input.equals("todo")) {
             throw new ChappiInvalidTodoException("Please enter a task description.");
-        } else if (input.startsWith("todo ")) {
-            String description = Util.trimPrefix(input, "todo ").strip();
-            if (description.isBlank()) {
-                throw new ChappiInvalidTodoException("Please enter a task description.");
-            }
-            return new ToDo(description);
-        } else {
+        }
+        if (!input.startsWith("todo ")) {
             throw new ChappiUnrecognisedCommandException();
         }
+
+        String description = Util.trimPrefix(input, "todo ").strip();
+        if (description.isBlank()) {
+            throw new ChappiInvalidTodoException("Please enter a task description.");
+        }
+        return new ToDo(description);
     }
 
     /**
@@ -96,32 +95,33 @@ public class Parser {
     public static Deadline parseDeadline(String input) throws ChappiException {
         if (input.equals("deadline")) {
             throw new ChappiInvalidDeadlineException("Please enter the event's description and start date.");
-        } else if (input.startsWith("deadline ")) {
-            String description = Util.trimPrefix(input, "deadline ").strip();
-            if (!description.contains("/by ")) {
-                throw new ChappiInvalidDeadlineException("Please enter a due date with the '/by' keyword.");
-            }
-            String[] strings = description.split("/by ");
-            String desc = strings[0].strip();
-            String endDateStr = strings[1].strip();
-
-            if (desc.isBlank()) {
-                throw new ChappiInvalidDeadlineException("Please enter a valid description.");
-            }
-            if (endDateStr.isBlank()) {
-                throw new ChappiInvalidDeadlineException("Please enter a valid end date.");
-            }
-            if (!endDateStr.matches("\\d{4}-\\d{2}-\\d{2}")) {
-                throw new ChappiInvalidDeadlineException("Please enter a valid end date in the YYYY-MM-DD format.");
-            }
-            try {
-                LocalDate endDate = LocalDate.parse(endDateStr);
-                return new Deadline(desc, endDate);
-            } catch (DateTimeParseException e) {
-                throw new ChappiInvalidDeadlineException(e.toString());
-            }
-        } else {
+        }
+        if (!input.startsWith("deadline ")) {
             throw new ChappiUnrecognisedCommandException();
+        }
+
+        String description = Util.trimPrefix(input, "deadline ").strip();
+        if (!description.contains("/by ")) {
+            throw new ChappiInvalidDeadlineException("Please enter a due date with the '/by' keyword.");
+        }
+        String[] strings = description.split("/by ");
+        String desc = strings[0].strip();
+        String endDateStr = strings[1].strip();
+
+        if (desc.isBlank()) {
+            throw new ChappiInvalidDeadlineException("Please enter a valid description.");
+        }
+        if (endDateStr.isBlank()) {
+            throw new ChappiInvalidDeadlineException("Please enter a valid end date.");
+        }
+        if (!endDateStr.matches("\\d{4}-\\d{2}-\\d{2}")) {
+            throw new ChappiInvalidDeadlineException("Please enter a valid end date in the YYYY-MM-DD format.");
+        }
+        try {
+            LocalDate endDate = LocalDate.parse(endDateStr);
+            return new Deadline(desc, endDate);
+        } catch (DateTimeParseException e) {
+            throw new ChappiInvalidDeadlineException(e.toString());
         }
     }
 
@@ -136,45 +136,46 @@ public class Parser {
     public static Event parseEvent(String input) throws ChappiException {
         if (input.equals("event")) {
             throw new ChappiInvalidEventException("Please enter the event's description, start date and end date.");
-        } else if (input.startsWith("event ")) {
-            String description = Util.trimPrefix(input, "todo ").strip();
-            if (!description.contains("/from ")) {
-                throw new ChappiInvalidEventException(
-                        "Please enter a valid string for a start date using the '/from' keyword.");
-            }
-            if (!description.contains("/to ")) {
-                throw new ChappiInvalidEventException(
-                        "Please enter a valid string for an end date using the '/to' keyword.");
-            }
-            String[] strings = description.split("/from ");
-            String[] dateArray = strings[1].split("/to ");
-            String desc = strings[0].strip();
-            String startDateStr = dateArray[0].strip();
-            String endDateStr = dateArray[1].strip();
-            if (desc.isBlank()) {
-                throw new ChappiInvalidEventException("Please enter a valid description.");
-            }
-            if (startDateStr.isBlank()) {
-                throw new ChappiInvalidEventException("Please enter a valid start date.");
-            }
-            if (endDateStr.isBlank()) {
-                throw new ChappiInvalidEventException("Please enter a valid end date.");
-            }
-            if (!startDateStr.matches("\\d{4}-\\d{2}-\\d{2}")) {
-                throw new ChappiInvalidDeadlineException("Please enter a valid end date in the YYYY-MM-DD format.");
-            }
-            if (!endDateStr.matches("\\d{4}-\\d{2}-\\d{2}")) {
-                throw new ChappiInvalidDeadlineException("Please enter a valid end date in the YYYY-MM-DD format.");
-            }
-            try {
-                LocalDate startDate = LocalDate.parse(startDateStr);
-                LocalDate endDate = LocalDate.parse(endDateStr);
-                return new Event(desc, startDate, endDate);
-            } catch (DateTimeParseException e) {
-                throw new ChappiInvalidEventException(e.toString());
-            }
-        } else {
+        }
+        if (!input.startsWith("event ")) {
             throw new ChappiUnrecognisedCommandException();
+        }
+
+        String description = Util.trimPrefix(input, "todo ").strip();
+        if (!description.contains("/from ")) {
+            throw new ChappiInvalidEventException(
+                    "Please enter a valid string for a start date using the '/from' keyword.");
+        }
+        if (!description.contains("/to ")) {
+            throw new ChappiInvalidEventException(
+                    "Please enter a valid string for an end date using the '/to' keyword.");
+        }
+        String[] strings = description.split("/from ");
+        String[] dateArray = strings[1].split("/to ");
+        String desc = strings[0].strip();
+        String startDateStr = dateArray[0].strip();
+        String endDateStr = dateArray[1].strip();
+        if (desc.isBlank()) {
+            throw new ChappiInvalidEventException("Please enter a valid description.");
+        }
+        if (startDateStr.isBlank()) {
+            throw new ChappiInvalidEventException("Please enter a valid start date.");
+        }
+        if (endDateStr.isBlank()) {
+            throw new ChappiInvalidEventException("Please enter a valid end date.");
+        }
+        if (!startDateStr.matches("\\d{4}-\\d{2}-\\d{2}")) {
+            throw new ChappiInvalidDeadlineException("Please enter a valid end date in the YYYY-MM-DD format.");
+        }
+        if (!endDateStr.matches("\\d{4}-\\d{2}-\\d{2}")) {
+            throw new ChappiInvalidDeadlineException("Please enter a valid end date in the YYYY-MM-DD format.");
+        }
+        try {
+            LocalDate startDate = LocalDate.parse(startDateStr);
+            LocalDate endDate = LocalDate.parse(endDateStr);
+            return new Event(desc, startDate, endDate);
+        } catch (DateTimeParseException e) {
+            throw new ChappiInvalidEventException(e.toString());
         }
     }
 
@@ -244,11 +245,12 @@ public class Parser {
     public static String parseMarkTask(String input) throws ChappiException {
         if (input.equals("mark")) {
             throw new ChappiException("Please enter a number.");
-        } else if (input.startsWith("mark ")) {
-            return Util.trimPrefix(input, "mark").strip();
-        } else {
+        }
+        if (!input.startsWith("mark ")) {
             throw new ChappiUnrecognisedCommandException();
         }
+
+        return Util.trimPrefix(input, "mark").strip();
     }
 
     /**
@@ -262,11 +264,12 @@ public class Parser {
     public static String parseUnmarkTask(String input) throws ChappiException {
         if (input.equals("unmark")) {
             throw new ChappiException("Please enter a number.");
-        } else if (input.startsWith("unmark ")) {
-            return Util.trimPrefix(input, "unmark").strip();
-        } else {
+        }
+        if (!input.startsWith("unmark ")) {
             throw new ChappiUnrecognisedCommandException();
         }
+
+        return Util.trimPrefix(input, "unmark").strip();
     }
 
     /**
@@ -280,11 +283,12 @@ public class Parser {
     public static String parseDeleteTask(String input) throws ChappiException {
         if (input.equals("delete")) {
             throw new ChappiException("Please enter a number.");
-        } else if (input.startsWith("delete ")) {
-            return Util.trimPrefix(input, "delete").strip();
-        } else {
+        }
+        if (!input.startsWith("delete ")) {
             throw new ChappiUnrecognisedCommandException();
         }
+
+        return Util.trimPrefix(input, "delete").strip();
     }
 
     /**
@@ -296,14 +300,15 @@ public class Parser {
     public static String parseFindTask(String input) throws ChappiException {
         if (input.equals("find")) {
             throw new ChappiException("Please enter a keyword.");
-        } else if (input.startsWith("find ")) {
-            String keyword = Util.trimPrefix(input, "find").strip();
-            if (keyword.isBlank()) {
-                throw new ChappiException("Please enter a keyword.");
-            }
-            return keyword;
-        } else {
+        }
+        if (!input.startsWith("find ")) {
             throw new ChappiUnrecognisedCommandException();
         }
+
+        String keyword = Util.trimPrefix(input, "find").strip();
+        if (keyword.isBlank()) {
+            throw new ChappiException("Please enter a keyword.");
+        }
+        return keyword;
     }
 }
