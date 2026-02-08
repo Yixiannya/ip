@@ -37,6 +37,8 @@ public class Ui {
      * @return String representation of Chappi's message and created task.
      */
     public String showNewTask(Task task, TaskList taskList) {
+        assert task != null;
+        assert taskList != null;
         return String.format("Sure, added:\n      %s\n", task)
                 + String.format("There's %d tasks in your list now.\n", taskList.size());
     }
@@ -47,6 +49,7 @@ public class Ui {
      * @return String representation of Chappi's message and marked task.
      */
     public String showMarkedTask(Task task) {
+        assert task != null;
         return String.format("Alright, marked this task as done:\n        %s\n", task);
     }
 
@@ -56,6 +59,7 @@ public class Ui {
      * @return String representation of Chappi's message and unmarked task.
      */
     public String showUnmarkedTask(Task task) {
+        assert task != null;
         return String.format("Alright, marked this task as not done yet:\n        %s\n", task);
     }
 
@@ -74,6 +78,7 @@ public class Ui {
      * @return String representation of Chappi's message and task list.
      */
     public String showTaskList(TaskList taskList) {
+        assert taskList != null;
         return "Here's your list:\n"
                 + taskList;
     }

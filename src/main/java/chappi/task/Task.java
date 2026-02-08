@@ -16,6 +16,7 @@ public abstract class Task {
      * @param description String describing what the task is about.
      */
     public Task(String description) {
+        assert !description.isEmpty();
         this.description = description;
         this.isDone = false;
     }
@@ -28,6 +29,7 @@ public abstract class Task {
      * @param isDone Boolean representing whether the task has been marked as done.
      */
     public Task(String description, boolean isDone) {
+        assert !description.isEmpty();
         this.description = description;
         this.isDone = isDone;
     }
