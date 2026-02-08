@@ -13,6 +13,7 @@ import chappi.task.Event;
 import chappi.task.Task;
 import chappi.task.ToDo;
 import chappi.tasklist.TaskList;
+import chappi.ui.Chappi;
 import chappi.util.Util;
 
 
@@ -39,27 +40,27 @@ public class Parser {
      * @param input String representation of the command to be deciphered.
      * @return Integer that represents the command to be performed.
      */
-    public static int parse(String input) {
+    public static Chappi.CommandType parse(String input) {
         if (input.equals("list")) {
-            return 0;
+            return Chappi.CommandType.LIST;
         } else if (input.equals("bye")) {
-            return 1;
+            return Chappi.CommandType.BYE;
         } else if (input.startsWith("mark")) {
-            return 2;
+            return Chappi.CommandType.MARK;
         } else if (input.startsWith("unmark")) {
-            return 3;
+            return Chappi.CommandType.UNMARK;
         } else if (input.startsWith("delete")) {
-            return 4;
+            return Chappi.CommandType.DELETE;
         } else if (input.startsWith("todo")) {
-            return 5;
+            return Chappi.CommandType.TODO;
         } else if (input.startsWith("deadline")) {
-            return 6;
+            return Chappi.CommandType.DEADLINE;
         } else if (input.startsWith("event")) {
-            return 7;
+            return Chappi.CommandType.EVENT;
         } else if (input.startsWith("find")) {
-            return 8;
+            return Chappi.CommandType.FIND;
         } else {
-            return -1;
+            return Chappi.CommandType.UNRECOGNISED;
         }
     }
 
