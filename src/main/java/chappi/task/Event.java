@@ -51,7 +51,7 @@ public class Event extends Task {
         String startDateStr = this.startDate.toString();
         String endDateStr = this.endDate.toString();
         return "E | "
-                + super.doneToInt()
+                + super.getIsDoneAsInt()
                 + " | "
                 + super.description
                 + " | "

@@ -108,7 +108,7 @@ public class Ui {
      * @param e Exception to be shown to user.
      * @return String representation of Chappi's message and exception message.
      */
-    public String showDukeException(ChappiException e) {
+    public String showChappiException(ChappiException e) {
         return e.getMessage();
     }
 

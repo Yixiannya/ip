@@ -45,7 +45,7 @@ public class Deadline extends Task {
     public String toFileString() {
         String endDateStr = this.endDate.toString();
         return "D | "
-                + super.doneToInt()
+                + super.getIsDoneAsInt()
                 + " | "
                 + super.description
                 + " | "

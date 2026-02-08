@@ -33,7 +33,7 @@ public class ToDo extends Task {
     @Override
     public String toFileString() {
         return "T | "
-                + super.doneToInt()
+                + super.getIsDoneAsInt()
                 + " | "
                 + super.description;
     }

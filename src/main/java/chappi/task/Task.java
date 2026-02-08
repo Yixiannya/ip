@@ -43,14 +43,6 @@ public abstract class Task {
     }
 
     /**
-     * Returns the description the task contains.
-     * @return Description of task as a String.
-     */
-    public String getDescription() {
-        return this.description; // mark done task with X
-    }
-
-    /**
      * Sets isDone boolean in task to true.
      */
     public void markDone() {
@@ -71,7 +63,7 @@ public abstract class Task {
      * 1 represents marked done. 0 represents not done.
      * @return Single digit integer.
      */
-    public int doneToInt() {
+    public int getIsDoneAsInt() {
         return isDone ? 1 : 0;
     }
 
