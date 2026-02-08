@@ -346,6 +346,8 @@ public class Parser {
                 desc = Util.trimPrefix(s, "desc ").strip();
             } else if (s.startsWith("to ")) {
                 endDateStr = Util.trimPrefix(s, "to ").strip();
+            } else if (s.startsWith("from ")) {
+                startDateStr = Util.trimPrefix(s, "from ").strip();
             } else {
                 index = s.strip();
             }
@@ -363,7 +365,15 @@ public class Parser {
                 throw new ChappiException(e.toString());
             }
         }
-        Object[] result = {index, desc, endDate};
-        return result;
+        if (!startDateStr.isBlank() && !startDateStr.matches("\\d{4}-\\d{2}-\\d{2}")) {
+            throw new ChappiException("Please enter a valid end date in the YYYY-MM-DD format.");
+        } else if (!startDateStr.isBlank()) {
+            try {
+                startDate = LocalDate.parse(startDateStr);
+            } catch (DateTimeParseException e) {
+                throw new ChappiException(e.toString());
+            }
+        }
+        return new Object[] {index, desc, endDate, startDate};
     }
 }

@@ -48,6 +48,7 @@ public class TaskList {
     public void updateTask(Task task, Object[] info) {
         String description = (String) info[1];
         LocalDate endDate = (LocalDate) info[2];
+        LocalDate startDate = (LocalDate) info[3];
         if (task instanceof Deadline) {
             Deadline deadlineTask = (Deadline) task;
             deadlineTask.updateEndDate(endDate);
@@ -55,6 +56,7 @@ public class TaskList {
         if (task instanceof Event) {
             Event eventTask = (Event) task;
             eventTask.updateEndDate(endDate);
+            eventTask.updateStartDate(startDate);
         }
         task.updateDescription(description);
     }
