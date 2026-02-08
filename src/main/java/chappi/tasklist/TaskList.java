@@ -24,6 +24,7 @@ public class TaskList {
      * @param task Task to be inserted.
      */
     public void addTask(Task task) {
+        assert task != null;
         arrayList.add(task);
     }
 
@@ -32,6 +33,7 @@ public class TaskList {
      * @param task Task to be removed.
      */
     public void removeTask(Task task) {
+        assert task != null;
         arrayList.remove(task);
     }
 

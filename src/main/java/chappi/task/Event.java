@@ -25,6 +25,8 @@ public class Event extends Task {
      */
     public Event(String description, LocalDate startDate, LocalDate endDate) {
         super(description);
+        assert startDate != null;
+        assert endDate != null;
         this.startDate = startDate;
         this.endDate = endDate;
     }
@@ -42,6 +44,8 @@ public class Event extends Task {
      */
     public Event(String description, boolean isDone, LocalDate startDate, LocalDate endDate) {
         super(description, isDone);
+        assert startDate != null;
+        assert endDate != null;
         this.startDate = startDate;
         this.endDate = endDate;
     }

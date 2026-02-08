@@ -23,6 +23,7 @@ public class Deadline extends Task {
      */
     public Deadline(String description, LocalDate endDate) {
         super(description);
+        assert endDate != null;
         this.endDate = endDate;
     }
 
@@ -38,6 +39,7 @@ public class Deadline extends Task {
      */
     public Deadline(String description, boolean isDone, LocalDate endDate) {
         super(description, isDone);
+        assert endDate != null;
         this.endDate = endDate;
     }
 

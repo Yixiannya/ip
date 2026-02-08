@@ -42,6 +42,7 @@ public class Chappi {
     public String getResponse(String input) {
         try {
             int commandType = Parser.parse(input);
+            assert commandType != null;
             switch (commandType) {
             case 0:
                 if (taskList.isEmpty()) {
