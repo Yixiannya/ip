@@ -56,6 +56,8 @@ public class Parser {
             return Chappi.CommandType.EVENT;
         } else if (input.startsWith("find")) {
             return Chappi.CommandType.FIND;
+        } else if (input.startsWith("update")) {
+            return Chappi.CommandType.UPDATE;
         } else {
             return Chappi.CommandType.UNRECOGNISED;
         }
@@ -310,5 +312,68 @@ public class Parser {
             throw new ChappiException("Please enter a keyword.");
         }
         return keyword;
+    }
+
+    /**
+     * Takes in a command beginning with "update" and interprets what information
+     * is needed to be returned.
+     * Also recognises if the information provided in the input is insufficient
+     * and if the input has the wrong formatting.
+     * @param input String input representing the user input command to update a task
+     * @return An object array containing the needed information, in the order of
+     *      index, description, end date, start date.
+     * @throws ChappiException when the command is given in an incorrect format, or if the dates provided are in the
+     *      wrong format.
+     */
+    public static Object[] parseUpdateTask(String input) throws ChappiException {
+        if (input.equals("update")) {
+            throw new ChappiException("Please enter a number.");
+        }
+        if (!input.startsWith("update ")) {
+            throw new ChappiUnrecognisedCommandException();
+        }
+
+        String description = Util.trimPrefix(input, "update ").strip();
+        String[] strings = description.split("/");
+        String desc = "";
+        String startDateStr = "";
+        String endDateStr = "";
+        String index = "-1";
+        LocalDate startDate = null;
+        LocalDate endDate = null;
+        for (String s : strings) {
+            if (s.startsWith("desc ")) {
+                desc = Util.trimPrefix(s, "desc ").strip();
+            } else if (s.startsWith("to ")) {
+                endDateStr = Util.trimPrefix(s, "to ").strip();
+            } else if (s.startsWith("from ")) {
+                startDateStr = Util.trimPrefix(s, "from ").strip();
+            } else {
+                index = s.strip();
+            }
+        }
+        boolean isAllBlank = desc.isBlank() && startDateStr.isBlank() && endDateStr.isBlank();
+        if (isAllBlank) {
+            throw new ChappiException("Please enter some information to update with!");
+        }
+        if (!endDateStr.isBlank() && !endDateStr.matches("\\d{4}-\\d{2}-\\d{2}")) {
+            throw new ChappiException("Please enter a valid end date in the YYYY-MM-DD format.");
+        } else if (!endDateStr.isBlank()) {
+            try {
+                endDate = LocalDate.parse(endDateStr);
+            } catch (DateTimeParseException e) {
+                throw new ChappiException(e.toString());
+            }
+        }
+        if (!startDateStr.isBlank() && !startDateStr.matches("\\d{4}-\\d{2}-\\d{2}")) {
+            throw new ChappiException("Please enter a valid end date in the YYYY-MM-DD format.");
+        } else if (!startDateStr.isBlank()) {
+            try {
+                startDate = LocalDate.parse(startDateStr);
+            } catch (DateTimeParseException e) {
+                throw new ChappiException(e.toString());
+            }
+        }
+        return new Object[] {index, desc, endDate, startDate};
     }
 }

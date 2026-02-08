@@ -106,6 +106,10 @@ public class Ui {
         }
     }
 
+    public String showUpdatedTask(Task task) {
+        return String.format("Alright, updated this task:\n        %s\n", task);
+    }
+
     /**
      * Displays encountered exception as a message to the user.
      * Used to tell user that a given command has encountered some problems.

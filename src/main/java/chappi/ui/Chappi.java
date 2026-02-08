@@ -32,6 +32,7 @@ public class Chappi {
         DEADLINE,
         EVENT,
         FIND,
+        UPDATE,
         UNRECOGNISED
     }
 
@@ -103,6 +104,13 @@ public class Chappi {
                 String keyword = Parser.parseFindTask(input);
                 TaskList foundTasks = taskList.findMatchingTasks(keyword);
                 return ui.showFoundTasks(foundTasks);
+            case UPDATE:
+                Object[] info = Parser.parseUpdateTask(input);
+                String indexString = (String) info[0];
+                Task toBeUpdatedTask = Parser.parseTaskIndex(indexString, taskList);
+                taskList.updateTask(toBeUpdatedTask, info);
+                storage.save(taskList);
+                return ui.showUpdatedTask(toBeUpdatedTask);
             default:
                 throw new ChappiUnrecognisedCommandException();
             }

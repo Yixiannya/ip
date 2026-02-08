@@ -50,6 +50,28 @@ public class Event extends Task {
         this.endDate = endDate;
     }
 
+    /**
+     * Updates the end date of the Event task to match the given end date.
+     * @param endDate LocalDate object containing the date to be updated to
+     */
+    public void updateEndDate(LocalDate endDate) {
+        if (endDate == null) {
+            return;
+        }
+        this.endDate = endDate;
+    }
+
+    /**
+     * Updates the start date of the Event task to match the given start date.
+     * @param startDate LocalDate object containing the date to be updated to
+     */
+    public void updateStartDate(LocalDate startDate) {
+        if (startDate == null) {
+            return;
+        }
+        this.startDate = startDate;
+    }
+
     @Override
     public String toFileString() {
         String startDateStr = this.startDate.toString();

@@ -89,6 +89,18 @@ public abstract class Task {
         return this.description.contains(keyword);
     }
 
+    /**
+     * Accepts a string and updates the task's description
+     * to be that of the given string.
+     * @param description String describing the new description.
+     */
+    public void updateDescription(String description) {
+        if (description.isBlank()) {
+            return;
+        }
+        this.description = description;
+    }
+
     @Override
     public String toString() {
         String statusIcon = this.getStatusIcon();
