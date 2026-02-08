@@ -38,8 +38,8 @@ public class StorageTest {
             TaskList result = storage.load();
             fail();
         } catch (ChappiException e) {
-            assertEquals("      There's been a problem.\n"
-                    + "      Unknown task type\n",
+            assertEquals("There's been a problem.\n"
+                    + "Unknown task type\n",
                     e.getMessage());
         }
     }
