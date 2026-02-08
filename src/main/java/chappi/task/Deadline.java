@@ -43,6 +43,17 @@ public class Deadline extends Task {
         this.endDate = endDate;
     }
 
+    /**
+     * Updates the end date of the Deadline task to match the given end date.
+     * @param endDate LocalDate object containing the date to be updated to
+     */
+    public void updateEndDate(LocalDate endDate) {
+        if (endDate == null) {
+            return;
+        }
+        this.endDate = endDate;
+    }
+
     @Override
     public String toFileString() {
         String endDateStr = this.endDate.toString();

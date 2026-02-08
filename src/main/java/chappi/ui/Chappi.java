@@ -105,9 +105,11 @@ public class Chappi {
                 TaskList foundTasks = taskList.findMatchingTasks(keyword);
                 return ui.showFoundTasks(foundTasks);
             case UPDATE:
-                String[] info = Parser.parseUpdateTask(input);
-                Task toBeUpdatedTask = Parser.parseTaskIndex(info[0], taskList);
+                Object[] info = Parser.parseUpdateTask(input);
+                String indexString = (String) info[0];
+                Task toBeUpdatedTask = Parser.parseTaskIndex(indexString, taskList);
                 taskList.updateTask(toBeUpdatedTask, info);
+                storage.save(taskList);
                 return ui.showUpdatedTask(toBeUpdatedTask);
             default:
                 throw new ChappiUnrecognisedCommandException();

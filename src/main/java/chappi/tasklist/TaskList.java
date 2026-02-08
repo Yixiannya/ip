@@ -1,7 +1,10 @@
 package chappi.tasklist;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 
+import chappi.task.Deadline;
+import chappi.task.Event;
 import chappi.task.Task;
 
 /**
@@ -37,8 +40,23 @@ public class TaskList {
         arrayList.remove(task);
     }
 
-    public void updateTask(Task task, String[] info) {
-        task.updateDescription(info[1]);
+    /**
+     * Updates tasks to match the new information provided.
+     * @param task The task to be updated.
+     * @param info Object array in a specific pattern containing the new information.
+     */
+    public void updateTask(Task task, Object[] info) {
+        String description = (String) info[1];
+        LocalDate endDate = (LocalDate) info[2];
+        if (task instanceof Deadline) {
+            Deadline deadlineTask = (Deadline) task;
+            deadlineTask.updateEndDate(endDate);
+        }
+        if (task instanceof Event) {
+            Event eventTask = (Event) task;
+            eventTask.updateEndDate(endDate);
+        }
+        task.updateDescription(description);
     }
 
     /**

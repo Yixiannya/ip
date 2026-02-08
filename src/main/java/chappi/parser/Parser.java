@@ -315,12 +315,17 @@ public class Parser {
     }
 
     /**
-     *
-     * @param input
-     * @return
-     * @throws ChappiException
+     * Takes in a command beginning with "update" and interprets what information
+     * is needed to be returned.
+     * Also recognises if the information provided in the input is insufficient
+     * and if the input has the wrong formatting.
+     * @param input String input representing the user input command to update a task
+     * @return An object array containing the needed information, in the order of
+     *      index, description, end date, start date.
+     * @throws ChappiException when the command is given in an incorrect format, or if the dates provided are in the
+     *      wrong format.
      */
-    public static String[] parseUpdateTask(String input) throws ChappiException {
+    public static Object[] parseUpdateTask(String input) throws ChappiException {
         if (input.equals("update")) {
             throw new ChappiException("Please enter a number.");
         }
@@ -334,9 +339,13 @@ public class Parser {
         String startDateStr = "";
         String endDateStr = "";
         String index = "-1";
+        LocalDate startDate = null;
+        LocalDate endDate = null;
         for (String s : strings) {
             if (s.startsWith("desc ")) {
                 desc = Util.trimPrefix(s, "desc ").strip();
+            } else if (s.startsWith("to ")) {
+                endDateStr = Util.trimPrefix(s, "to ").strip();
             } else {
                 index = s.strip();
             }
@@ -345,7 +354,16 @@ public class Parser {
         if (isAllBlank) {
             throw new ChappiException("Please enter some information to update with!");
         }
-        String[] result = {index, desc};
+        if (!endDateStr.isBlank() && !endDateStr.matches("\\d{4}-\\d{2}-\\d{2}")) {
+            throw new ChappiException("Please enter a valid end date in the YYYY-MM-DD format.");
+        } else if (!endDateStr.isBlank()) {
+            try {
+                endDate = LocalDate.parse(endDateStr);
+            } catch (DateTimeParseException e) {
+                throw new ChappiException(e.toString());
+            }
+        }
+        Object[] result = {index, desc, endDate};
         return result;
     }
 }
