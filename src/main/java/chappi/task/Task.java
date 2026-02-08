@@ -16,6 +16,7 @@ public abstract class Task {
      * @param description String describing what the task is about.
      */
     public Task(String description) {
+        assert !description.isEmpty();
         this.description = description;
         this.isDone = false;
     }
@@ -28,6 +29,7 @@ public abstract class Task {
      * @param isDone Boolean representing whether the task has been marked as done.
      */
     public Task(String description, boolean isDone) {
+        assert !description.isEmpty();
         this.description = description;
         this.isDone = isDone;
     }
@@ -40,14 +42,6 @@ public abstract class Task {
      */
     public String getStatusIcon() {
         return (this.isDone ? "X" : " "); // mark done task with X
-    }
-
-    /**
-     * Returns the description the task contains.
-     * @return Description of task as a String.
-     */
-    public String getDescription() {
-        return this.description; // mark done task with X
     }
 
     /**
@@ -71,7 +65,7 @@ public abstract class Task {
      * 1 represents marked done. 0 represents not done.
      * @return Single digit integer.
      */
-    public int doneToInt() {
+    public int getIsDoneAsInt() {
         return isDone ? 1 : 0;
     }
 

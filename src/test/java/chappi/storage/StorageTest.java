@@ -20,19 +20,19 @@ public class StorageTest {
     }
 
     @Test
-    public void testLoad_success() throws Exception {
+    public void testLoad_success() throws ChappiException {
         Storage storage = new Storage("./data/testLoad.txt");
         assertEquals(new TaskListStub().toString(), storage.load().toString());
     }
 
     @Test
-    public void testLoad_fileNotFound() throws Exception {
+    public void testLoad_fileNotFound() throws ChappiException {
         Storage storage = new Storage("./data/no.txt");
         assertEquals("", storage.load().toString());
     }
 
     @Test
-    public void testLoad_fileIncorrectTaskFormat() throws Exception {
+    public void testLoad_fileIncorrectTaskFormat() {
         Storage storage = new Storage("./data/testLoad2.txt");
         try {
             TaskList result = storage.load();

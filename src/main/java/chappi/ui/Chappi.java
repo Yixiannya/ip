@@ -28,10 +28,11 @@ public class Chappi {
         try {
             taskList = storage.load();
         } catch (ChappiException e) {
-            ui.showDukeException(e);
+            ui.showChappiException(e);
             taskList = new TaskList();
         }
     }
+
     /**
      * Generates a response for the user's chat message.
      * Message is dependent on what command the user includes in their input.
@@ -41,6 +42,7 @@ public class Chappi {
     public String getResponse(String input) {
         try {
             int commandType = Parser.parse(input);
+            assert commandType != null;
             switch (commandType) {
             case 0:
                 if (taskList.isEmpty()) {
@@ -88,7 +90,7 @@ public class Chappi {
                 throw new ChappiUnrecognisedCommandException();
             }
         } catch (ChappiException e) {
-            return ui.showDukeException(e);
+            return ui.showChappiException(e);
         } catch (IOException e) {
             return ui.showIoException(e);
         }
