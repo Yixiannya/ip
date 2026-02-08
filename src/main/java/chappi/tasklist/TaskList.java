@@ -37,6 +37,10 @@ public class TaskList {
         arrayList.remove(task);
     }
 
+    public void updateTask(Task task, String[] info) {
+        task.updateDescription(info[1]);
+    }
+
     /**
      * Returns the task at the specified index of the array list.
      * @param i Index of the task in the array list.

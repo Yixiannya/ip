@@ -56,6 +56,8 @@ public class Parser {
             return Chappi.CommandType.EVENT;
         } else if (input.startsWith("find")) {
             return Chappi.CommandType.FIND;
+        } else if (input.startsWith("update")) {
+            return Chappi.CommandType.UPDATE;
         } else {
             return Chappi.CommandType.UNRECOGNISED;
         }
@@ -310,5 +312,40 @@ public class Parser {
             throw new ChappiException("Please enter a keyword.");
         }
         return keyword;
+    }
+
+    /**
+     *
+     * @param input
+     * @return
+     * @throws ChappiException
+     */
+    public static String[] parseUpdateTask(String input) throws ChappiException {
+        if (input.equals("update")) {
+            throw new ChappiException("Please enter a number.");
+        }
+        if (!input.startsWith("update ")) {
+            throw new ChappiUnrecognisedCommandException();
+        }
+
+        String description = Util.trimPrefix(input, "update ").strip();
+        String[] strings = description.split("/");
+        String desc = "";
+        String startDateStr = "";
+        String endDateStr = "";
+        String index = "-1";
+        for (String s : strings) {
+            if (s.startsWith("desc ")) {
+                desc = Util.trimPrefix(s, "desc ").strip();
+            } else {
+                index = s.strip();
+            }
+        }
+        boolean isAllBlank = desc.isBlank() && startDateStr.isBlank() && endDateStr.isBlank();
+        if (isAllBlank) {
+            throw new ChappiException("Please enter some information to update with!");
+        }
+        String[] result = {index, desc};
+        return result;
     }
 }
