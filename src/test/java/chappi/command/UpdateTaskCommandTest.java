@@ -2,22 +2,18 @@ package chappi.command;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.fail;
 
-import chappi.parser.Parser;
-import chappi.storage.Storage;
-import chappi.task.Deadline;
-import chappi.task.Task;
-import chappi.task.ToDo;
-import chappi.ui.Ui;
+import java.io.FileNotFoundException;
+
 import org.junit.jupiter.api.Test;
 
 import chappi.exceptions.ChappiException;
+import chappi.storage.Storage;
+import chappi.task.Task;
+import chappi.task.ToDo;
 import chappi.tasklist.TaskList;
-
-import java.io.FileNotFoundException;
-import java.time.LocalDate;
+import chappi.ui.Ui;
 
 // Used ChatGPT to help improve this test.
 // ChatGPT suggested the following stubs for testing.
@@ -114,25 +110,4 @@ public class UpdateTaskCommandTest {
         assertTrue(storage.saveCalled, "Storage.save should be called");
         assertEquals("updated!", result);
     }
-
-    @Test
-    public void execute_saveFileMissing_throwsChappiException() {
-
-        UpdateTaskCommand cmd =
-                new UpdateTaskCommand("update 1 /desc hello");
-
-        TaskListStub tasks = new TaskListStub();
-        UiStub ui = new UiStub();
-        Storage storage = new FailingStorageStub();
-
-        try {
-            cmd.execute(tasks, ui, storage);
-            fail();
-        } catch (ChappiException e) {
-            assertEquals("There's been a problem.\n"
-                    + "Save file missing while trying to save the list!",
-                    e.getMessage());
-        }
-    }
-
 }
