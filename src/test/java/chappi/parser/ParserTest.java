@@ -1,38 +1,60 @@
 package chappi.parser;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 import static org.junit.jupiter.api.Assertions.fail;
 
 import org.junit.jupiter.api.Test;
 
+import chappi.command.AddDeadlineTaskCommand;
+import chappi.command.AddEventTaskCommand;
+import chappi.command.AddTodoTaskCommand;
+import chappi.command.DeleteTaskCommand;
+import chappi.command.ExitCommand;
+import chappi.command.FindTaskCommand;
+import chappi.command.MarkTaskCommand;
+import chappi.command.ShowTaskListCommand;
+import chappi.command.UnmarkTaskCommand;
+import chappi.command.UpdateTaskCommand;
 import chappi.exceptions.ChappiException;
 import chappi.exceptions.ChappiInvalidTodoException;
 import chappi.exceptions.ChappiUnrecognisedCommandException;
 import chappi.task.ToDo;
-import chappi.ui.Chappi;
+
 
 public class ParserTest {
     @Test
-    public void parse() throws Exception {
-        assertEquals(Chappi.CommandType.LIST, Parser.parse("list"));
+    public void parseCommand_success() throws Exception {
+        assertInstanceOf(ShowTaskListCommand.class, Parser.parseCommand("list"));
 
-        assertEquals(Chappi.CommandType.BYE, Parser.parse("bye"));
+        assertInstanceOf(ExitCommand.class, Parser.parseCommand("bye"));
 
-        assertEquals(Chappi.CommandType.MARK, Parser.parse("mark"));
+        assertInstanceOf(MarkTaskCommand.class, Parser.parseCommand("mark"));
 
-        assertEquals(Chappi.CommandType.UNMARK, Parser.parse("unmark"));
+        assertInstanceOf(UnmarkTaskCommand.class, Parser.parseCommand("unmark"));
 
-        assertEquals(Chappi.CommandType.DELETE, Parser.parse("delete"));
+        assertInstanceOf(DeleteTaskCommand.class, Parser.parseCommand("delete"));
 
-        assertEquals(Chappi.CommandType.TODO, Parser.parse("todo"));
+        assertInstanceOf(AddTodoTaskCommand.class, Parser.parseCommand("todo"));
 
-        assertEquals(Chappi.CommandType.DEADLINE, Parser.parse("deadline"));
+        assertInstanceOf(AddDeadlineTaskCommand.class, Parser.parseCommand("deadline"));
 
-        assertEquals(Chappi.CommandType.EVENT, Parser.parse("event"));
+        assertInstanceOf(AddEventTaskCommand.class, Parser.parseCommand("event"));
 
-        assertEquals(Chappi.CommandType.UNRECOGNISED, Parser.parse("listy"));
+        assertInstanceOf(FindTaskCommand.class, Parser.parseCommand("find"));
 
-        assertEquals(Chappi.CommandType.UNRECOGNISED, Parser.parse("sleep"));
+        assertInstanceOf(UpdateTaskCommand.class, Parser.parseCommand("update"));
+    }
+
+    @Test
+    public void parseCommand_unrecognised() throws Exception {
+        try {
+            Parser.parseCommand("listy");
+            fail();
+        } catch (ChappiUnrecognisedCommandException e) {
+            ChappiException testException = new ChappiUnrecognisedCommandException();
+            assertEquals(testException.getMessage(), e.getMessage());
+        }
     }
 
     @Test
