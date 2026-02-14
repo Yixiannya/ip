@@ -1,5 +1,6 @@
 package chappi.ui;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 
 import chappi.exceptions.ChappiException;
@@ -63,61 +64,30 @@ public class Chappi {
             assert commandType != null;
             switch (commandType) {
             case LIST:
-                if (taskList.isEmpty()) {
-                    return ui.showEmptyTaskList();
-                } else {
-                    return ui.showTaskList(taskList);
-                }
+                return executeShowTaskListCommand();
             case BYE:
                 return "bye";
             case MARK:
-                Task markedTask = Parser.parseTaskIndex(Parser.parseMarkTask(input), taskList);
-                markedTask.markDone();
-                storage.save(taskList);
-                return ui.showMarkedTask(markedTask);
+                return executeMarkTaskCommand(input);
             case UNMARK:
-                Task unmarkedTask = Parser.parseTaskIndex(Parser.parseUnmarkTask(input), taskList);
-                unmarkedTask.markNotDone();
-                storage.save(taskList);
-                return ui.showUnmarkedTask(unmarkedTask);
+                return executeUnmarkTaskCommand(input);
             case DELETE:
-                Task deletedTask = Parser.parseTaskIndex(Parser.parseDeleteTask(input), taskList);
-                taskList.removeTask(deletedTask);
-                storage.save(taskList);
-                return ui.showDeletedTask(deletedTask);
+                return executeDeleteTaskCommand(input);
             case TODO:
-                Task todoTask = Parser.parseTodo(input);
-                taskList.addTask(todoTask);
-                storage.save(taskList);
-                return ui.showNewTask(todoTask, taskList);
+                return executeAddTodoTaskCommand(input);
             case DEADLINE:
-                Task deadlineTask = Parser.parseDeadline(input);
-                taskList.addTask(deadlineTask);
-                storage.save(taskList);
-                return ui.showNewTask(deadlineTask, taskList);
+                return executeAddDeadlineTaskCommand(input);
             case EVENT:
-                Task eventTask = Parser.parseEvent(input);
-                taskList.addTask(eventTask);
-                storage.save(taskList);
-                return ui.showNewTask(eventTask, taskList);
+                return executeAddEventTaskCommand(input);
             case FIND:
-                String keyword = Parser.parseFindTask(input);
-                TaskList foundTasks = taskList.findMatchingTasks(keyword);
-                return ui.showFoundTasks(foundTasks);
+                return executeFindTaskCommand(input);
             case UPDATE:
-                Object[] info = Parser.parseUpdateTask(input);
-                String indexString = (String) info[0];
-                Task toBeUpdatedTask = Parser.parseTaskIndex(indexString, taskList);
-                taskList.updateTask(toBeUpdatedTask, info);
-                storage.save(taskList);
-                return ui.showUpdatedTask(toBeUpdatedTask);
+                return executeUpdateTaskCommand(input);
             default:
                 throw new ChappiUnrecognisedCommandException();
             }
         } catch (ChappiException e) {
             return ui.showChappiException(e);
-        } catch (IOException e) {
-            return ui.showIoException(e);
         }
     }
 
@@ -127,5 +97,78 @@ public class Chappi {
      */
     public String showGreeting() {
         return ui.showGreeting();
+    }
+
+    private String executeShowTaskListCommand() {
+        if (taskList.isEmpty()) {
+            return ui.showEmptyTaskList();
+        } else {
+            return ui.showTaskList(taskList);
+        }
+    }
+
+    private String executeMarkTaskCommand(String input) throws ChappiException {
+        Task markedTask = Parser.parseTaskIndex(Parser.parseMarkTask(input), taskList);
+        markedTask.markDone();
+        saveTaskList();
+        return ui.showMarkedTask(markedTask);
+    }
+
+    private String executeUnmarkTaskCommand(String input) throws ChappiException {
+        Task unmarkedTask = Parser.parseTaskIndex(Parser.parseUnmarkTask(input), taskList);
+        unmarkedTask.markNotDone();
+        saveTaskList();
+        return ui.showUnmarkedTask(unmarkedTask);
+    }
+
+    private String executeDeleteTaskCommand(String input) throws ChappiException {
+        Task deletedTask = Parser.parseTaskIndex(Parser.parseDeleteTask(input), taskList);
+        taskList.removeTask(deletedTask);
+        saveTaskList();
+        return ui.showDeletedTask(deletedTask);
+    }
+
+    private String executeAddTodoTaskCommand(String input) throws ChappiException {
+        Task todoTask = Parser.parseTodo(input);
+        taskList.addTask(todoTask);
+        saveTaskList();
+        return ui.showNewTask(todoTask, taskList);
+    }
+
+    private String executeAddDeadlineTaskCommand(String input) throws ChappiException {
+        Task deadlineTask = Parser.parseDeadline(input);
+        taskList.addTask(deadlineTask);
+        saveTaskList();
+        return ui.showNewTask(deadlineTask, taskList);
+    }
+
+    private String executeAddEventTaskCommand(String input) throws ChappiException {
+        Task eventTask = Parser.parseEvent(input);
+        taskList.addTask(eventTask);
+        saveTaskList();
+        return ui.showNewTask(eventTask, taskList);
+    }
+
+    private String executeFindTaskCommand(String input) throws ChappiException {
+        String keyword = Parser.parseFindTask(input);
+        TaskList foundTasks = taskList.findMatchingTasks(keyword);
+        return ui.showFoundTasks(foundTasks);
+    }
+
+    private String executeUpdateTaskCommand(String input) throws ChappiException {
+        Object[] info = Parser.parseUpdateTask(input);
+        String indexString = (String) info[0];
+        Task toBeUpdatedTask = Parser.parseTaskIndex(indexString, taskList);
+        taskList.updateTask(toBeUpdatedTask, info);
+        saveTaskList();
+        return ui.showUpdatedTask(toBeUpdatedTask);
+    }
+
+    private void saveTaskList() throws ChappiException {
+        try {
+            storage.save(taskList);
+        } catch (FileNotFoundException e) {
+            throw new ChappiException(e.getMessage());
+        }
     }
 }
