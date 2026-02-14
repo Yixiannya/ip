@@ -78,7 +78,6 @@ public class UpdateTaskCommandTest {
         }
     }
 
-
     @Test
     public void execute_success() throws Exception {
         UpdateTaskCommand cmd =
@@ -96,18 +95,22 @@ public class UpdateTaskCommandTest {
     }
 
     @Test
-    public void execute_exception() throws Exception {
+    public void execute_saveFileMissing_throwsChappiException() {
+
         UpdateTaskCommand cmd =
                 new UpdateTaskCommand("update 1 /desc hello");
 
         TaskListStub tasks = new TaskListStub();
         UiStub ui = new UiStub();
-        StorageStub storage = new StorageStub();
+        Storage storage = new FailingStorageStub();
 
-        String result = cmd.execute(tasks, ui, storage);
-
-        assertTrue(tasks.updateCalled, "TaskList.updateTask should be called");
-        assertTrue(storage.saveCalled, "Storage.save should be called");
-        assertEquals("updated!", result);
+        try {
+            cmd.execute(tasks, ui, storage);
+            fail();
+        } catch (ChappiException e) {
+            assertEquals("There's been a problem.\n"
+                    + "Save file missing while trying to save the list!",
+                    e.getMessage());
+        }
     }
 }
