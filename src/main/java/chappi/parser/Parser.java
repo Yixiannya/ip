@@ -31,7 +31,6 @@ public class Parser {
     public Parser() {}
 
     /**
-     * Main parsing logic for commands.
      * Checks the given command to see if it starts with
      * any of the given keywords and returns the appropriate command type.
      * @param input String representation of the command to be deciphered.
