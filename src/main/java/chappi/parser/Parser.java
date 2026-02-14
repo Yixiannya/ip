@@ -113,18 +113,13 @@ public class Parser {
         if (desc.isBlank()) {
             throw new ChappiInvalidDeadlineException("Please enter a valid description.");
         }
-        if (endDateStr.isBlank()) {
-            throw new ChappiInvalidDeadlineException("Please enter a valid end date.");
+
+        LocalDate endDate = parseDate(endDateStr);
+
+        if (endDate == null) {
+            throw new ChappiInvalidEventException("Please enter a date! (Not a blank)");
         }
-        if (!endDateStr.matches("\\d{4}-\\d{2}-\\d{2}")) {
-            throw new ChappiInvalidDeadlineException("Please enter a valid end date in the YYYY-MM-DD format.");
-        }
-        try {
-            LocalDate endDate = LocalDate.parse(endDateStr);
-            return new Deadline(desc, endDate);
-        } catch (DateTimeParseException e) {
-            throw new ChappiInvalidDeadlineException(e.toString());
-        }
+        return new Deadline(desc, endDate);
     }
 
     /**
@@ -137,48 +132,39 @@ public class Parser {
      */
     public static Event parseEvent(String input) throws ChappiException {
         if (input.equals("event")) {
-            throw new ChappiInvalidEventException("Please enter the event's description, start date and end date.");
+            throw new ChappiInvalidEventException(
+                    "Please enter the event's description, start date and end date.");
         }
         if (!input.startsWith("event ")) {
             throw new ChappiUnrecognisedCommandException();
         }
+        String body = Util.trimPrefix(input, "event ").strip();
 
-        String description = Util.trimPrefix(input, "todo ").strip();
-        if (!description.contains("/from ")) {
+        if (!body.contains("/from ")) {
             throw new ChappiInvalidEventException(
                     "Please enter a valid string for a start date using the '/from' keyword.");
         }
-        if (!description.contains("/to ")) {
+        if (!body.contains("/to ")) {
             throw new ChappiInvalidEventException(
                     "Please enter a valid string for an end date using the '/to' keyword.");
         }
-        String[] strings = description.split("/from ");
-        String[] dateArray = strings[1].split("/to ");
-        String desc = strings[0].strip();
-        String startDateStr = dateArray[0].strip();
-        String endDateStr = dateArray[1].strip();
+        String[] parts = body.split("/from ");
+        String desc = parts[0].strip();
+        String[] dateParts = parts[1].split("/to ");
+        String startDateStr = dateParts[0].strip();
+        String endDateStr = dateParts[1].strip();
+
         if (desc.isBlank()) {
             throw new ChappiInvalidEventException("Please enter a valid description.");
         }
-        if (startDateStr.isBlank()) {
-            throw new ChappiInvalidEventException("Please enter a valid start date.");
+        LocalDate startDate = parseDate(startDateStr);
+        LocalDate endDate = parseDate(endDateStr);
+
+        if (startDate == null || endDate == null) {
+            throw new ChappiInvalidEventException("Please enter a date! (Not a blank)");
         }
-        if (endDateStr.isBlank()) {
-            throw new ChappiInvalidEventException("Please enter a valid end date.");
-        }
-        if (!startDateStr.matches("\\d{4}-\\d{2}-\\d{2}")) {
-            throw new ChappiInvalidDeadlineException("Please enter a valid end date in the YYYY-MM-DD format.");
-        }
-        if (!endDateStr.matches("\\d{4}-\\d{2}-\\d{2}")) {
-            throw new ChappiInvalidDeadlineException("Please enter a valid end date in the YYYY-MM-DD format.");
-        }
-        try {
-            LocalDate startDate = LocalDate.parse(startDateStr);
-            LocalDate endDate = LocalDate.parse(endDateStr);
-            return new Event(desc, startDate, endDate);
-        } catch (DateTimeParseException e) {
-            throw new ChappiInvalidEventException(e.toString());
-        }
+
+        return new Event(desc, startDate, endDate);
     }
 
     /**
@@ -319,6 +305,8 @@ public class Parser {
      * is needed to be returned.
      * Also recognises if the information provided in the input is insufficient
      * and if the input has the wrong formatting.
+     * Used ChatGPT to find ways to shorten the method.
+     * ChatGPT gave the follow method below, as well as the private parseDate method.
      * @param input String input representing the user input command to update a task
      * @return An object array containing the needed information, in the order of
      *      index, description, end date, start date.
@@ -333,47 +321,42 @@ public class Parser {
             throw new ChappiUnrecognisedCommandException();
         }
 
-        String description = Util.trimPrefix(input, "update ").strip();
-        String[] strings = description.split("/");
+        String[] parts = Util.trimPrefix(input, "update ").strip().split("/");
         String desc = "";
-        String startDateStr = "";
-        String endDateStr = "";
         String index = "-1";
         LocalDate startDate = null;
         LocalDate endDate = null;
-        for (String s : strings) {
-            if (s.startsWith("desc ")) {
-                desc = Util.trimPrefix(s, "desc ").strip();
-            } else if (s.startsWith("to ")) {
-                endDateStr = Util.trimPrefix(s, "to ").strip();
-            } else if (s.startsWith("from ")) {
-                startDateStr = Util.trimPrefix(s, "from ").strip();
+        for (String p : parts) {
+            p = p.strip();
+            if (p.startsWith("desc ")) {
+                desc = Util.trimPrefix(p, "desc ").strip();
+            } else if (p.startsWith("from ")) {
+                startDate = parseDate(Util.trimPrefix(p, "from ").strip());
+            } else if (p.startsWith("to ")) {
+                endDate = parseDate(Util.trimPrefix(p, "to ").strip());
             } else {
-                index = s.strip();
+                index = p;
             }
         }
-        boolean isAllBlank = desc.isBlank() && startDateStr.isBlank() && endDateStr.isBlank();
-        if (isAllBlank) {
+
+        if (desc.isBlank() && startDate == null && endDate == null) {
             throw new ChappiException("Please enter some information to update with!");
         }
-        if (!endDateStr.isBlank() && !endDateStr.matches("\\d{4}-\\d{2}-\\d{2}")) {
-            throw new ChappiException("Please enter a valid end date in the YYYY-MM-DD format.");
-        } else if (!endDateStr.isBlank()) {
-            try {
-                endDate = LocalDate.parse(endDateStr);
-            } catch (DateTimeParseException e) {
-                throw new ChappiException(e.toString());
-            }
+
+        return new Object[] { index, desc, endDate, startDate };
+    }
+
+    private static LocalDate parseDate(String dateStr) throws ChappiException {
+        if (dateStr.isBlank()) {
+            return null;
         }
-        if (!startDateStr.isBlank() && !startDateStr.matches("\\d{4}-\\d{2}-\\d{2}")) {
-            throw new ChappiException("Please enter a valid end date in the YYYY-MM-DD format.");
-        } else if (!startDateStr.isBlank()) {
-            try {
-                startDate = LocalDate.parse(startDateStr);
-            } catch (DateTimeParseException e) {
-                throw new ChappiException(e.toString());
-            }
+        if (!dateStr.matches("\\d{4}-\\d{2}-\\d{2}")) {
+            throw new ChappiException("Please enter a valid date in the YYYY-MM-DD format.");
         }
-        return new Object[] {index, desc, endDate, startDate};
+        try {
+            return LocalDate.parse(dateStr);
+        } catch (DateTimeParseException e) {
+            throw new ChappiException(e.getMessage());
+        }
     }
 }
