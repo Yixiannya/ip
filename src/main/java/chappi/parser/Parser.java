@@ -3,6 +3,17 @@ package chappi.parser;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
+import chappi.command.AddDeadlineTaskCommand;
+import chappi.command.AddEventTaskCommand;
+import chappi.command.AddTodoTaskCommand;
+import chappi.command.Command;
+import chappi.command.DeleteTaskCommand;
+import chappi.command.ExitCommand;
+import chappi.command.FindTaskCommand;
+import chappi.command.MarkTaskCommand;
+import chappi.command.ShowTaskListCommand;
+import chappi.command.UnmarkTaskCommand;
+import chappi.command.UpdateTaskCommand;
 import chappi.exceptions.ChappiException;
 import chappi.exceptions.ChappiInvalidDeadlineException;
 import chappi.exceptions.ChappiInvalidEventException;
@@ -13,7 +24,6 @@ import chappi.task.Event;
 import chappi.task.Task;
 import chappi.task.ToDo;
 import chappi.tasklist.TaskList;
-import chappi.ui.Chappi;
 import chappi.util.Util;
 
 
@@ -36,29 +46,29 @@ public class Parser {
      * @param input String representation of the command to be deciphered.
      * @return Enum that represents the command to be performed.
      */
-    public static Chappi.CommandType parse(String input) {
+    public static Command parseCommand(String input) throws ChappiUnrecognisedCommandException {
         if (input.equals("list")) {
-            return Chappi.CommandType.LIST;
+            return new ShowTaskListCommand(input);
         } else if (input.equals("bye")) {
-            return Chappi.CommandType.BYE;
+            return new ExitCommand(input);
         } else if (input.startsWith("mark")) {
-            return Chappi.CommandType.MARK;
+            return new MarkTaskCommand(input);
         } else if (input.startsWith("unmark")) {
-            return Chappi.CommandType.UNMARK;
+            return new UnmarkTaskCommand(input);
         } else if (input.startsWith("delete")) {
-            return Chappi.CommandType.DELETE;
+            return new DeleteTaskCommand(input);
         } else if (input.startsWith("todo")) {
-            return Chappi.CommandType.TODO;
+            return new AddTodoTaskCommand(input);
         } else if (input.startsWith("deadline")) {
-            return Chappi.CommandType.DEADLINE;
+            return new AddDeadlineTaskCommand(input);
         } else if (input.startsWith("event")) {
-            return Chappi.CommandType.EVENT;
+            return new AddEventTaskCommand(input);
         } else if (input.startsWith("find")) {
-            return Chappi.CommandType.FIND;
+            return new FindTaskCommand(input);
         } else if (input.startsWith("update")) {
-            return Chappi.CommandType.UPDATE;
+            return new UpdateTaskCommand(input);
         } else {
-            return Chappi.CommandType.UNRECOGNISED;
+            throw new ChappiUnrecognisedCommandException();
         }
     }
 
