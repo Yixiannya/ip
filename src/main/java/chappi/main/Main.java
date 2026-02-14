@@ -27,6 +27,7 @@ public class Main extends Application {
             scene.getStylesheets().add(getClass().getResource("/css/chappi-dialog-box.css").toExternalForm());
 
             stage.setScene(scene);
+            stage.setTitle("Chappi");
             stage.setMinHeight(220);
             stage.setMinWidth(417);
             fxmlLoader.<MainWindow>getController().setChappi(chappi); // inject the Chappi instance
