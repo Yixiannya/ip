@@ -6,15 +6,15 @@
         -fx-border-radius: 1em 1em 1em 0;
 }
 
-.add-label {
+.chappi-dialog-box.add-label {
     -fx-background-color: yellow;
 }
 
-.marked-label {
+.chappi-dialog-box.marked-label {
     -fx-background-color: palegreen;
 }
 
-.delete-label {
+.chappi-dialog-box.delete-label {
     -fx-background-color: lightpink;
 }
 
