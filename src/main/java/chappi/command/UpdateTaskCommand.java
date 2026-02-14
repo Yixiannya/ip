@@ -27,7 +27,7 @@ public class UpdateTaskCommand extends Command {
         try {
             storage.save(tasks);
         } catch (FileNotFoundException e) {
-            throw new ChappiException(e.getMessage());
+            throw new ChappiException("Save file missing while trying to save the list!");
         }
         return ui.showUpdatedTask(toBeUpdatedTask);
     }
