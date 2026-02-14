@@ -55,7 +55,9 @@ public class DialogBox extends HBox {
      * @return DialogBox containing the user's input and image.
      */
     public static DialogBox getUserDialog(String text, Image img) {
-        return new DialogBox(text, img);
+        DialogBox db = new DialogBox(text, img);
+        db.dialog.getStyleClass().add("user-dialog-box");
+        return db;
     }
 
     /**
@@ -65,9 +67,32 @@ public class DialogBox extends HBox {
      * @param img 150x150 image to indicate this is Chappi's response.
      * @return DialogBox containing Chappi's response and image.
      */
-    public static DialogBox getChappiDialog(String text, Image img) {
-        var db = new DialogBox(text, img);
+    public static DialogBox getChappiDialog(String text, Image img, String commandType) {
+        DialogBox db = new DialogBox(text, img);
+        db.dialog.getStyleClass().add("chappi-dialog-box");
         db.flip();
+        if (!commandType.isBlank()) {
+            db.changeDialogStyle(commandType);
+        }
         return db;
+    }
+
+    private void changeDialogStyle(String commandType) {
+        switch(commandType) {
+        case "AddDeadlineTaskCommand":
+        case "AddEventTaskCommand":
+        case "AddTodoTaskCommand":
+            dialog.getStyleClass().add("add-label");
+            break;
+        case "MarkTaskCommand":
+        case "UnmarkTaskCommand":
+            dialog.getStyleClass().add("marked-label");
+            break;
+        case "DeleteTaskCommand":
+            dialog.getStyleClass().add("delete-label");
+            break;
+        default:
+            // Do nothing
+        }
     }
 }

@@ -14,6 +14,7 @@ public class Chappi {
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
+    private String commandType;
 
     /**
      * Creates a Chappi object that uses the specified file path for storage.
@@ -22,6 +23,7 @@ public class Chappi {
     public Chappi(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
+        commandType = "";
         try {
             tasks = storage.load();
         } catch (ChappiException e) {
@@ -40,6 +42,7 @@ public class Chappi {
         try {
             Command c = Parser.parseCommand(input);
             assert c != null;
+            commandType = c.getClass().getSimpleName();
             return c.execute(tasks, ui, storage);
         } catch (ChappiException e) {
             return ui.showChappiException(e);
@@ -52,5 +55,14 @@ public class Chappi {
      */
     public String showGreeting() {
         return ui.showGreeting();
+    }
+
+    /**
+     * Gives a String representation
+     * of the type of command Chappi receives.
+     * @return String representation of command type
+     */
+    public String getCommandType() {
+        return commandType;
     }
 }

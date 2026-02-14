@@ -45,7 +45,7 @@ public class MainWindow extends AnchorPane {
      */
     private void showGreeting() {
         dialogContainer.getChildren().addAll(
-                DialogBox.getChappiDialog(chappi.showGreeting(), chappiImage)
+                DialogBox.getChappiDialog(chappi.showGreeting(), chappiImage, "")
         );
     }
 
@@ -57,6 +57,7 @@ public class MainWindow extends AnchorPane {
     private void handleUserInput() {
         String input = userInput.getText();
         String response = chappi.getResponse(input);
+        String commandType = chappi.getCommandType();
 
         if (response.equals("bye")) {
             Platform.exit();
@@ -64,7 +65,7 @@ public class MainWindow extends AnchorPane {
         }
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),
-                DialogBox.getChappiDialog(response, chappiImage)
+                DialogBox.getChappiDialog(response, chappiImage, commandType)
         );
         userInput.clear();
     }
