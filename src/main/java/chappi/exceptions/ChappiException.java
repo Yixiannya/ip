@@ -15,7 +15,6 @@ public class ChappiException extends Exception {
      */
     public ChappiException(String message) {
         super("There's been a problem.\n"
-                + message
-                + "\n");
+                + message);
     }
 }

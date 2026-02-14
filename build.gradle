@@ -53,7 +53,7 @@ checkstyle {
 
 shadowJar {
     archiveBaseName = "chappi"
-    archiveVersion = "0.1"
+    archiveVersion = "1.0"
     archiveClassifier = null
 }
 

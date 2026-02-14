@@ -73,7 +73,7 @@ public class Storage {
                 line = br.readLine();
             }
         } catch (IllegalArgumentException | IOException e) {
-            throw new ChappiException("Sorry, there's been a problem loading the file...");
+            throw new ChappiException("There were issues loading the file...");
         }
 
         return savedList;
