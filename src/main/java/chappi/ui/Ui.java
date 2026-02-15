@@ -1,7 +1,5 @@
 package chappi.ui;
 
-import java.io.IOException;
-
 import chappi.exceptions.ChappiException;
 import chappi.task.Task;
 import chappi.tasklist.TaskList;

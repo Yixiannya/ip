@@ -64,7 +64,7 @@ public class ParserTest {
     }
 
     @Test
-    public void parseToDo_invalidFormat() throws Exception {
+    public void parseToDo_invalidFormat() {
         try {
             ToDo testResult = Parser.parseTodo("todoEat a banana.");
             fail();
@@ -75,7 +75,7 @@ public class ParserTest {
     }
 
     @Test
-    public void parseToDo_missingDescription() throws Exception {
+    public void parseToDo_missingDescription() {
         try {
             ToDo testResult = Parser.parseTodo("todo");
             fail();
@@ -86,7 +86,7 @@ public class ParserTest {
     }
 
     @Test
-    public void parseToDo_missingDescription_withWhiteSpace() throws Exception {
+    public void parseToDo_missingDescription_withWhiteSpace() {
         try {
             ToDo testResult = Parser.parseTodo("todo    ");
             fail();
