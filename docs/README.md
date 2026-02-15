@@ -2,7 +2,7 @@
 
 Chappi is a simple chatbot with the ability to record and save tasks in a list!
 
-![Screenshot of the GUI of Chappi.](/docs/Ui.png)
+![Screenshot of the GUI of Chappi.](https://Yixiannya.github.io/ip/Ui.png)
 
 ## Setting up the app
 
