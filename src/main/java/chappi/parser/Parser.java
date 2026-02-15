@@ -181,6 +181,9 @@ public class Parser {
      */
     public static Task parseSavedTask(String line) {
         String[] splitLine = line.split(" \\| ");
+        if (splitLine.length < 3) {
+            throw new IllegalArgumentException("Unknown task type");
+        }
         String taskType = splitLine[0];
         boolean isDone = splitLine[1].equals("1");
         String description = splitLine[2];
