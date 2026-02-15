@@ -19,7 +19,7 @@ public class Ui {
     public String showGreeting() {
         return "Hello! I'm Chappi!\n"
                 + "What can I do for you?\n"
-                + "☆*:.｡. o(≧▽≦)o .｡.:*☆";
+                + "(o' u 'o)";
     }
 
     /**
@@ -27,7 +27,7 @@ public class Ui {
      * @return String representation of Chappi's goodbye message.
      */
     public String showGoodbye() {
-        return "Bye. Hope to see you again soon! ☆*:.｡. o(≧▽≦)o .｡.:*☆\n";
+        return "Bye. Hope to see you again soon!\n";
     }
 
     /**
