@@ -23,14 +23,6 @@ public class Ui {
     }
 
     /**
-     * Displays goodbye message.
-     * @return String representation of Chappi's goodbye message.
-     */
-    public String showGoodbye() {
-        return "Bye. Hope to see you again soon!\n";
-    }
-
-    /**
      * Displays the given task to the user.
      * @param task Task to be shown to user.
      * @param taskList List of tasks to have its size shown to user.
@@ -118,16 +110,5 @@ public class Ui {
      */
     public String showChappiException(ChappiException e) {
         return e.getMessage();
-    }
-
-    /**
-     * Displays encountered exception as a message to the user.
-     * Used to tell user that a storage command has encountered some problems.
-     * @param e Exception to be shown to user.
-     * @return String representation of Chappi's message and exception message.
-     */
-    public String showIoException(IOException e) {
-        return "Sorry, there's been a problem:\n"
-                + e;
     }
 }

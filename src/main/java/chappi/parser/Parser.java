@@ -26,8 +26,6 @@ import chappi.task.ToDo;
 import chappi.tasklist.TaskList;
 import chappi.util.Util;
 
-
-
 /**
  * Represents the logic in extracting the required
  * information from the given String input commands.
