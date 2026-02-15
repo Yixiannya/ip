@@ -50,7 +50,7 @@ Format: `deadline TASK_DESCRIPTION /by END_DATE`
 * Spaces are allowed in the task description.
 * Only a single task is created per `event` command.
 
-Example command: `deadline Take a nap /by 2026-02-15
+Example command: `deadline Take a nap /by 2026-02-15`
 
 ### Adding an Event task: `event`
 Adds an Event type task to the list.
@@ -59,6 +59,10 @@ Format: `event TASK_DESCRIPTION /from START_DATE /to END_DATE`
 * Spaces are allowed in the task description
 * Only a single task is created per `event` command.
 * The order of `/from` and `/to` can be reversed.
+
+Examples:
+* `event Do homework /from 2026-01-31 /to 2026-02-15`
+* `event Build a robot /to 2026-02-20 /from 2026-02-12`
 
 ### Marking a task as done: `mark`
 Marks a task in the task list as done.
@@ -106,7 +110,8 @@ Quits the program and closes the window.
 Format: `bye`
 
 ### Saving the task list
-Saving is automatically done after any command that modifies the list.
+There is no command to save manually.
+Saving is automatically done after any command that modifies a task or the list.
 
 ### Manually editing the task list
 The task list is saved under `./data/chappiSave.txt`.
