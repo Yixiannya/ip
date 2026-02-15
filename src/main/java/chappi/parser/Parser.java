@@ -140,41 +140,37 @@ public class Parser {
      * @throws ChappiException if input is in the incorrect format.
      */
     public static Event parseEvent(String input) throws ChappiException {
-        if (input.equals("event")) {
-            throw new ChappiInvalidEventException(
-                    "Please enter the event's description, start date and end date.");
-        }
         if (!input.startsWith("event ")) {
             throw new ChappiUnrecognisedCommandException();
         }
+
         String body = Util.trimPrefix(input, "event ").strip();
-
-        if (!body.contains("/from ")) {
+        if (body.isBlank()) {
             throw new ChappiInvalidEventException(
-                    "Please enter a valid string for a start date using the '/from' keyword.");
+                    "Please enter the event's description, start date and end date.");
         }
-        if (!body.contains("/to ")) {
+
+        String desc = body.split("/")[0].strip();
+        LocalDate startDate = null;
+        LocalDate endDate = null;
+
+        for (String part : body.split("/")) {
+            part = part.strip();
+            if (part.startsWith("from ")) {
+                startDate = parseDate(part.substring(5).strip());
+            } else if (part.startsWith("to ")) {
+                endDate = parseDate(part.substring(3).strip());
+            }
+        }
+
+        if (desc.isBlank() || startDate == null || endDate == null) {
             throw new ChappiInvalidEventException(
-                    "Please enter a valid string for an end date using the '/to' keyword.");
-        }
-        String[] parts = body.split("/from ");
-        String desc = parts[0].strip();
-        String[] dateParts = parts[1].split("/to ");
-        String startDateStr = dateParts[0].strip();
-        String endDateStr = dateParts[1].strip();
-
-        if (desc.isBlank()) {
-            throw new ChappiInvalidEventException("Please enter a valid description.");
-        }
-        LocalDate startDate = parseDate(startDateStr);
-        LocalDate endDate = parseDate(endDateStr);
-
-        if (startDate == null || endDate == null) {
-            throw new ChappiInvalidEventException("Please enter a date! (Not a blank)");
+                    "Format: event <desc> /from <start> /to <end>");
         }
 
         return new Event(desc, startDate, endDate);
     }
+
 
     /**
      * Takes given String representation of task.
